@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
+        {% block links %}{% endblock %}
+    </head>
+    <body>
+        <header>
+            <!-- LINKS HERE -->
+            <div class = 'links'>
+                <a href="{% url 'home' %}" class="link">Home Page</a>
+                <div class = 'login-links'>
+                    {% if not request.user.is_authenticated %}
+                        <a href="{% url 'login' %}" class="link">Login Page</a>
+                        <a href="{% url 'reg' %}" class="link">Registration Page</a>
+                    {% else %}
+                        <p>{{ request.user.username }}</p>
+                        <a class="logout-button" href = "{% url 'logout' %}">Logout</a>
+                    {% endif %}
+                </div> 
+            </div>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </body>
+</html>

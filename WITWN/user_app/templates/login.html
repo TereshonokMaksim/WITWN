@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/base_form.css' %}">
+    <script defer src = "{% static 'js/login.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    
+    <form method = "post" class = "user-form">
+        {% csrf_token %}
+        
+            <input type="text" hidden name = "{% static 'img/open-eye.png' %}" value = "{% static 'img/closed-eye.png' %}" id = "iconLinks">
+            {% for field in form %}
+                {{ field.label_tag }}
+                <div class = "input-box">
+                    {{ field }}
+                    {% if field.field.widget.input_type == "password" %}
+                        <button type = "button" class = "look" id = "{{ field.auto_id }}-button">
+                            <img src="{% static 'img/closed-eye.png' %}" alt="Show" class = "look-eye">
+                        </button>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <p class = "error">
+                {% for error in form.error.values %}
+                    {{ error }}
+                    <br>
+                {% endfor %}
+        
+        <button class="login-button" disabled>Login</button>
+    </form>
+{% endblock %}

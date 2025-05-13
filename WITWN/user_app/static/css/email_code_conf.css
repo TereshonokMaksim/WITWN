@@ -1,0 +1,55 @@
+.email-code-form{
+    display: flex;
+    padding: 40px;
+    flex-direction: column;
+    gap: 50px;
+    position: relative;
+}
+
+input{
+    height: 50px;
+    width: 40px;
+    font-size: 40px;
+    display: inline;
+    text-align: center;
+}
+
+.content-bg{
+    padding: 70px;
+    background-color: lightgray;
+    border-radius: 20px;
+    border: 2px solid black;
+    display: flex;
+    width: fit-content;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.content-desc{
+    width: 500px;
+}
+
+.next-button{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    font-size: 24px;
+}
+
+.back-button{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    font-size: 24px;
+}
+
+.back-button a{
+    text-decoration: none;
+    color: black;
+}
+
+.inputs{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}

@@ -1,0 +1,69 @@
+.look{
+    width: 60px;
+    height: 50px;
+    background-color: transparent;
+    border: 0;
+}
+.look-eye{
+    width: 100%;
+    height: 100%;
+    user-select: none;
+}
+
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-form{
+    position: relative;
+    display: flex;
+    padding: 50px;
+    border: 1px solid rgb(200, 200, 200);
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 80px;
+}
+
+input{
+    height: 36px;
+    width: 600px;
+    font-size: 28px;
+    border-radius: 15px;
+    padding: 5px;
+}
+label{
+    font-size: 34px;
+}
+
+.input-box{
+    display: flex;
+    align-items: center;
+}
+
+body{
+    overflow: hidden;
+}
+
+.next-button{
+    position: absolute;
+    width: fit-content;
+    font-size: 30px;
+    right: 30px;
+    bottom: 30px;
+}
+.login-button{
+    position: absolute;
+    width: fit-content;
+    font-size: 30px;
+    right: 30px;
+    bottom: 30px;
+}
+
+.error-text{
+    color: red;
+    font-size: 30px;
+    margin: 0px;
+    padding: 0px;
+}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Successfull Registration
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/base_simple.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h2>You have confirmed you email</h2>
+    <h3>Now, your can enter your account using <a href="{% url 'login' %}">login</a> page.</h3>
+{% endblock %}
