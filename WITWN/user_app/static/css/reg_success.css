@@ -1,23 +1,46 @@
-.look{
-    width: 60px;
-    height: 50px;
-    background-color: transparent;
-    border: 0;
+.reg-success-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    gap: 15px;
+    border-radius: 30px;
+    padding: 50px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(209, 209, 209);
+    border-image: initial;
 }
-.look-eye{
-    width: 100%;
-    height: 100%;
-    user-select: none;
+h2 {
+    font-size: 40px;
 }
-
+h3 {
+    font-size: 28px;
+}
+.login-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(84, 60, 82);
+    font-weight: 500;
+    width: fit-content;
+    font-size: 30px;
+    border-radius: 1234px;
+    padding: 25px;
+}
+.login-button a {
+    font-size: 26px;
+    color: white;
+    text-decoration: none;
+}
 main{
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.user-form{
-    .user-form {
+.user-form {
     box-sizing: border-box;
     min-height: 804px;
     max-height: 804px;
@@ -31,20 +54,6 @@ main{
     border-color: rgb(200, 200, 200);
     border-image: initial;
     gap: 36px;
-}
-}
-
-
-input{
-    height: 36px;
-    width: 600px;
-    font-size: 28px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(205, 206, 210);
-    border-image: initial;
-    border-radius: 10px;
-    padding: 5px;
 }
 
 
@@ -80,26 +89,4 @@ body{
     bottom: 30px;
     width: 400px;
     height: 52px;
-}
-.login-button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 52px;
-    width: 400px;
-    font-size: 16px;
-    font-weight: 500;
-    right: 24px;
-    bottom: 16px;
-    top: 16px;
-    left: 24px;
-    gap: 8px;
-}
-
-
-.error-text{
-    color: red;
-    font-size: 30px;
-    margin: 0px;
-    padding: 0px;
 }

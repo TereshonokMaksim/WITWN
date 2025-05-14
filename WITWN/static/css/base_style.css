@@ -1,5 +1,18 @@
+@font-face {
+    font-family: "GT Walsheim Bold";
+    src: url('../fonts/gt_walsheim_bold.otf') format('truetype');
+}
+@font-face {
+    font-family: "GT Walsheim Light";
+    src: url('../fonts/gt_walsheim_light.otf') format('truetype');
+}
+@font-face {
+    font-family: "GT Walsheim Medium";
+    src: url('../fonts/gt_wlasheim_medium.otf') format('truetype');
+}
+
 *{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family:'GT Walsheim Light' ;
 }
 
 .links{
@@ -7,7 +20,8 @@
     padding-top: 10px;
     padding-bottom: 10px;
     height: 45px;
-    background-color: rgb(211, 211, 211);
+    background-color: white;
+    height: 88px;
     display: flex;
     align-items: center;
     /* justify-content: center; */
@@ -35,6 +49,7 @@ main{
 }
 
 header{
+    
     height: 100px;
     position: relative;
     align-items: center;

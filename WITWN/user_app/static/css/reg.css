@@ -1,0 +1,86 @@
+.user-form {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    min-height: 804px;
+    max-height: 804px;
+    align-items: center;
+    justify-content: center;
+    padding: 44px;
+    gap: 36px;
+    border-radius: 20px;
+    background-color: white;
+    box-sizing: border-box;
+}
+.links-block {
+    display: flex;
+    width: fit-content;
+    box-sizing: border-box;
+    min-height: 46px;
+    max-height: 46px;
+    gap: 24px;
+}
+.links-block a {
+    font-family: 'GT Walsheim Bold';
+    font-size: 34px;
+    font-weight: 500;
+    
+}
+#reg-link {
+    color: rgba(7, 10, 28, 1);
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px black solid;
+}
+#login-link {
+    text-decoration: none;
+    color: rgba(129, 129, 141, 1);
+}
+#welcome-p {
+    font-family: 'GT Walsheim Bold';
+    font-weight: 500;
+    font-size: 24px;
+}
+.all-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    height: fit-content;
+    gap: 16px;
+}
+.input-with-label {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    height: fit-content;
+    width: 400px;
+    padding-bottom: 6px;
+}
+label {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(7, 10, 28, 1);
+}
+.input-box {
+    display: flex;
+    top: 10px;
+    right: 16px;
+    bottom: 10px;
+    left: 16px;
+    height: 42px;
+    gap: 10px;
+    border-radius: 10px;
+}
+.next-button {
+    background-color: rgba(84, 60, 82, 1);
+    border-radius: 1234px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+}
+.phone_pic {
+    width: 880px;
+    height: 730px;
+    top: 250px;
+    left: 650px;
+}

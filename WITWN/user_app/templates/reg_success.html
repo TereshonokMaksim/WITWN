@@ -7,9 +7,14 @@
 
 {% block links %}
     <link rel="stylesheet" href="{% static 'css/base_simple.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reg_success.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base_form.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h2>You have confirmed you email</h2>
-    <h3>Now, your can enter your account using <a href="{% url 'login' %}">login</a> page.</h3>
+     <div class="reg-success-div">
+        <h2>Ви пiдтвердили вашу пошту</h2>
+        <h3>Зараз ви можете авторизуватися в свiй акаунт за допомогою кнопки знизу</h3>
+        <button class="login-button"><a href="/login/">Авторизуватися</a></button>
+    </div>
 {% endblock %}
