@@ -1,8 +1,8 @@
 // Password eye button
 
 const FORM = document.querySelector(".reg-form");
-const PASSWORD_FIELD = document.querySelector("#id_password");
-const PASSWORD_CONFIRM_FIELD = document.querySelector("#id_password_confirm");
+const PASSWORD_FIELD = document.querySelector("#id_password1");
+const PASSWORD_CONFIRM_FIELD = document.querySelector("#id_password2");
 const ICON_LINKS_INPUT = document.querySelector("#iconLinks");
 const ICON_LINKS = {"show": ICON_LINKS_INPUT.name, "close": ICON_LINKS_INPUT.value}
 
@@ -21,10 +21,9 @@ document.querySelectorAll(".look").forEach((element) => {
 // Submit button logic
 
 
-const USERNAME_FIELD = document.querySelector("#id_username")
 const EMAIL_FIELD = document.querySelector("#id_email")
 const NEXT_BUTTON = document.querySelector(".next-button")
-const ALL_FIELDS = [USERNAME_FIELD, EMAIL_FIELD, PASSWORD_FIELD, PASSWORD_CONFIRM_FIELD]
+const ALL_FIELDS = [EMAIL_FIELD, PASSWORD_FIELD, PASSWORD_CONFIRM_FIELD]
 
 function validateField(field){
     if (4 > field.value.length || 256 < field.value.length){
@@ -61,6 +60,5 @@ ALL_FIELDS.forEach((field) => {
 
 const START_DATA = document.querySelector("#startData").value
 if (START_DATA!="&"){
-    USERNAME_FIELD.value = START_DATA.split("&")[0]
     EMAIL_FIELD.value = START_DATA.split("&")[1]
 }

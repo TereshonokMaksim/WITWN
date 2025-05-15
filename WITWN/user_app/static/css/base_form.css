@@ -1,4 +1,6 @@
 .look{
+    position: absolute;
+    right: 10px;
     width: 60px;
     height: 50px;
     background-color: transparent;
@@ -17,53 +19,109 @@ main{
 }
 
 .user-form{
+    box-sizing: border-box;
+    background-color: white;
     position: relative;
     display: flex;
-    padding: 50px;
-    border: 1px solid rgb(200, 200, 200);
     flex-direction: column;
-    gap: 10px;
-    padding-bottom: 80px;
+    padding: 44px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(200, 200, 200);
+    border-image: initial;
+    gap: 36px;
 }
+
 
 input{
     height: 36px;
     width: 600px;
     font-size: 28px;
-    border-radius: 15px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(205, 206, 210);
+    border-image: initial;
+    border-radius: 10px;
     padding: 5px;
 }
+
+
 label{
-    font-size: 34px;
+    font-family: "GT Walsheim Medium";
+    font-size: 16px;
+    font-weight: 400;
+    padding-bottom: 6px;
 }
+
 
 .input-box{
     display: flex;
     align-items: center;
+    position: relative;
+    margin-left: -20px;
+    margin-top: -5px;
 }
 
 body{
     overflow: hidden;
+    background-color: rgba(233, 229, 238, 1);
 }
 
-.next-button{
-    position: absolute;
+.next-button {
+    font-family: "GT Walsheim Medium";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(84, 60, 82, 1);
+    border-radius: 1234px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
     width: fit-content;
     font-size: 30px;
     right: 30px;
     bottom: 30px;
+    width: 400px;
+    height: 52px;
+    transition: 0.1s;
+    border: 0px;
 }
+
+.next-button:enabled:hover{
+    cursor: pointer;
+    transition: 0.1s;
+    background-color: rgba(124, 100, 120, 1);
+}
+
+.next-button:disabled{
+    filter: brightness(0.6);
+    transition: 0.1s;
+}
+
 .login-button{
-    position: absolute;
-    width: fit-content;
-    font-size: 30px;
-    right: 30px;
-    bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 52px;
+    width: 400px;
+    font-size: 16px;
+    font-weight: 500;
+    right: 24px;
+    bottom: 16px;
+    top: 16px;
+    left: 24px;
+    gap: 8px;
 }
+
 
 .error-text{
     color: red;
     font-size: 30px;
     margin: 0px;
     padding: 0px;
+}
+
+.errorlist{
+    margin-bottom: 0px;
+    color: red;
 }

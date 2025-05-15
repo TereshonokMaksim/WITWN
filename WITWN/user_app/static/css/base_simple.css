@@ -4,3 +4,6 @@ main{
     align-items: center;
     flex-direction: column;
 }
+body{
+     background-color: rgba(233, 229, 238, 1);
+}

@@ -1,0 +1,92 @@
+.reg-success-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    gap: 15px;
+    border-radius: 30px;
+    padding: 50px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(209, 209, 209);
+    border-image: initial;
+}
+h2 {
+    font-size: 40px;
+}
+h3 {
+    font-size: 28px;
+}
+.login-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(84, 60, 82);
+    font-weight: 500;
+    width: fit-content;
+    font-size: 30px;
+    border-radius: 1234px;
+    padding: 25px;
+}
+.login-button a {
+    font-size: 26px;
+    color: white;
+    text-decoration: none;
+}
+main{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-form {
+    box-sizing: border-box;
+    min-height: 804px;
+    max-height: 804px;
+    background-color: white;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 44px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(200, 200, 200);
+    border-image: initial;
+    gap: 36px;
+}
+
+
+label{
+    font-size: 16px;
+    font-weight: 400;
+    padding-bottom: 6px;
+}
+
+
+.input-box{
+    display: flex;
+    align-items: center;
+}
+
+body{
+    overflow: hidden;
+    background-color: rgba(233, 229, 238, 1);
+}
+
+.next-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(84, 60, 82, 1);
+    border-radius: 1234px;
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    width: fit-content;
+    font-size: 30px;
+    right: 30px;
+    bottom: 30px;
+    width: 400px;
+    height: 52px;
+}

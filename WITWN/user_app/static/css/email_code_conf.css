@@ -3,6 +3,8 @@
     padding: 40px;
     flex-direction: column;
     gap: 50px;
+    justify-content: center;
+    align-items: center;
     position: relative;
 }
 
@@ -15,41 +17,73 @@ input{
 }
 
 .content-bg{
-    padding: 70px;
-    background-color: lightgray;
+    padding: 44px;
+    background-color: white;
     border-radius: 20px;
-    border: 2px solid black;
     display: flex;
     width: fit-content;
     flex-direction: column;
     height: fit-content;
+    justify-content: center;
+    align-items: center;
 }
-
+.content-header{
+    text-align: center;
+}
 .content-desc{
-    width: 500px;
+    text-align: center;
+    width: 470px;
 }
 
 .next-button{
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(84, 60, 82, 1);
+    border-radius: 1234px;
+    color: white;
+    padding: 15px;
+    width: 450px;
+    font-weight: 500;
+    font-size: 20px;
+   
 }
 
 .back-button{
-    position: absolute;
+    text-decoration: none;
     bottom: 0px;
     left: 0px;
     font-size: 24px;
+    color: rgba(84, 60, 82, 1);
+    text-align: center;
 }
 
 .back-button a{
     text-decoration: none;
-    color: black;
+    text-align: center;
+
+    
 }
 
 .inputs{
     display: flex;
-    width: 100%;
+    width: 450px;
     justify-content: space-between;
+}
+input{
+    border: 1px rgba(205, 206, 210, 1) solid;
+    border-radius: 10px;
+    width: 50px;
+    height: 45px;
+}
+.input-buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    width: fit-content;
+}
+input:nth-of-type(odd){
+    margin-right: -15px;
 }

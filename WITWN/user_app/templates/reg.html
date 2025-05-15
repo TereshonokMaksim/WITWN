@@ -8,30 +8,38 @@
 {% block links %}
     <script defer src = "{% static 'js/reg.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/base_form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reg.css' %}">
 {% endblock %}
 
 {% block content %}
     <form method = "post" class = "user-form">
+        <div class="links-block">
+            <a href="/reg/" id="reg-link">Реєстрацiя</a>
+            <a href="/login/" id="login-link">Авторизацiя</a>
+        </div>
+        <p id="welcome-p">Приєднуйся до World IT</p>
         {% csrf_token %}
-        <input type="text" hidden name = "start_data" value = "{{ username }}&{{ email }}" id = "startData">
+        <input type="text" hidden name = "start_data" value = "&{{ email }}" id = "startData">
         <input type="text" hidden name = "{% static 'img/open-eye.png' %}" value = "{% static 'img/closed-eye.png' %}" id = "iconLinks">
-        {% for field in form %}
-            {{ field.label_tag }}
-            <div class = "input-box">
-                {{ field }}
-                {% if field.field.widget.input_type == "password" %}
-                    <button type = "button" class = "look" id = "{{ field.auto_id }}-button">
-                        <img src="{% static 'img/closed-eye.png' %}" alt="Show" class = "look-eye">
-                    </button>
-                {% endif %}
+        <div class="all-inputs">
+            {% for field in form %}
+             <div class="input-with-label">
+                    {{ field.label_tag }}
+                    <div class = "input-box">
+                        {{ field }}
+                        {% if field.field.widget.input_type == "password" %}
+                            <button type = "button" class = "look" id = "{{ field.auto_id }}-button">
+                                <img src="{% static 'img/closed-eye.png' %}" alt="Show" class = "look-eye">
+                            </button>
+                        {% endif %}
+                    </div>
+                    {{ field.errors }}
             </div>
-        {% endfor %}
-        <p class = "error-text">
-            {% for error in form.errors.values %}
-                {{ error }}
-                <br>
             {% endfor %}
-        </p>
-        <button class = "next-button" disabled>Next ></button>
+        </div>
+        <p class = "error-text">{{ form.non_field_errors }}</p>
+        <button class = "next-button" disabled>Створити акаунт</button>
     </form>
+     <img src="/static/img/Group_1.png" alt="phone_pic" class="phone_pic">
 {% endblock %}
+

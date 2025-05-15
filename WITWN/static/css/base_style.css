@@ -1,5 +1,18 @@
+@font-face {
+    font-family: "GT Walsheim Bold";
+    src: url('../fonts/gt_walsheim_bold.otf') format('truetype');
+}
+@font-face {
+    font-family: "GT Walsheim Light";
+    src: url('../fonts/gt_walsheim_light.otf') format('truetype');
+}
+@font-face {
+    font-family: "GT Walsheim Medium";
+    src: url('../fonts/gt_walsheim_medium.otf') format('truetype');
+}
+
 *{
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family:'GT Walsheim Medium';
 }
 
 .links{
@@ -7,7 +20,8 @@
     padding-top: 10px;
     padding-bottom: 10px;
     height: 45px;
-    background-color: rgb(211, 211, 211);
+    background-color: white;
+    height: 88px;
     display: flex;
     align-items: center;
     /* justify-content: center; */
@@ -17,7 +31,7 @@
     right: 30px;
     position: absolute;
     display: flex;
-    gap: 10px;   
+    gap: 30px;   
     align-items: center;
 }
 
@@ -35,12 +49,13 @@ main{
 }
 
 header{
+    
     height: 100px;
     position: relative;
     align-items: center;
 }
 .link{
-    width: 230px;
+    width: 150px;
     height: fit-content;
     font-size: 25px;
     font-weight: 500;
@@ -48,9 +63,9 @@ header{
     text-decoration: none;
     color: black;
     transition: 0.1s;
+    text-align: center;
 }
 .link:hover{
-    width: 230px;
     font-size: 26px;
     transition: 0.1s;
     /* font-weight: 550; */
@@ -61,15 +76,15 @@ header{
 
 .logout-button{
     font-size: 24px;
-    background-color: gray;
+    background-color: rgb(140, 120, 140);
     border-radius: 20px;
     transition: 0.1s;
-    padding: 5px;
-    color: black;
+    padding: 10px;
+    color: white;
     text-decoration: none;
 }
 
 .logout-button:hover{
-    background-color: lightgray;
+    background-color: rgb(160, 120, 160);
     transition: 0.1s;
 }

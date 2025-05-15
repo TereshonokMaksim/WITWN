@@ -21,9 +21,8 @@ document.querySelectorAll(".look").forEach((element) => {
 // Submit button logic
 
 
-const USERNAME_FIELD = document.querySelector("#id_username")
-const NEXT_BUTTON = document.querySelector(".login-button")
-const ALL_FIELDS = [USERNAME_FIELD, PASSWORD_FIELD]
+const NEXT_BUTTON = document.querySelector(".next-button")
+const ALL_FIELDS = [PASSWORD_FIELD]
 
 function validateField(field){
     if (4 > field.value.length || 256 < field.value.length){
