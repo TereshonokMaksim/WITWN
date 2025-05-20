@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/font_loader.css' %}">
         <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
         {% block links %}{% endblock %}
     </head>
@@ -12,14 +13,27 @@
         <header>
             <!-- LINKS HERE -->
             <div class = 'links'>
-                <a href="{% url 'home' %}" class="link">Домашня</a>
+                <!-- <a href="{% url 'home' %}" class="link">Домашня</a> -->
                 <div class = 'login-links'>
                     {% if not user.is_authenticated %}
                         <a href="{% url 'login' %}" class="link">Авторизація</a>
                         <a href="{% url 'reg' %}" class="link">Реєстрація</a>
                     {% else %}
                         <!-- <p>{{ user.username }}</p> -->
-                        <a class="logout-button" href = "{% url 'logout' %}">Вийти</a>
+                         <div class="header-authenticated">
+                            <img src="{% static 'img/base/logo.svg' %}" alt="logo" class="logo">
+                            <div class = 'authenticated-links'>
+                                <a href="{% url 'home' %}" class="link" id="home-link"><img src="{% static 'img/base/home.svg' %}" alt="">Головна</a>
+                                <a href="{% url 'my_publications' %}" class="link" id = "myPublicationsLink"><img src="{% static 'img/base/publications.svg' %}" alt="">Мої публікації</a>
+                                <a href="{% url 'home' %}" class="link" id = "friendsLink"><img src="{% static 'img/base/friends2.svg' %}" alt="">Друзі</a>
+                                <a href="{% url 'home' %}" class="link" id = "chatsLink"><img src="{% static 'img/base/chats2.svg' %}" alt=""><p>Чати</p></a>
+                                <a href="{% url 'home' %}" class="link" id = "settingsLink"><img src="{% static 'img/base/settings.svg' %}" alt="">Налаштування</a>
+                            </div>
+                        </div>
+                        <form method = "post" action = "{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button class = "logout-button" type = "submit"><img src="{% static 'img/base/door.svg' %}" alt="door" class="door-img">Вихід</button>
+                        </form>
                     {% endif %}
                 </div> 
             </div>

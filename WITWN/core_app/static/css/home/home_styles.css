@@ -1,0 +1,35 @@
+.posts{
+    overflow-y: scroll;
+    max-height: 95%;
+    max-width: 85%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+}
+.posts::-webkit-scrollbar {
+    width: 0;  
+    background: transparent;
+}
+main{
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding-top: 15px;
+    /* align-items: center; */
+    overflow: hidden;
+}
+
+body{
+    overflow: hidden;
+}
+
+#home-link{
+    background-color: rgba(233, 229, 238, 1);
+}
+
+
+.hidden{
+    display: none !important;
+}

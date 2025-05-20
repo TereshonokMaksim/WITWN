@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/font_loader.css' %}">
+        <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/user_base/base_user_style.css' %}">
+        {% block links %}{% endblock %}
+    </head>
+    <body>
+        <header>
+            <!-- THERE IS NO LINKS HERE -->
+            <div class = 'links'>
+                <img src="{% static 'img/base/logo.svg' %}" class = "logo">
+            </div>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </body>
+</html>

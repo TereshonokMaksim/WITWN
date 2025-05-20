@@ -1,0 +1,23 @@
+{% load static %}
+
+{% csrf_token %}
+<input type="text" hidden name = "start_data" value = "&{{ email }}" id = "startData">
+<input type="text" hidden name = "{% static 'img/user_base/open-eye.svg' %}" value = "{% static 'img/user_base/closed-eye.svg' %}" id = "iconLinks">
+<div class="all-inputs">
+    {% for field in form %}
+        <div class="input-with-label">
+            {{ field.label_tag }}
+            <div class = "input-box">
+                {{ field }}
+                {% if field.field.widget.input_type == "password" %}
+                    <!-- <button type = "button" class = "look" id = "{{ field.auto_id }}-button"> -->
+                    <img src="{% static 'img/user_base/closed-eye.svg' %}" alt="Show" class = "look" id = "{{ field.auto_id }}-button">
+                    <!-- </button> -->
+                {% endif %}
+            </div>
+            {{ field.errors }}
+    </div>
+    {% endfor %}
+</div>
+<p class = "error-text">{{ form.non_field_errors }}</p>
+<button class = "next-button" disabled>{{ button_submit_text }}</button>

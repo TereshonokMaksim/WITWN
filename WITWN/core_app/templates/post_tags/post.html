@@ -1,0 +1,42 @@
+{% load static %}
+{% load base_post_tags %}
+
+<div class = "post-box" id = "post-{{ post.pk }}">
+    <div class = "author-info-box">
+        {% get_avatar post.author %} 
+        <p class = "author-username">{{ post.author.user.username }}</p>
+        <img src = "{% static 'img/home_tt/triple_dot.svg' %}" alt = "add." id = "details-{{ post.pk }}" class = "author-triple-dot">
+    </div>
+    <div class = "content-box">
+        <!-- Uncomment once the tag TT is done -->
+        <!-- <div class = "content-tag-box tag-box">
+            {% for tag in post.tags.all %}
+                <p class = "content-tag tag" data-color = "{{ tag.color }}">{{ tag.name }}</p>
+            {% endfor %}
+        </div> -->
+        <p class = "content-title">{{ post.title }}</p>
+        <p class = "content-theme hidden">{{ post.theme }}</p>
+        <p class = "content-text">{{ post.text }}</p>
+        <div class = "content-link-box">
+            {% for link in links %}
+                <a class = "content-link" href = "{{ link }}">{{ link }}</a>
+            {% endfor %}
+        </div>
+        <!-- make that images pls -->
+        <div class = "content-images-box">
+            {% for img in images %}
+                <img src = "{{ img.file.url }}" alt = "Beatiful image" class = "post-content-img">
+            {% endfor %}
+        </div>
+        <div class = "reactions-box">
+            <div class = "like-box reactions-info-box">
+                <img src="{% static 'img/home_tt/like_icon.svg' %}" alt="Like" class = "post-icon">
+                <p class = "reaction-info-text"><span class = "liked-num number" id = "likedBy{{ post.pk }}">{{ liked_by }}</span> Вподобань</p>
+            </div>
+            <div class = "watched-box reactions-info-box">
+                <img src="{% static 'img/home_tt/eye_icon.svg' %}" alt="Eye" class = "post-icon">
+                <p class = "reaction-info-text"><span class = "watched-num number" id = "watchedBy{{ post.pk }}">{{ watched_by }}</span> Переглядів</p>
+            </div>
+        </div>
+    </div>
+</div>

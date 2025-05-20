@@ -1,0 +1,195 @@
+.profile-info-box{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.profile-short-info{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    flex-direction: column;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    gap: 16px;
+    padding: 16px 0px;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+.profile-author-info{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+    justify-content: center;
+}
+
+.profile-username{
+    margin: 0;
+    font-size: 24px;
+    font-family: 'GT Walsheim Bold';
+    width: fit-content;
+    max-width: 100%;
+}
+
+.profile-nickname{
+    margin: 0;
+    font-size: 16px;
+    width: fit-content;
+    max-width: 100%;
+}
+
+.profile-activity-info{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.profile-activity-info > *:not(:last-child) {
+    border-right: 1px solid #ccc;
+}
+
+.profile-activity-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.profile-activity-num{
+    margin: 0;
+    font-size: 20px;
+    font-family: 'GT Walsheim Bold';
+}
+
+.profile-activity-text{
+    margin: 0;
+    color: #81818D;
+    font-size: 16px;
+}
+
+.profile-requests-box{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    flex-direction: column;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    gap: 16px;
+    padding: 16px;
+    align-items: center;
+    box-sizing: border-box;
+    /* justify-content: center; */
+}
+
+.profile-requests-panel{
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    position: relative;
+    width: 100%;
+    gap: 8px;
+}
+
+.profile-requests-title{
+    font-size: 20px;
+    color: #81818D;
+    margin: 0;
+}
+.profile-requests-all{
+    font-size: 16px;
+    color: #543C52;
+    margin: 0;
+    position: absolute;
+    right: 0px;
+    text-decoration: none;
+}
+
+.friend-avatar-restricter{
+    width: 46px;
+    height: 46px;
+}
+
+.profile-possible-friends{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.profile-friend-request{
+    display: flex;
+    gap: 12px;
+    flex-direction: row;
+    width: 100%;
+}
+
+.profile-info-other{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.profile-username-other{
+    color: #070A1C;
+    font-size: 16px;
+    margin: 0;
+}
+
+.profile-not-important{
+    font-size: 14px;
+    color: #81818D;
+    margin: 0;
+}
+
+.profile-friend-info{
+    display: flex;
+    width: 100%;
+    flex-direction: row ;
+    justify-content: space-between;
+}
+
+.profile-friends-messages{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    flex-direction: column;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    gap: 16px;
+    padding: 16px 0px;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.profile-friend-message{
+    padding: 16px 16px;
+    box-sizing: border-box;
+}
+
+.not-read-message{
+    background-color: #E9E5EE;
+}
+
+.profile-messages{
+    width: 100%;
+}
+
+.profile-messages-panel{
+    padding: 0px 16px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.profile-messages-all{
+    right: 16px;
+}
+
+.profile-friend-text{
+    margin: 0;
+    font-size: 14px;
+}

@@ -1,0 +1,31 @@
+{% extends "user_base/base_form.html" %}
+{% load static %}
+{% load user_tags %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/user_base/base_form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login/login.css' %}">
+    <script defer src = "{% static 'js/login/login.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    
+    <form method = "post" class = "user-form">
+        <div class="links-block">
+            <a href="{% url 'reg' %}" id="reg-link">Реєстрацiя</a>
+            <a href="{% url 'login' %}" id="login-link">Авторизацiя</a>
+        </div>
+        <p id="welcome-p">Радi тебе знову бачити!</p>
+        {% user_form form "Увійти" %}
+        
+        <div class="login-info">
+            <p><span class = "line">――</span>ㅤ  Або увiйдiть за допомогою QR-коду  ㅤ<span class = "line">――</span></p>
+            <img src="/static/img/reg_and_login/qrcode.png" alt="qrcode" class="qrcode">
+        </div>
+    </form>
+    <img src="/static/img/reg_and_login/bg_laptop.png" alt="phone_pic" class="phone_pic">
+{% endblock %}
