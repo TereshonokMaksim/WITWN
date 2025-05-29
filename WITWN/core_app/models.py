@@ -7,10 +7,9 @@ from user_app.models import Account
 
 class Tag(models.Model):
     name = models.CharField(max_length = 255)
-    color = models.CharField(max_length = 9)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} Tag"
 
 class UserPost(models.Model):
     author = models.ForeignKey(to = Account, on_delete = models.CASCADE)
@@ -21,7 +20,6 @@ class UserPost(models.Model):
     links = models.TextField(null=True, default = "") # sep between links: " " (forbidden in urls)
     watched_by = models.ManyToManyField(to = Account, related_name = "users_watched")
     liked_by = models.ManyToManyField(to = Account, related_name = "users_liked")
-    # images = models.FieldFile(upload_to = "posts/")
     # Remember: To get number of likes or watches just use len(UserPost.wached_by)
 
     def __str__(self):

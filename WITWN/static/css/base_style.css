@@ -2,31 +2,38 @@
     font-family:'GT Walsheim Medium';
 }
 
-.links{
-    padding-left: 30px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    height: 45px;
-    background-color: white;
-    height: 88px;
+html{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+body{
+    background-color: #FAF8FF;
+    width: 1920px;
+    height: 953px;
+    overflow: hidden;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.links{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    height: fit-content;
 }
 
 .login-links{
-    right: 30px;
+    right: 80px;
     position: absolute;
     display: flex;
     gap: 30px;   
     align-items: center;
-}
-
-body{
-    padding: 0px;
-    margin: 0px;
-    width: 100vw;
-    height: 100vh;
 }
 
 main{
@@ -35,11 +42,18 @@ main{
 }
 
 header{
-    
-    height: 100px;
+    display: flex;
+    background-color: white;
+    height: 88px;
+    padding: 24px 80px;
     position: relative;
     align-items: center;
+    flex-direction: row;
+    width: 1920px;
+    box-sizing: border-box;
+    z-index: 5;
 }
+
 .link{
     display: flex;
     flex-direction: row;
@@ -59,9 +73,7 @@ header{
     border-radius: 3px;
 }
 .link:hover{
-    /* font-size: 17px; */
     transition: 0.1s; 
-    /* font-weight: 550; */
     font-family: inherit;
     text-decoration: none;
     color: rgb(49, 48, 48);
@@ -89,7 +101,6 @@ header{
     cursor: pointer;
     background-color: #E9E5EE;
     transition: 0.1s;
-    /* color: white; */
 }
 
 .logout-link{
@@ -99,19 +110,17 @@ header{
 }
 
 .logo{
-    position: fixed;
     width: fit-content;
     height: fit-content;
     padding: 0px;
     margin: 0px;
-    left: 24px;
 }
 .header-authenticated{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 700px;
+    /* gap: 700px; */
     padding-left: 24px;
 }
 .authenticated-links{
@@ -125,4 +134,9 @@ header{
 .door-img{
     width: 20px;
     height: 20px;
+}
+
+
+.choosed-link{
+    background-color: rgba(233, 229, 238, 1);
 }

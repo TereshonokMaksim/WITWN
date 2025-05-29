@@ -3,8 +3,6 @@ let detailButtons = []
 let clickedDetailButtons = 0
 let deleteURL = document.querySelector("[name='deleteURL']").value
 
-// document.querySelector().parentElement
-
 document.addEventListener("click", (event) => {
     if (!detailButtons.includes(event.target) && detailsWindow != event.target){
         detailsWindow.classList.add("hidden")
@@ -12,12 +10,16 @@ document.addEventListener("click", (event) => {
 })
 
 function detailClickEvent(button){
-    let detailsStyles = getComputedStyle(detailsWindow)
-    let detailsWidth = Number(detailsStyles.width.split("px")[0])
-    detailsWindow.style.top = `${button.parentElement.offsetTop + 4}px`
-    detailsWindow.style.left = `${button.offsetLeft + 38 - detailsWidth}px`
-    detailsWindow.classList.remove("hidden")
-    detailsWindow.id = button.id.split("-")[1]
+    if (document.querySelector(".profile-username").innerHTML == button.parentElement.querySelector(".author-username").innerHTML){
+        let detailsStyles = getComputedStyle(detailsWindow)
+        let detailsWidth = Number(detailsStyles.width.split("px")[0])
+        let fixedOffsetTop = button.parentElement.parentElement.parentElement.offsetTop + button.parentElement.offsetTop + 4
+        detailsWindow.name = fixedOffsetTop
+        detailsWindow.style.top = `${fixedOffsetTop - document.querySelector(".posts").scrollTop}px`
+        detailsWindow.style.left = `${button.parentElement.parentElement.parentElement.offsetLeft + button.offsetLeft + 38 - detailsWidth}px`
+        detailsWindow.classList.remove("hidden")
+        detailsWindow.id = button.id.split("-")[1]
+    }
 }
 
 function getDetailButtons(){
@@ -37,6 +39,16 @@ document.querySelector("#deletePost").addEventListener("click", () => {
 })
 
 getDetailButtons()
+function getTags(post){
+    let tagsData = post.querySelector(".content-tags").innerHTML
+    tagsTextPreview.innerHTML = tagsData
+    updateTagsPreviewPosition()
+    for (let tag of tagsData.split(" ")){
+        if (tag != " " && tag != ""){
+            createTag(tag)
+        }
+    }
+}
 
 const creationForm = document.querySelector(".form-creation-post")
 const transferCanvas = document.querySelector(".image-transfer")
@@ -81,4 +93,22 @@ document.querySelector("#editPost").addEventListener("click", () => {
     creationForm.querySelector(".creation-form-title").innerHTML = "Редагування публікації"
     creationForm.querySelector(".creation-form-send").innerHTML = `Оновити ${sendImgTextTag}`
     dimmer.classList.replace("hidden", "show")
+    getTags(origPost)
+    let linkBlock = 0
+    let firstLinkBlock = true
+    for (let linkTag of origPost.querySelectorAll(".content-link")){
+        linkBlock = createLinkBlock()
+        linkBlock.querySelector(".creation-link-confirm").classList.add("hidden")
+        if (firstLinkBlock){
+            firstLinkBlock = false
+            linkBlock.querySelector(".creation-link-delete").classList.add("hidden")
+        }
+        linkBlock.querySelector(".creation-link-input").value = linkTag.innerHTML
+    }
+    document.querySelector(".creation-link-box").remove()
+    linkBlock.querySelector(".creation-link-create").classList.remove("hidden")
+})
+
+document.querySelector(".posts").addEventListener("scroll", () => {
+    detailsWindow.style.top = `${+detailsWindow.name - document.querySelector(".posts").scrollTop}px`
 })

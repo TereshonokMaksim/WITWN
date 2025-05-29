@@ -7,23 +7,23 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css/font_loader.css' %}">
         <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
+        <script defer src = "{% static 'js/base/loader.js' %}"></script>
         {% block links %}{% endblock %}
     </head>
     <body>
+        <input type="hidden" id = "pageNameString" value = "{{ page_name }}">
         <header>
             <!-- LINKS HERE -->
+            <img src="{% static 'img/base/logo.svg' %}" alt="logo" class="logo">
             <div class = 'links'>
-                <!-- <a href="{% url 'home' %}" class="link">Домашня</a> -->
                 <div class = 'login-links'>
                     {% if not user.is_authenticated %}
                         <a href="{% url 'login' %}" class="link">Авторизація</a>
                         <a href="{% url 'reg' %}" class="link">Реєстрація</a>
                     {% else %}
-                        <!-- <p>{{ user.username }}</p> -->
                          <div class="header-authenticated">
-                            <img src="{% static 'img/base/logo.svg' %}" alt="logo" class="logo">
                             <div class = 'authenticated-links'>
-                                <a href="{% url 'home' %}" class="link" id="home-link"><img src="{% static 'img/base/home.svg' %}" alt="">Головна</a>
+                                <a href="{% url 'home' %}" class="link" id="homeLink"><img src="{% static 'img/base/home.svg' %}" alt="">Головна</a>
                                 <a href="{% url 'my_publications' %}" class="link" id = "myPublicationsLink"><img src="{% static 'img/base/publications.svg' %}" alt="">Мої публікації</a>
                                 <a href="{% url 'home' %}" class="link" id = "friendsLink"><img src="{% static 'img/base/friends2.svg' %}" alt="">Друзі</a>
                                 <a href="{% url 'home' %}" class="link" id = "chatsLink"><img src="{% static 'img/base/chats2.svg' %}" alt=""><p>Чати</p></a>

@@ -32,26 +32,18 @@ class CreationPostForm(forms.ModelForm):
         self.fields["title"].widget.attrs.update({"placeholder": "Напишіть назву публікації", "class": "creation-input-field"})
         self.fields["theme"].widget.attrs.update({"placeholder": "Напишіть тему публікації", "class": "creation-input-field"})
         self.fields["text"].widget.attrs.update({"placeholder": "Напишіть опис публікації", "class": "creation-input-area"})
+        self.fields["links"].widget.attrs.update({"class": "hidden"})
         self.fields["title"].label = "Назва публікації"
         self.fields["theme"].label = "Тема публікації"
         self.fields["text"].label = "Опис публікації"
         self.fields["links"].label = "Посилання"
-        # self.fields["files"].widget.attrs.update()
-        # self.fields["text"].widget.attrs.update()
 
+    def clean_tags(self):
+        data = self.cleaned_data["tags"].split(" ")
+        for tag in data.copy():
+            if tag[0] != "#":
+                data.remove(tag)
+        return data
 
     def clean_files(self):
         return self.files.getlist("files")
-    
-    # def save_as(self, commit = ...):
-    #     data = self.data
-    #     print(data)
-    #     for file in data['files']:
-    #         print(file)
-    #     UserPost.objects.create(
-    #         title = data["title"],
-    #         theme = data["theme"],
-    #         text = data["text"],
-
-    #     )
-    #     return super().save(commit)
