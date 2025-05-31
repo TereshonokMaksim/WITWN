@@ -40,10 +40,16 @@ class CreationPostForm(forms.ModelForm):
 
     def clean_tags(self):
         data = self.cleaned_data["tags"].split(" ")
-        for tag in data.copy():
-            if tag[0] != "#":
-                data.remove(tag)
-        return data
+        if data != "":
+            for tag in data.copy():
+                if tag != "":
+                    if tag[0] != "#":
+                        data.remove(tag)
+                else:
+                    data.remove(tag)
+            return data
+        else:
+            return []
 
     def clean_files(self):
         return self.files.getlist("files")

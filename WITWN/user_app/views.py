@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LogoutView
@@ -67,7 +67,10 @@ class RegView(FormView):
         return context
 
     def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
+        if not self.request.user.is_authenticated:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('home')
     
 class Reg2View(FormView):
     template_name = "reg/confirmation.html"
@@ -88,8 +91,20 @@ class Reg2View(FormView):
         response.delete_cookie('reg_id')
         return response
     
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('home')
+    
 class ConfirmationView(TemplateView):
     template_name = "reg/reg_success.html"
+        
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('home')
 
 class LoginView(FormView):
     template_name = 'login/login.html'
@@ -104,6 +119,12 @@ class LoginView(FormView):
             return super().form_valid(form)
         else:
             return super().form_invalid(form)
+        
+    def dispatch(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('home')
 
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy("login")

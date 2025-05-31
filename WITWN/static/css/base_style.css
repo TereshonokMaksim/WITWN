@@ -11,8 +11,8 @@ html{
 
 body{
     background-color: #FAF8FF;
-    width: 1920px;
-    height: 953px;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -29,27 +29,27 @@ body{
 }
 
 .login-links{
-    right: 80px;
+    right: calc(7vw + 2vh);
     position: absolute;
     display: flex;
-    gap: 30px;   
+    gap: calc(1.5vw + 0.3vh);   
     align-items: center;
 }
 
 main{
     width: 100%;
-    height: calc(100% - 100px);
+    height: 100%;
 }
 
 header{
     display: flex;
     background-color: white;
-    height: 88px;
-    padding: 24px 80px;
+    height: calc(2.2vw + 4vh);
+    padding: calc(1vw + 0.5vh) calc(4vw + 8vh);
     position: relative;
     align-items: center;
     flex-direction: row;
-    width: 1920px;
+    width: 100%;
     box-sizing: border-box;
     z-index: 5;
 }
@@ -57,50 +57,51 @@ header{
 .link{
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: calc(0.5vw + 0.2vh);
     width: fit-content;
     height: fit-content;
-    font-size: 16px;
+    font-size: calc(0.8vw + 0.2vh);
     font-weight: 500;
     font-family: inherit;
     text-decoration: none;
     color: black;
-    transition: 0.1s;
     text-align: center;
     justify-content: center;
     align-items: center;
-    padding: 4px 8px;
-    border-radius: 3px;
-}
-.link:hover{
-    transition: 0.1s; 
-    font-family: inherit;
-    text-decoration: none;
-    color: rgb(49, 48, 48);
+    padding: calc(0.2vw + 0.05vh) calc(0.3vw + 0.1vh);
+    border-radius: calc(0.15vw + 0.05vh);
 }
 
 .logout-button{
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: calc(0.3vw + 0.1vh);
     justify-content: center;
     align-items: center;
-    font-size: 16px;
+    font-size: calc(0.8vw + 0.2vh);
     background-color: white;
-    border: 1px rgba(84, 60, 82, 1) solid;
-    border-radius: 20px;
-    transition: 0.1s;
-    padding: 10px;
+    border: 0.1vw rgba(84, 60, 82, 1) solid;
+    border-radius: calc(0.9vw + 0.2vh);
+    padding: calc(0.4vw + 0.2vh);
     color: rgb(82, 64, 80);
     text-decoration: none;
     font-weight: 100;
-  
 }
+
+.door-img{
+    width: calc(1vw + 0.2vh);
+    height: calc(1vw + 0.2vh);
+}
+
+.header-link-icon{
+    width: calc(1vw + 0.2vh);
+    height: calc(1vw + 0.2vh);
+}
+
 
 .logout-button:hover{
     cursor: pointer;
     background-color: #E9E5EE;
-    transition: 0.1s;
 }
 
 .logout-link{
@@ -110,8 +111,8 @@ header{
 }
 
 .logo{
-    width: fit-content;
-    height: fit-content;
+    width: calc(7.5vw + 1vh);
+    height: calc(1vw + 0.2vh);
     padding: 0px;
     margin: 0px;
 }
@@ -120,20 +121,15 @@ header{
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    /* gap: 700px; */
-    padding-left: 24px;
+    padding-left: calc(1.2vw + 0.2vh);
 }
 .authenticated-links{
     display: flex;
     flex-direction: row;
-    gap: 44px;
+    gap: calc(2vw + 0.5vh);
     justify-content: center;
     align-items: center;
-    padding-right: 24px;
-}
-.door-img{
-    width: 20px;
-    height: 20px;
+    padding-right: calc(1.2vw + 0.2vh);
 }
 
 

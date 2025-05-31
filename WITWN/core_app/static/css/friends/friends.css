@@ -1,0 +1,121 @@
+.friends-links-div{
+    display: flex;
+    flex-direction: column;
+    min-width: 254px;
+    max-width: 254px;
+    height: fit-content;
+    top: 104px;
+    left: 80px;
+    gap: 16px;
+}
+.friends-link{
+    min-height: 18px;
+    max-height: 18px;
+    width: fit-content;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(129, 129, 141, 1);
+    text-decoration: none;
+  
+}
+#main-friends-link{
+    display: flex;
+    color: rgba(7, 10, 28, 1);
+    font-weight: 700;
+    gap: 8px;
+    border-bottom: 2px solid rgba(84, 60, 82, 1);
+    
+}
+.everything-div{
+    display: flex;
+    flex-direction: row;
+    gap: 357px;
+}
+.content-div{
+    display: flex;
+    flex-direction: column;
+    min-width: 923px;
+    max-width: 923px;
+    top: 104px;
+    gap: 8px;
+}
+.requests-div{
+    display: flex;
+    width: 923px;
+    height: fit-content;
+    border: 1px solid rgba(205, 206, 210, 1);
+    border-radius: 10px;
+    flex-direction: column;
+    padding: 16px 20px 16px 20px;
+    gap: 16px;
+    background-color: white;
+   
+}
+.request-header{
+    width: 923px;
+    display: flex;
+    flex-direction: row;
+    min-height: 18px;
+    max-height: 18px;
+    width: 923px;
+    justify-content: space-between;
+}
+.request-header a{
+    color: rgba(84, 60, 82, 1);
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.single-request-div{
+    border: 1px solid rgba(205, 206, 210, 1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 289px;
+    max-width: 289px;
+    height: 263px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+}
+.request-profile-icon{
+    width: 96px;
+    height: 96px;
+}
+.profile-info{
+    display: flex;
+    flex-direction: column;
+    width: 289px;
+    height: 175px;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+}
+.nicknames-info{
+    display: flex;
+    flex-direction: column;
+    width: 289px;
+    height: 55px;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+.request-buttons{
+    display: flex;
+    width: 221px;
+    height: 40px;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+.request-buttons button{
+    
+}
+
+.request-title{
+    margin: 0px;
+}

@@ -109,17 +109,26 @@ function textAreaContentHeight(textArea){
     return copy.scrollHeight
 }
 
+function px2vw(px){
+    return px / window.innerWidth * 100
+}
+
+function px2vh(px){
+    console.log(px)
+    return px / window.innerHeight * 100
+}
+
 function updateTagsPreviewPosition(){
     let areaStyle = window.getComputedStyle(mainTextArea)
-    let offsetLeft = Number(areaStyle.paddingLeft.split("px")[0])
-    let offsetTop = mainTextArea.parentElement.querySelector("label").clientHeight
-    offsetTop += Number(window.getComputedStyle(mainTextArea.parentElement).gap.split("px")[0])
-    offsetTop += Math.max(50, textAreaContentHeight(mainTextArea))
-    offsetTop -= 10
-    offsetTop -= mainTextArea.scrollTop
-    console.log(offsetLeft, offsetTop, mainTextArea.scrollHeight, areaStyle.lineHeight, mainTextArea.rows, textAreaContentHeight(mainTextArea))
-    tagsTextPreview.style.left = `${offsetLeft}px`
-    tagsTextPreview.style.top = `${offsetTop}px`
+    let offsetLeft = px2vw(Number(areaStyle.paddingLeft.split("px")[0]))
+    let offsetTop = px2vh(mainTextArea.parentElement.querySelector("label").clientHeight)
+    offsetTop += px2vh(Number(window.getComputedStyle(mainTextArea.parentElement).gap.split("px")[0]))
+    offsetTop += Math.max(0.5, textAreaContentHeight(mainTextArea))
+    offsetTop -= px2vh(10)
+    offsetTop -= px2vh(mainTextArea.scrollTop)
+    console.log(offsetLeft, offsetTop, window.innerHeight, window.innerWidth)
+    tagsTextPreview.style.left = `calc(${offsetLeft * 0.6}vw + )`
+    tagsTextPreview.style.top = `${offsetTop}vh`
 }
 
 function updateTagsPreviewText(){
@@ -163,11 +172,12 @@ function createTag(text = null){
     createTagDiv.insertBefore(newTag, createFormBox)
     closeTagCreation()
     updateTagsPreviewText()
+    return true
 }
 
-document.addEventListener("click", (event) => {
+document.addEventListener("mousedown", (event) => {
     let allLinkBoxes = document.querySelectorAll(".creation-link-box")
-    if (![createFormBox, showTagButton].includes(event.target)){
+    if (![createFormBox, createTagButton, createTagInput].includes(event.target)){
         closeTagCreation()
     }
     if (![allLinkBoxes[allLinkBoxes.length - 1], ...document.querySelectorAll(".creation-link-create")].includes(event.target)){
@@ -283,7 +293,7 @@ const MIN_SCROLL_HEIGHT = 10
 function resizeScroll(){
     let height = (SCROLLABLE_AREA.clientHeight / SCROLLABLE_AREA.scrollHeight) * SCROLL_TRACK.clientHeight
     height = Math.max(MIN_SCROLL_HEIGHT, Math.min(height, SCROLL_TRACK.clientHeight))
-    SCROLL.style.height = `${height}px`
+    SCROLL.style.height = `${height / window.innerHeight * 100}vh`
     let top = Math.min(SCROLL_TRACK.clientHeight - height, Math.max(0, height))
     SCROLL.style.top = `${top}px`
     adaptScroll()

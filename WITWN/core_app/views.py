@@ -7,7 +7,7 @@ from .forms import CreationPostForm
 from django.views import View
 from django.urls import reverse_lazy
 from django.http import JsonResponse
-
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -82,3 +82,8 @@ class PostDeleteView(View):
             if post.author.user == request.user:
                 post.delete()
         return JsonResponse({"ok": 200})
+    
+class FriendsView(TemplateView):
+    template_name = 'friends/friends.html'
+   
+    

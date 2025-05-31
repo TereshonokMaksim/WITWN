@@ -13,10 +13,10 @@ function detailClickEvent(button){
     if (document.querySelector(".profile-username").innerHTML == button.parentElement.querySelector(".author-username").innerHTML){
         let detailsStyles = getComputedStyle(detailsWindow)
         let detailsWidth = Number(detailsStyles.width.split("px")[0])
-        let fixedOffsetTop = button.parentElement.parentElement.parentElement.offsetTop + button.parentElement.offsetTop + 4
+        let fixedOffsetTop = button.parentElement.offsetTop + 4
         detailsWindow.name = fixedOffsetTop
-        detailsWindow.style.top = `${fixedOffsetTop - document.querySelector(".posts").scrollTop}px`
-        detailsWindow.style.left = `${button.parentElement.parentElement.parentElement.offsetLeft + button.offsetLeft + 38 - detailsWidth}px`
+        detailsWindow.style.top = `${fixedOffsetTop}px`
+        detailsWindow.style.left = `${button.offsetLeft + 38 - detailsWidth}px`
         detailsWindow.classList.remove("hidden")
         detailsWindow.id = button.id.split("-")[1]
     }
@@ -24,7 +24,7 @@ function detailClickEvent(button){
 
 function getDetailButtons(){
     detailButtons = Array.from(document.querySelectorAll(".author-triple-dot"))
-    detailButtons.forEach((button) => {button.addEventListener("click", () => {detailClickEvent(button)})})
+    detailButtons.forEach((button) => {console.log(button); button.addEventListener("click", () => {detailClickEvent(button)})})
 }
 
 document.querySelector("#deletePost").addEventListener("click", () => {
@@ -58,6 +58,8 @@ function imgTag2File(imgTag, imgName){
     transferCanvas.width = imgTag.naturalWidth
     transferCanvas.height = imgTag.naturalHeight
 
+    console.log(imgTag)
+
     canvasContext.drawImage(imgTag, 0, 0)
     transferCanvas.toBlob(blob => {
         let file = new File([blob], imgName, {"type": blob.type})
@@ -88,7 +90,7 @@ document.querySelector("#editPost").addEventListener("click", () => {
     }
     creationForm.querySelector("#id_links").value = links  
     for (let imageBox of origPost.querySelectorAll(".post-content-img")){
-        imgTag2File(imageBox)
+        imgTag2File(imageBox.querySelector("img"))
     }
     creationForm.querySelector(".creation-form-title").innerHTML = "Редагування публікації"
     creationForm.querySelector(".creation-form-send").innerHTML = `Оновити ${sendImgTextTag}`
@@ -107,8 +109,4 @@ document.querySelector("#editPost").addEventListener("click", () => {
     }
     document.querySelector(".creation-link-box").remove()
     linkBlock.querySelector(".creation-link-create").classList.remove("hidden")
-})
-
-document.querySelector(".posts").addEventListener("scroll", () => {
-    detailsWindow.style.top = `${+detailsWindow.name - document.querySelector(".posts").scrollTop}px`
 })

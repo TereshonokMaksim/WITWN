@@ -25,7 +25,7 @@
     <form class = "create-post-form">
         <textarea name="publication-text" id="publication-text" placeholder="Текст публікації"></textarea>
         <div class="creation-buttons">
-            <button class="smile-button" type="button"><img src="{% static 'img/home_tt/smile.svg' %}" alt="smile"></button>
+            <img src="{% static 'img/home_tt/smile.svg' %}" alt="Reactions" class = "smile-button icon">
             <button class="form-button" type = "button">Перейти до оформлення</button>
         </div>
     </form>    
@@ -34,7 +34,7 @@
 <div class = "form-dimmer hidden">
     <form method = "post" class = "form-creation-post" enctype="multipart/form-data">
         {% csrf_token %}
-        <img src = "{% static 'img/my_publications/close.svg' %}" alt = "X" class = "creation-form-close">
+        <img src = "{% static 'img/my_publications/close.svg' %}" alt = "X" class = "creation-form-close icon">
         <h1 class = "creation-form-title">Створення публікації</h1>
         <div class = "creation-form-inputs">
             {% for field in form %}
@@ -61,17 +61,17 @@
                 <div class = "create-tag-box hidden">
                     <p class = "create-tag-sign">#</p>
                     <input name="create-tag-input" class = "create-tag-input" id="createTagInput">
-                    <img class="create-tag-button tag-button" src="{% static 'img/my_publications/checkmark.svg' %}" alt="checkmark">
+                    <img class="create-tag-button icon" src="{% static 'img/my_publications/checkmark.svg' %}" alt="checkmark">
                 </div>
-                <img class="show-tag-button tag-button" src="{% static 'img/my_publications/plus.svg' %}" alt="plus">
+                <img class="show-tag-button icon" src="{% static 'img/my_publications/plus.svg' %}" alt="plus">
             </div>
             <div class = "creation-links-block">
                 <p class = "creation-links-title">Посилання</p>
                 <div class = "creation-link-box">
                     <input type="text" class = "creation-link-input" placeholder = "Посилання...">
-                    <img class = "creation-link-delete tag-button hidden" src = "{% static 'img/my_publications/remove_button.svg' %}">
-                    <img class = "creation-link-create tag-button" src="{% static 'img/my_publications/plus.svg' %}">
-                    <img class = "creation-link-confirm tag-button hidden" src="{% static 'img/my_publications/checkmark.svg' %}">
+                    <img class = "creation-link-delete icon hidden" src = "{% static 'img/my_publications/remove_button.svg' %}">
+                    <img class = "creation-link-create icon" src="{% static 'img/my_publications/plus.svg' %}">
+                    <img class = "creation-link-confirm icon hidden" src="{% static 'img/my_publications/checkmark.svg' %}">
                 </div>
             </div>
             
@@ -79,16 +79,16 @@
                 <!-- just a template for JS -->
                 <div class = "creation-image-box hidden" id = "originalImgTemplate">
                     <img src = "" class = "creation-image-preview">
-                    <img src = "{% static 'img/my_publications/trashbin.svg' %}" class = "creation-image-delete">
+                    <img src = "{% static 'img/my_publications/trashbin.svg' %}" class = "creation-image-delete icon">
                 </div>
             </div>
         </div>
         <div class = "creation-form-buttons">
             <input type="hidden" value = "{% static 'img/my_publications/trashbin.svg' %}" name = "trashbinSource">
-            <button class="creation-images-button creation-additional-button"  type="button"><img src="{% static 'img/my_publications/img.svg' %}" alt="img"></button>
-            <button class="creation-smile-button creation-additional-button" type="button"><img src="{% static 'img/home_tt/smile.svg' %}" alt="smile"></button>
+            <img src="{% static 'img/my_publications/img.svg' %}" alt="img" class="creation-images-button creation-additional-button icon">
+            <img src="{% static 'img/home_tt/smile.svg' %}" alt="smile" class="creation-smile-button creation-additional-button icon">
             <input type="hidden" name = "sendImgURL" value = "{% static 'img/my_publications/send.svg' %}">
-            <button class="creation-form-send" type = "submit">Публікація <img src = "{% static 'img/my_publications/send.svg' %}" alt=""></button>
+            <button class="creation-form-send" type = "submit">Публікація <img src = "{% static 'img/my_publications/send.svg' %}" alt="" class = "icon"></button>
         </div>
     </form>
 </div>
