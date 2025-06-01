@@ -74,7 +74,6 @@
     border: 0.1vw rgba(84, 60, 82, 1) solid;
     border-radius: 100vw;
     background-color: white;
-    box-sizing: border-box  ;
 }
 
 .smile-button:hover{
@@ -476,6 +475,7 @@ label{
     top: 0;
     word-wrap: break-word;
     box-sizing: border-box;
+    font-size: calc(0.8vw + 0.2vh);
 }
 
 .creation-links-block{

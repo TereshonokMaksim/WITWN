@@ -56,7 +56,6 @@ class PublicationsView(FormView):
         data["form"] = CreationPostForm()
         if self.request.user.is_authenticated:
             data["account"] = Account.objects.get(user = self.request.user)
-        data["page_name"] = "myPublications"
         return data
 
 class HomeView(PublicationsView):
@@ -64,6 +63,7 @@ class HomeView(PublicationsView):
         data = super().get_context_data(**kwargs)
         data["posts"] = reversed(list(UserPost.objects.all()))
         data["page_name"] = "home"
+        data["full_acc"] = True
         return data
     
 class MyPublicationsView(PublicationsView):
@@ -71,6 +71,8 @@ class MyPublicationsView(PublicationsView):
         data = super().get_context_data(**kwargs)
         if self.request.user.is_authenticated:
             data["posts"] = reversed(list(UserPost.objects.filter(author = data["account"])))
+        data["page_name"] = "myPublications"
+        data["full_acc"] = False
         return data
         
 

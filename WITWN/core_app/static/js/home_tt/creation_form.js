@@ -100,11 +100,12 @@ function textAreaContentHeight(textArea){
     copy.style.fontSize = orStyle.fontSize
     copy.style.border = orStyle.border
     copy.style.lineHeight = orStyle.lineHeight
-    if (copy.innerHTML != ""){
-        copy.innerHTML = textArea.value
+    if (textArea.value != ""){
+        copy.innerHTML = textArea.value.replace(/\n/g, "<br>")
+        console.log(textArea.value.replace(/\n/g, "<br>"))
     }
     else{
-        copy.innerHTML = " "
+        copy.textContent = " "
     }
     return copy.scrollHeight
 }
@@ -114,7 +115,6 @@ function px2vw(px){
 }
 
 function px2vh(px){
-    console.log(px)
     return px / window.innerHeight * 100
 }
 
@@ -123,11 +123,11 @@ function updateTagsPreviewPosition(){
     let offsetLeft = px2vw(Number(areaStyle.paddingLeft.split("px")[0]))
     let offsetTop = px2vh(mainTextArea.parentElement.querySelector("label").clientHeight)
     offsetTop += px2vh(Number(window.getComputedStyle(mainTextArea.parentElement).gap.split("px")[0]))
-    offsetTop += Math.max(0.5, textAreaContentHeight(mainTextArea))
-    offsetTop -= px2vh(10)
-    offsetTop -= px2vh(mainTextArea.scrollTop)
+    offsetTop += Math.max(4, px2vh(textAreaContentHeight(mainTextArea)))
+    offsetTop -= px2vh(50)
+    // offsetTop -= px2vh(mainTextArea.scrollTop)
     console.log(offsetLeft, offsetTop, window.innerHeight, window.innerWidth)
-    tagsTextPreview.style.left = `calc(${offsetLeft * 0.6}vw + )`
+    tagsTextPreview.style.left = `calc(${offsetLeft}vw)`
     tagsTextPreview.style.top = `${offsetTop}vh`
 }
 
