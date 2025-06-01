@@ -1,0 +1,22 @@
+.profile-box{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.prof-pic{
+    position: absolute;
+    border-radius: 100%;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+}
+
+.prof-ind{
+    position: absolute;
+    width: 18.75%;
+    height: 18.75%;
+    right: 8.33%;
+    bottom: 8.33%;
+}

@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "GT Walsheim Bold";
+    src: url('../fonts/gt_walsheim_bold.otf') format('truetype');
+}
+@font-face {
+    font-family: "GT Walsheim Light";
+    src: url('../fonts/gt_walsheim_light.otf') format('truetype');
+}
+@font-face {
+    font-family: "GT Walsheim Medium";
+    src: url('../fonts/gt_walsheim_medium.otf') format('truetype');
+}

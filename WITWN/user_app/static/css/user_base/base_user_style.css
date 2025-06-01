@@ -1,0 +1,14 @@
+header{
+    height: 88px;
+}
+
+.links{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main{
+    height: calc(100vh - 88px);
+}

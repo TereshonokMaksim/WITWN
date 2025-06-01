@@ -1,0 +1,20 @@
+{% extends "user_base/base_form.html" %}
+{% load static %}
+
+{% block title %}
+    Successfull Registration
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/user_base/base_simple.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reg/reg_success.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user_base/base_form.css' %}">
+{% endblock %}
+
+{% block content %}
+     <div class="reg-success-div">
+        <h2>Ви пiдтвердили вашу пошту</h2>
+        <h3>Зараз ви можете авторизуватися в свiй акаунт за допомогою кнопки знизу</h3>
+        <button class="login-button"><a href="{% url 'login' %}">Авторизуватися</a></button>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+.posts{
+    overflow-y: scroll;
+    min-height: 95%;
+    width: 64.1%;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: calc(0.5vw + 0.15vh);
+    position: relative;
+}
+.posts::-webkit-scrollbar {
+    width: 0;  
+    background: transparent;
+}
+main{
+    display: flex;
+    justify-content: center;
+    gap: calc(0.35vw + 0.1vh);
+    padding-top: calc(1vw + 0.2vh);
+    overflow: hidden;
+}
+
+body{
+    overflow: hidden;
+}
+
+/* CREATION FORM PART (TODO (NOT ANYMORE)) */
+/* For it look in post_creation_styles.css */

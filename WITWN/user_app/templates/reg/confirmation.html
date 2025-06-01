@@ -1,0 +1,35 @@
+{% extends "user_base/base_form.html" %}
+{% load static %}
+
+{% block title %}
+    Confirmation
+{% endblock %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/user_base/base_form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reg/email_code_conf.css' %}">
+    <script src="{% static 'js/reg/reg2.js' %}" defer></script>
+  
+{% endblock %}
+
+{% block content %}
+    <div class = "content-bg">
+        <h1 class = "content-header">Пiдтвердження пошти</h2>
+        <h3 class = "content-desc">Ми надiслали 6-значний код на вашу пошту (you@example.com). Введiть його нижче, щоб пiдтвердити акаунт</h3>
+        <form method = "post" class = "email-code-form">
+            {% csrf_token %}
+                <div class="code-with-p">
+                <p>Код пiдтвердження</p>
+                <div class = "inputs">
+                    {% for field in form %}
+                        {{ field }}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class = "input-buttons">
+                <button class = "next-button" type = "submit" name = "next" disabled>Пiдтвердити</button>
+                <a href="{% url 'reg' %}" class = "back-button" type = "button" name = "back">Назад</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

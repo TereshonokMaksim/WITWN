@@ -1,0 +1,513 @@
+/* Pre form textarea and button styles */
+
+.creation-publication-div textarea{ 
+    display: flex;
+    flex-direction: row;    
+    min-height: calc(2vw + 1vh);
+    width: 100%;
+    font-weight: 300;
+    font-size: calc(0.8vw + 0.2vh);
+    border: 0;
+    resize: none;
+    background-color: transparent;
+    padding: calc(0.2vw + 0.07vh);
+    border-width: 0.1vw;
+}
+
+.creation-publication-div textarea:focus{
+    border: 0;
+    outline: none;
+}
+
+.creation-form-title{
+    font-size: calc(1.6vw + 0.6vh);
+}
+
+.create-post-form{
+    display: flex;
+    flex-direction: column;
+    padding: calc(0.8vw + 0.2vh);
+    box-sizing: border-box;
+    /* min-height: calc(5vw + 2.5vh);
+    max-height: calc(5vw + 2.5vh); */
+    height: fit-content;
+    width: 100%;
+    border: 0.1vw rgba(205, 206, 210, 1) solid;
+    border-radius: calc(0.5vw + 0.2vh);
+    font-weight: 300;
+    font-size: calc(0.8vw + 0.2vh);
+}
+
+.publication-div{
+    min-width: 48%;
+    max-width: calc(4vw + 0.4vh);
+}
+
+.form-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(84, 60, 82, 1);
+    padding: calc(0.4vw + 0.3vh) calc(0.8vw + 0.2vh);
+    gap: calc(0.4vw + 0.1vh);
+    border-radius: 100vw;
+    border: 0;
+    color: white;
+    font-weight: 400;
+    font-size: calc(0.7vw + 0.2vh);
+    height: fit-content;
+    width: fit-content;
+}
+
+.form-button:hover{
+    background-color: rgba(124, 100, 122, 1);
+    cursor: pointer;
+}
+
+.smile-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(1.6vw + 1vh);
+    height: calc(1.6vw + 1vh);
+    padding: calc(0.3vw + 0.1vh);
+    border: 0.1vw rgba(84, 60, 82, 1) solid;
+    border-radius: 100vw;
+    background-color: white;
+    box-sizing: border-box  ;
+}
+
+.smile-button:hover{
+    background-color: #E9E5EE;
+    cursor: pointer;
+}
+
+.creation-publication-div{
+    justify-content: space-between;
+    position: relative;
+    background-color: white;
+    height: fit-content;
+}
+
+.creation-buttons{
+    display: flex;
+    flex-direction: row;
+    gap: calc(0.6vw + 0.2vh);
+    width: 100%;
+    justify-content: end;
+}
+
+/* Form styles */
+
+.form-dimmer{
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    left: 0;
+    top: 0;
+}
+
+.hidden{
+    display: none !important;
+}
+
+.show{
+    display: flex;
+}
+
+.form-creation-post{
+    position: relative;
+    padding: calc(2vw + 0.4vh) calc(1.3vw + 0.3vh);
+    background-color: white;
+    border-radius: calc(1.1vw + 0.3vh);
+    width: 54%;
+    height: fit-content;
+    pointer-events: auto;
+    z-index: 20;
+    overflow-y: scroll;
+    max-height: 80%;
+}
+
+
+.form-creation-post::-webkit-scrollbar{
+    display: none;
+}
+
+.creation-form-inputs{
+    display: flex;
+    flex-direction: column;
+    padding: calc(1.1vw + 0.3vh) 0;
+    gap: calc(0.8vw + 0.2vh);
+    width: 100%;
+    overflow: hidden;
+}
+
+.creation-form-box{
+    display: flex;
+    flex-direction: column;
+    gap: calc(0.2vw + 0.1vh);
+    width: 100%;
+}
+
+label{
+    font-size: calc(0.8vw + 0.2vh);
+    margin: 0;
+    color: #070A1C;
+}
+
+.creation-form-input{
+    display: flex;
+    gap: calc(0.2vw + 0.1vh);
+    width: 50%;
+    flex-direction: column;
+    position: relative;
+}
+
+.creation-input-field{
+    width: 100%;
+    font-size: calc(0.8vw + 0.2vh);
+    padding: calc(0.5vw + 0.2vh) calc(0.8vw + 0.2vh);
+    border-radius: calc(0.5vw + 0.2vh);
+    border: 0.1vw solid #81818D;
+}
+
+.creation-input-field::placeholder{
+    color: #81818D;
+    font-size: calc(0.8vw + 0.2vh);
+}
+
+.creation-form-input:has(.creation-input-area){
+    width: 100%;
+    overflow: hidden;
+}
+
+.creation-input-area{
+    width: 100%;
+    padding: calc(0.8vw + 0.2vh);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    resize: none;
+    font-size: calc(0.8vw + 0.2vh);
+    color: #070A1C;
+    border-radius: calc(0.5vw + 0.2vh);
+    box-sizing: border-box;
+    border-width: 0.1vw;
+}
+
+.creation-input-area:focus, .creation-input-field:focus{
+    outline: none;
+}
+
+.creation-input-area::placeholder{
+    color: #81818D;
+    font-size: calc(0.8vw + 0.2vh);        
+}
+
+.creation-input-area::-webkit-scrollbar{
+    display: none;
+}
+
+.creation-textarea-scrollbar{
+    position: absolute;
+    top: calc(1.4vw + 0.2vh);
+    right: 0;
+    height: calc(100% - 1.6vw - 0.4vh);
+    width: calc(0.4vw + 0.2vh);
+    border-radius: 100vw;
+    background-color: #E9E5EE;
+    border: 0;
+}
+
+.creation-textarea-scrolltrack{
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: relative;
+}
+
+.creation-textarea-scroll{
+    position: absolute;
+    border: 0;
+    height: 100%;
+    width: 100%;
+    background-color: #543C52;
+    border-radius: 100vw;
+    padding: 0;
+}
+
+.creation-textarea-scroll:hover{
+    outline: none;
+    background-color: #8a6386;
+}
+
+.creation-textarea-scroll:focus{
+    outline: none;
+    background-color: #362734;
+}
+
+.creation-form-buttons{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: end;
+    gap: calc(0.5vw + 0.2vh);
+}
+
+.creation-additional-button{
+    display: flex;
+    border: 0.1vw solid #543C52;
+    border-radius: 100vw;
+    padding: calc(0.5vw + 0.2vh);
+    background-color: transparent;
+    height: min-content;
+}
+
+.creation-additional-button:hover{
+    background-color: #E9E5EE;
+}
+
+.creation-form-send{
+    background-color: #543C52;
+    border: 0;
+    border-radius: 100vw;
+    padding: calc(0.5vw + 0.2vh) calc(0.8vw + 0.2vh);
+    gap: calc(0.4vw + 0.2vh);
+    color: white;
+    font-size: calc(0.7vw + 0.2vh);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.creation-form-send:focus{
+    outline: none;
+}
+
+.creation-image-grid{
+    display: grid;
+    width: 100%;
+    height: fit-content;
+    grid-template-columns: repeat(auto-fit, minmax(calc(13vw + 10vh),auto));
+    gap: calc(0.8vw + 0.2vh);
+}
+
+.creation-image-box{
+    position: relative;
+    min-width: calc(13vw + 10vh);
+    max-width: calc(18vw + 15vh);
+    height: calc(10vw + 15vh); /* Фиксированное значение взял с фигмы, если что, желательно пофиксить */
+}
+
+.creation-image-preview{
+    width: 100%;
+    height: 100%;
+    border-radius: calc(0.8vw + 0.2vh);
+    object-fit: cover;
+}
+
+.creation-image-delete{
+    position: absolute;
+    display: flex;
+    right: calc(0.5vw + 0.2vh);
+    top: calc(0.5vw + 0.2vh);
+    padding: calc(0.5vw + 0.2vh);
+    border-radius: 100vw;
+    border: 0.1vw solid #543C52;
+    background-color: #E9E5EE;
+}
+
+.creation-image-delete:hover{
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
+.creation-form-close{
+    position: absolute;
+    top: calc(1.2vw + 0.3vh);
+    right: calc(1.2vw + 0.3vh);
+}
+
+.creation-form-close:hover{
+    cursor: pointer;
+}
+
+/* this is final part, right? */
+
+.post-detail-box{
+    display: flex;
+    position: absolute;
+    padding: calc(0.8vw + 0.2vh);
+    gap: calc(0.8vw + 0.2vh);
+    flex-direction: column;
+    border-radius: calc(0.5vw + 0.2vh);
+    background-color: #E9E5EE;
+    z-index: 10;
+    width: calc(15vw + 12vh);
+    box-sizing: border-box;
+}
+
+.post-detail-imgbox{
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.post-detail-edit{
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    flex-direction: row;
+    gap: calc(0.5vw + 0.2vh);  
+    width: 100%;
+}
+
+.post-detail-edit:hover{
+    cursor: pointer;
+}
+
+.post-detail-desc-text{
+    font-size: calc(0.8vw + 0.2vh);
+    color: #070A1C;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.post-detail-breaker{
+    color: rgb(212, 211, 217);
+    width: 100%;
+    margin: 0;
+}
+
+/* New TT */
+
+#createTagDiv{
+    max-width: 100%;
+    min-width: fit-content;
+    height: fit-content;
+    max-height: calc(6vw + 1.2vh);
+    overflow-x: hidden;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: calc(0.5vw + 0.18vh);
+}
+
+#createTagDiv::-webkit-scrollbar{
+    display: none;
+}
+
+.create-tag-box{
+    width: calc(11vw + 4vh);
+    position: relative;
+    display: flex;
+    gap: calc(0.3vw + 0.08vh);
+    overflow: hidden;
+    align-items: center;
+}
+
+.create-tag-sign{
+    position: absolute;
+    left: calc(0.4vw + 0.1vh);
+    font-size: calc(0.7vw + 0.18vh);
+    color: #070A1C;
+}
+
+.create-tag-input{
+    width: calc(9.5vw + 3vh);
+    border: 0.1vw solid #81818D;
+    border-radius: calc(0.2vw + 0.05vh);
+    padding: calc(0.23vw + 0.04vh) calc(0.4vw + 0.1vh) calc(0.23vw + 0.04vh) calc(0.8vw + 0.2vh);
+    font-size: calc(0.7vw + 0.15vh);
+    color: #070A1C;
+}
+
+.create-tag-input:focus{
+    outline: none;
+}
+
+.icon{
+    width: calc(1vw + 0.25vh);
+    height: calc(1vw + 0.25vh);
+}
+
+.icon:hover{
+    cursor: pointer;
+}
+
+.create-tag-name{
+    background-color: #E9E5EE;
+    border-radius: calc(0.3vw + 0.08vh);
+    padding: calc(0.3vw + 0.08vh);
+    font-size: calc(0.7vw + 0.18vh);
+    color: #543C52;
+    margin: 0;
+    user-select: none;
+}
+
+.create-tag-name:hover{
+    cursor: pointer;
+    background-color: #FFE5EE;
+}
+
+.create-tag-preview{
+    color: rgb(116, 96, 115);
+    font-weight: 300;
+    font-size: calc(0.8vw + 0.2vh);
+    width: calc(100% - 1.6vw - 0.4vh);
+    margin: 0;
+    position: absolute;
+}
+
+.invinsible{
+    visibility: hidden !important;
+}
+
+.helper-text{
+    position: fixed;
+    left: 0;
+    top: 0;
+    word-wrap: break-word;
+    box-sizing: border-box;
+}
+
+.creation-links-block{
+    display: flex;
+    flex-direction: column;
+    gap: calc(0.3vw + 0.08vh);
+}
+
+.creation-links-title{
+    font-size: calc(0.8vw + 0.2vh);
+    color: #070A1C;
+    margin: 0;
+}
+
+.creation-link-box{
+    display: flex;
+    align-items: center;
+    gap: calc(0.5vw + 0.13vh);
+    flex-direction: row;
+}
+
+.creation-link-input{
+    width: calc(15vw + 2.6vh);
+    padding: calc(0.8vw + 0.2vh) calc(0.5vw + 0.13vh);
+    border: 0.1vw solid #81818D;
+    border-radius: calc(0.5vw + 0.13vh);
+    font-size: calc(0.8vw + 0.2vh);
+    line-height: calc(1.1vw + 0.28vh);
+    height: calc(2.2vw + 0.56vh);
+    box-sizing: border-box;
+}
+
+.creation-link-input:focus{
+    outline: none;
+}

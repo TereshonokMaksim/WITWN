@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load post_tags %}
+{% load static %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/home_tt/profile_pic.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_tt/post.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_tt/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/publications/publications_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_tt/post_creation_styles.css' %}">
+    <script defer src = "{% static 'js/publications/post_details.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        {% render_profile_short account 1 %}
+    {% endif %}
+    <input type="hidden" name = "deleteURL" value = "{% url 'delete_link' %}">
+    <div class = "posts">
+        {% render_creation_form form %}
+        {% for post in posts %}
+            {% render_post post %}
+        {% endfor %}
+    </div>
+{% endblock %}

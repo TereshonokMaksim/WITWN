@@ -1,0 +1,72 @@
+{% load static %}
+{% load base_post_tags %}
+
+<div class = "profile-info-box">
+    <div class = "profile-short-info">
+        <div class = "profile-author-info">
+            {% get_avatar account %}
+            <p class = "profile-username">{{ account.user.username }}</p>
+            <p class = "profile-nickname">@nickname</p>
+        </div>
+        <div class = "profile-activity-info">
+            <div class = "profile-activity-box">
+                <p class = "profile-activity-num" id = "profilePostsNum">{{ posts_num }}</p>
+                <p class = "profile-activity-text">Дописи</p>
+            </div>
+            <div class = "profile-activity-box">
+                <p class = "profile-activity-num">{{ readers_num }}</p>
+                <p class = "profile-activity-text">Читачі</p>
+            </div>
+            <div class = "profile-activity-box">
+                <p class = "profile-activity-num">{{ friends|length }}</p>
+                <p class = "profile-activity-text">Друзі</p>
+            </div>
+        </div>
+    </div>
+    {% if profile_with_additions %}
+        <div class = "profile-requests-box">
+            <div class = "profile-requests-panel">
+                <img src = "{% static 'img/home_tt/humans.svg' %}" class = "profile-section-icon">
+                <p class = "profile-requests-title">Запити</p>
+                <a href="#" class = "profile-requests-all">Дивитись всі</a>
+            </div>
+            <div class = "profile-possible-friends">
+                {% for request in requests %}
+                    <div class = "profile-friend-request">
+                        <div class = "friend-avatar-restricter">
+                            {% get_avatar request %}
+                        </div>
+                        <div class = "profile-request-info profile-info-other">
+                            <p class = "profile-request-username profile-username-other">{{ request.user.username }}</p>
+                            <p class = "profile-request-subs profile-not-important">{{ request.readers.all|length }} підписників</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class = "profile-friends-messages">
+            <div class = "profile-requests-panel profile-messages-panel">   
+                <img src = "{% static 'img/base/chats2.svg' %}" class = "profile-section-icon">
+                <p class = "profile-requests-title">Повідомлення</p>
+                <a href="#" class = "profile-requests-all profile-messages-all">Дивитись всі</a>
+            </div>
+            <div class = "profile-messages">
+                {% for friend in friends %}
+                    <div class = "profile-friend-request profile-friend-message not-read-message">
+                        <div class = "friend-avatar-restricter">
+                            {% get_avatar friend %}
+                        </div>
+                        <div class = "profile-request-info profile-info-other">
+                            <div class = "profile-friend-info">
+                                <p class = "profile-friend-username profile-username-other">{{ friend.user.username }}</p>
+                                <p class = "profile-friend-time profile-not-important">23:59</p>
+                            </div>
+                            <!-- Hard coded info, fix once TT with messages is done (TODO) -->
+                            <p class = "profile-friend-text">Я придбав Луну 😠</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>

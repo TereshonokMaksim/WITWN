@@ -17,13 +17,13 @@ class NewLoginForm(AuthenticationForm):
 
     def __init__(self, request = ..., *args, **kwargs):
         super().__init__(request, *args, **kwargs)
+        self.user_cache: User
 
     def clean(self):
         data = self.cleaned_data
         print(data)
         data["email"] = data["username"]
-        # del data["username"]
-        user: User = authenticate(username = data["email"], password = data["password"])
+        user = authenticate(username = data["email"], password = data["password"])
         if user == None:
             raise forms.ValidationError(gettext_lazy("Incorrect password or email"))
         else:
@@ -39,7 +39,7 @@ class NewLoginForm(AuthenticationForm):
         data = self.cleaned_data["username"]
         return data
             
-    def get_user(self):
+    def get_user(self) -> User:
         return self.user_cache
 
 class NewRegForm(UserCreationForm):

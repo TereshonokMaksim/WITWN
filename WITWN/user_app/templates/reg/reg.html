@@ -1,0 +1,26 @@
+{% extends "user_base/base_form.html" %}
+{% load static %}
+{% load user_tags %}
+
+{% block title %}
+    Registration
+{% endblock %}
+
+{% block links %}
+    <script defer src = "{% static 'js/reg/reg.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/user_base/base_form.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reg/reg.css' %}">
+{% endblock %}
+
+{% block content %}
+    <form method = "post" class = "user-form">
+        <div class="links-block">
+            <a href="{% url 'reg' %}" id="reg-link">Реєстрацiя</a>
+            <a href="{% url 'login' %}" id="login-link">Авторизацiя</a>
+        </div>
+        <p id="welcome-p">Приєднуйся до World IT</p>
+        {% user_form form "Створити акаунт" %}
+    </form>
+     <img src="/static/img/reg_and_login/bg_laptop.png" alt="phone_pic" class="phone_pic">
+{% endblock %}
+

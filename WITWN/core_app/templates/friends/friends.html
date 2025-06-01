@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block links %}
+     <link rel="stylesheet" href="{% static 'css/friends/friends.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="everything-div">
+        <div class="friends-links-div">
+            <a href="{% url 'home' %}" class="friends-link" id="main-friends-link">Головна</a>
+            <a href="{% url 'home' %}" class="friends-link">Запити</a>
+            <a href="{% url 'home' %}" class="friends-link">Рекомендації</a>
+            <a href="{% url 'home' %}" class="friends-link">Всі друзі</a>
+        </div>
+        <div class="content-div">
+            <div class="requests-div">
+                <div class="request-header">
+                    <p class="request-title">Запити</p>
+                    <a href="{% url 'home' %}" class="request-see-all">Дивитись всі</a>
+                </div>
+                <div class="all-requests-block">
+                    <div class="single-request-div">
+                        <div class="profile-info">
+                            <img src="{% static 'img/home_tt/indicator.svg' %}" alt="profile-icon" class="request-profile-icon">
+                            <div class="nicknames-info">
+                                <p class="request-username">Ball Matie</p>
+                                <p class="request-tag">@leraiazagit</p>
+                            </div>
+                        </div>
+                        <div class="request-buttons">
+                            <button class="confirm-button">Підтвердити</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                     <div class="single-request-div">
+                        <div class="profile-info">
+                            <img src="{% static 'img/home_tt/indicator.svg' %}" alt="profile-icon" class="request-profile-icon">
+                            <div class="nicknames-info">
+                                <p class="request-username">Ball Matie</p>
+                                <p class="request-tag">@leraiazagit</p>
+                            </div>
+                        </div>
+                        <div class="request-buttons">
+                            <button class="confirm-button">Підтвердити</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="single-request-div">
+                        <div class="profile-info">
+                            <img src="{% static 'img/home_tt/indicator.svg' %}" alt="profile-icon" class="request-profile-icon">
+                            <div class="nicknames-info">
+                                <p class="request-username">Ball Matie</p>
+                                <p class="request-tag">@leraiazagit</p>
+                            </div>
+                        </div>
+                        <div class="request-buttons">
+                            <button class="confirm-button">Підтвердити</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="single-request-div">
+                        <div class="profile-info">
+                            <img src="{% static 'img/home_tt/indicator.svg' %}" alt="profile-icon" class="request-profile-icon">
+                            <div class="nicknames-info">
+                                <p class="request-username">Ball Matie</p>
+                                <p class="request-tag">@leraiazagit</p>
+                            </div>
+                        </div>
+                        <div class="request-buttons">
+                            <button class="confirm-button">Підтвердити</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="requests-div">
+                <div class="request-header">
+                    <p class="request-title">Рекомендації</p>
+                    <a href="{% url 'home' %}" class="request-see-all">Дивитись всі</a>
+                </div>
+                <div class="all-requests-block">
+                    <div class="single-request-div">
+                        <div class="profile-info">
+                            <img src="{% static 'img/home_tt/indicator.svg' %}" alt="profile-icon" class="request-profile-icon">
+                            <div class="nicknames-info">
+                                <p class="request-username">Ball Matie</p>
+                                <p class="request-tag">@leraiazagit</p>
+                            </div>
+                        </div>
+                        <div class="request-buttons">
+                            <button class="confirm-button">Підтвердити</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                     <div class="single-request-div">
+                        <div class="profile-info">
+                            <img src="{% static 'img/home_tt/indicator.svg' %}" alt="profile-icon" class="request-profile-icon">
+                            <div class="nicknames-info">
+                                <p class="request-username">Ball Matie</p>
+                                <p class="request-tag">@leraiazagit</p>
+                            </div>
+                        </div>
+                        <div class="request-buttons">
+                            <button class="confirm-button">Підтвердити</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="requests-div">
+                <div class="request-header">
+                    <p class="request-title">Всі друзі</p>
+                    <a href="{% url 'home' %}" class="request-see-all">Дивитись всі</a>
+                </div>
+                <div class="all-requests-block">
+                    <div class="single-request-div">
+                        <div class="profile-info">
+                            <img src="{% static 'img/home_tt/indicator.svg' %}" alt="profile-icon" class="request-profile-icon">
+                            <div class="nicknames-info">
+                                <p class="request-username">Ball Matie</p>
+                                <p class="request-tag">@leraiazagit</p>
+                            </div>
+                        </div>
+                        <div class="request-buttons">
+                            <button class="confirm-button">Підтвердити</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                     <div class="single-request-div">
+                        <div class="profile-info">
+                            <img src="{% static 'img/home_tt/indicator.svg' %}" alt="profile-icon" class="request-profile-icon">
+                            <div class="nicknames-info">
+                                <p class="request-username">Ball Matie</p>
+                                <p class="request-tag">@leraiazagit</p>
+                            </div>
+                        </div>
+                        <div class="request-buttons">
+                            <button class="confirm-button">Підтвердити</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
