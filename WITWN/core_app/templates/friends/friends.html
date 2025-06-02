@@ -74,5 +74,56 @@
             </div>
         </div>
     </div>
+
+    
+<h2>Запити в друзі</h2>
+{% for request in requests %}
+    <div class="friend-request">
+        <p>{{ request.user.username }}</p>
+        <form method="post" action="{% url 'accept_friend' user_id=request.user.id %}">
+            {% csrf_token %}
+            <button type="submit">Прийняти</button>
+        </form>
+        <form method="post" action="{% url 'decline_friend' user_id=request.user.id %}">
+            {% csrf_token %}
+            <button type="submit">Відхилити</button>
+        </form>
+    </div>
+{% empty %}
+    <p>Немає запитів на дружбу.</p>
+{% endfor %}
+
+<hr>
+
+<h2>Рекомендації</h2>
+{% for user in recommended_users %}
+    <div class="recommendation">
+        <p>{{ user.username }}</p>
+        <form method="post" action="{% url 'send_friend_request' user_id=user.id %}">
+            {% csrf_token %}
+            <button type="submit">Відправити запит</button>
+        </form>
+    </div>
+{% empty %}
+    <p>Немає рекомендацій.</p>
+{% endfor %}
+
+<hr>
+
+<h2>Твої друзі</h2>
+{% for friend in friends %}
+    <div class="friend-item">
+        <p>{{ friend.user.username }}</p>
+        <form method="post" action="{% url 'remove_friend' user_id=friend.user.id %}">
+            {% csrf_token %}
+            <button type="submit">Видалити з друзів</button>
+        </form>
+    </div>
+{% empty %}
+    <p>У тебе немає друзів.</p>
+{% endfor %}
+
+
+
 {% endblock %}
 

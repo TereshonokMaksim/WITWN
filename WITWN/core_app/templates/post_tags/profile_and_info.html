@@ -5,8 +5,14 @@
     <div class = "profile-short-info">
         <div class = "profile-author-info">
             {% get_avatar account %}
-            <p class = "profile-username">{{ account.user.username }}</p>
-            <p class = "profile-nickname">@nickname</p>
+            <p class="profile-username">
+            {% if account.first_name or account.last_name %}
+                {{ account.first_name }} {{ account.last_name }}
+            {% else %}
+                {{ account.user.username }}
+            {% endif %}
+            </p>
+            <p class="profile-nickname">@{{ account.user.username }}</p>
         </div>
         <div class = "profile-activity-info">
             <div class = "profile-activity-box">

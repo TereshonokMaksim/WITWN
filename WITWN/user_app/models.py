@@ -12,7 +12,9 @@ class Account(models.Model):
     friends = models.ManyToManyField(to = User, related_name = "accounts_friends", blank = True)
     requests = models.ManyToManyField(to = User, related_name = "accounts_requests", blank = True)
     readers = models.ManyToManyField(to = User, related_name = "accounts_readers", blank = True)
-
+    first_name = models.CharField(max_length = 100, blank = True)  
+    last_name = models.CharField(max_length = 100, blank = True)   
+    
     def get_friends_accounts(self):
         return Account.objects.filter(**{"user__in": list(self.friends.all())})
     
@@ -21,6 +23,10 @@ class Account(models.Model):
 
     def get_absolute_url(self):
         return reverse("confirm", args = [self.email_code])
+    
+    def is_profile_complete(self):
+        return bool(self.first_name and self.last_name and self.user.username)
 
     def __str__(self):
         return f"{self.user.username} account"
+    

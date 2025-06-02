@@ -41,7 +41,23 @@ class NewLoginForm(AuthenticationForm):
             
     def get_user(self) -> User:
         return self.user_cache
+    
+class UserProfileForm(forms.ModelForm):
+    username = forms.CharField(label="Нікнейм (без @)")
+    
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'username']
 
+    def clean_username(self):
+        username = self.cleaned_data['username'].strip()
+        if username.startswith('@'):
+            username = username[1:]
+        if not username.isalnum():
+            raise forms.ValidationError("Нікнейм має містити лише літери та цифри.")
+        if User.objects.filter(username=username).exclude(pk=self.instance.pk).exists():
+            raise forms.ValidationError("Цей нікнейм вже використовується.")
+        return username  
 class NewRegForm(UserCreationForm):
     class Meta:
         model = User
