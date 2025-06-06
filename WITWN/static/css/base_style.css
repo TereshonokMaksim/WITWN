@@ -2,6 +2,10 @@
     font-family:'GT Walsheim Medium';
 }
 
+.hidden{
+    display: none !important;
+}
+
 html{
     height: 100vh;
     width: 100vw;
@@ -98,6 +102,14 @@ header{
     height: calc(1vw + 0.2vh);
 }
 
+.icon{
+    width: calc(1vw + 0.25vh);
+    height: calc(1vw + 0.25vh);
+}
+
+.icon:hover{
+    cursor: pointer;
+}
 
 .logout-button:hover{
     cursor: pointer;

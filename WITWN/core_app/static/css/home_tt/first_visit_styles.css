@@ -1,0 +1,101 @@
+.form-dimmer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.data-form{
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 24px 44px 44px 44px;
+    background-color: white;
+    border-radius: 20px;
+    position: relative;
+}
+
+.data-form p{
+    margin: 0;
+}
+
+.data-form label{
+    font-size: 16px;
+}
+
+.data-form-title{
+    font-size: 34px;
+    color: #070A1C;
+    font-weight: 500;
+    width: 402px; /* <- FORM WIDTH CONTROL HERE */
+    text-align: center;
+    margin: 0;
+}
+
+.data-form-inputs{
+    width: 100%;
+    padding: 24px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.data-form-input{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+input{
+    box-sizing: border-box;
+    padding: 10px 16px;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.data-form-username{
+    width: 100%;
+    position: relative;
+}
+
+.data-form-sign{
+    font-size: 16px;
+    color: #81818D;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 16px;
+}
+
+.data-form-username > input{
+    padding-left: 30px;
+}
+
+.data-form-hinttext{
+    font-size: 12px;
+}
+
+.data-form-hint{
+    color: #22C55E;
+}
+
+.data-form-submit{
+    float: right;
+    background-color: #543C52;
+    padding: 10px 16px;
+    border-radius: 100vw;
+    font-size: 14px;
+    border: 0;
+    color: white;
+}
+
+.data-form-wrapper{
+    width: 100%;
+    height: fit-content;
+    position: relative;
+}

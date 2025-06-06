@@ -15,7 +15,7 @@
 main{
     display: flex;
     justify-content: center;
-    gap: calc(0.35vw + 0.1vh);
+    gap: calc(0.35vw + 0.F1vh);
     padding-top: calc(1vw + 0.2vh);
     overflow: hidden;
 }

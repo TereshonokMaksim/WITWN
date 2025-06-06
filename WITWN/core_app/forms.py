@@ -1,9 +1,70 @@
 from django import forms
 from .models import UserPost
+from user_app.models import Account
+from django.contrib.auth import get_user_model
 
+
+User = get_user_model()
+
+USERNAME_SYMBOLS = [*list(range(0, 10)), *[chr(num) for num in range(65, 91)], *[chr(num) for num in range(97, 123)], "_"]
+
+class UsernameInput(forms.TextInput):
+    def render(self, name, value, attrs = None, renderer = None):
+        basic = super().render(name, value, attrs, renderer)
+        return f"<div class = 'data-form-username'><p class = 'data-form-sign'>@</p>{basic}</div><p class = 'data-form-hinttext'>Або оберіть: <span class = 'data-form-hint'>Запропоновані варіанти відповідно до Ім’я та Прізвища</span></p>"
 
 class MultipleFileInput(forms.ClearableFileInput):
     allow_multiple_selected = True
+
+class FirstVisitForm(forms.ModelForm):
+    username = forms.CharField(widget = UsernameInput())
+
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name", "username"]
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["first_name"].widget.attrs.update({"placeholder": "Введіть Ваше ім'я", "required": True})
+        self.fields["first_name"].label = "Ім'я"
+        self.fields["last_name"].widget.attrs.update({"placeholder": "Введіть Ваше прізвище", "requeired": True})
+        self.fields["last_name"].label = "Прізвище"
+        self.fields["username"].label = "Ім'я користувача"
+
+    def clean_username(self):
+        data: str = self.cleaned_data["username"]
+        for symbol in data:
+            if symbol not in USERNAME_SYMBOLS:
+                raise forms.ValidationError(f'В імені користувача не можна використовувати {symbol}')
+            
+        return f"@{data}"
+
+# class SettignsInput(forms.TextInput):
+#     def __init__(self, attrs = None, shown: bool = False):
+#         super().__init__(attrs)
+#         self.shown = shown
+#     def render(self, name, value, attrs = None, renderer = None):
+#         base = super().render(name, value, attrs, renderer)
+#         if self.shown:
+#             img_source = "{% static 'img/user_base/open_eye.svg' %}"
+#         else:
+#             img_source = "{% static 'img/user_base/closed_eye.svg' %}"
+#         html = f"""<div class = 'settings-input'>{base}<img src = {img_source} class = ""></div>"""
+#         return html
+
+class SettingsForm(forms.ModelForm):
+    birthday = forms.DateField(required = True)
+    password = forms.CharField(max_length = 200, widget = forms.PasswordInput(render_value = True))
+    class Meta:
+        model = User
+        fields = ["first_name", "last_name", "birthday", "email", "password"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["birthday"].label = "День народженя"
+        self.fields["email"].label = "Електронна пошта"
+        self.fields["password"].label = "Пароль"
+
 
 class MultipleFileField(forms.FileField):
     def __init__(self, attrs: dict | None = None, *args, **kwargs):

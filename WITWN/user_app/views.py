@@ -10,6 +10,7 @@ from django.core.mail import EmailMessage
 from .models import Account
 from django.contrib.auth.hashers import make_password
 from django.utils.translation import gettext_lazy
+from .utils import email_authenticate
 import random
 
 # Create your views here.
@@ -40,11 +41,10 @@ class RegView(FormView):
         while len(Account.objects.filter(email_code = email_code)) > 0:
             email_code = generate_email_code()
         if self.request.COOKIES.get("reg_id") == None:
-            user = User.objects.create_user(username = data["email"], password = data["password1"], email = data["email"])
-            account = Account(user = user, email_code = email_code)
+            user = User.objects.create_user(username = "none", password = data["password1"], email = data["email"])
+            account = Account(user = user, email_code = email_code, password = data["password1"])
         else:
             user = User.objects.get(pk = int(self.request.COOKIES["reg_id"]))
-            user.username = data["email"]
             user.email = data["email"]
             user.password = make_password(data["password1"])
             account = Account.objects.get(user = user)
@@ -113,7 +113,7 @@ class LoginView(FormView):
 
     def form_valid(self, form):
         data = form.cleaned_data
-        account = User.objects.get(email = data["email"])
+        account = email_authenticate(email = data["email"], password = data["password"])
         if account:
             login(self.request, account)
             return super().form_valid(form)

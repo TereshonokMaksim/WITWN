@@ -1,5 +1,6 @@
 from django import template
 from ..models import ImageFile, UserPost
+from user_app.models import Account
 
 register = template.Library()
 
@@ -26,5 +27,5 @@ def render_profile_short(account, detailed: bool = True):
 
 @register.inclusion_tag(filename = "post_tags/create_post_form.html")
 
-def render_creation_form(form):
-    return {"form": form}
+def render_creation_form(form, account: Account):
+    return {"form": form, "account": account}

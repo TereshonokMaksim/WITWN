@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'css/home_tt/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/publications/publications_styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/home_tt/post_creation_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_tt/first_visit_styles.css' %}">
     <script defer src = "{% static 'js/publications/post_details.js' %}"></script>
 {% endblock %}
 
@@ -17,7 +18,7 @@
     {% endif %}
     <input type="hidden" name = "deleteURL" value = "{% url 'delete_link' %}">
     <div class = "posts">
-        {% render_creation_form form %}
+        {% render_creation_form form account %}
         {% for post in posts %}
             {% render_post post %}
         {% endfor %}

@@ -5,8 +5,8 @@
     <div class = "profile-short-info">
         <div class = "profile-author-info">
             {% get_avatar account %}
-            <p class = "profile-username">{{ account.user.username }}</p>
-            <p class = "profile-nickname">@nickname</p>
+            <p class = "profile-username">{{ account.user.first_name }} {{ account.user.last_name }}</p>
+            <p class = "profile-nickname">{{ account.user.username }}</p>
         </div>
         <div class = "profile-activity-info">
             <div class = "profile-activity-box">

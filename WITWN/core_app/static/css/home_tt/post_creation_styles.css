@@ -74,6 +74,7 @@
     border: 0.1vw rgba(84, 60, 82, 1) solid;
     border-radius: 100vw;
     background-color: white;
+    box-sizing: border-box;
 }
 
 .smile-button:hover{
@@ -108,10 +109,7 @@
     z-index: 10;
     left: 0;
     top: 0;
-}
-
-.hidden{
-    display: none !important;
+    backdrop-filter: blur(3px);
 }
 
 .show{
@@ -430,15 +428,6 @@ label{
 
 .create-tag-input:focus{
     outline: none;
-}
-
-.icon{
-    width: calc(1vw + 0.25vh);
-    height: calc(1vw + 0.25vh);
-}
-
-.icon:hover{
-    cursor: pointer;
 }
 
 .create-tag-name{
