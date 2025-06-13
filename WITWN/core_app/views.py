@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView, UpdateView
-from .models import UserPost, ImageFile, Tag
-from .forms import CreationPostForm
+from .models import UserPost, ImageFile, Tag, Album, AlbumImage, AlbumImageFile
+from .forms import CreationPostForm, AlbumForm
 from user_app.forms import UserProfileForm
 from user_app.models import Account
 from django.views import View
@@ -11,7 +11,7 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.http import JsonResponse
 from django.contrib.auth.models import User
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView, DeleteView
 
 # Create your views here.
 
@@ -201,3 +201,40 @@ class RemoveFriendView(LoginRequiredMixin, View):
         else:
             messages.error(request, "Цей користувач не ваш друг.")
         return redirect('friends')
+    
+class AlbumListView(LoginRequiredMixin, ListView):
+    model = Album
+    template_name = 'albums/album_list.html'
+    context_object_name = 'albums'
+
+    def get_queryset(self):
+        return Album.objects.filter(user=self.request.user)
+
+class AlbumCreateView(LoginRequiredMixin, View):
+    def get(self, request):
+        form = AlbumForm()
+        return render(request, 'albums/album_create.html', {'form': form})
+
+    def post(self, request):
+        form = AlbumForm(request.POST, request.FILES)
+        files = request.FILES.getlist('images')  
+
+        if form.is_valid():
+            album = form.save(commit=False)
+            album.user = request.user
+            album.save()
+
+            for f in files:
+                AlbumImageFile.objects.create(file = f, album = album)
+
+            return redirect('album_list')
+
+        return render(request, 'albums/album_create.html', {'form': form})
+
+class AlbumDeleteView(LoginRequiredMixin, DeleteView):
+    model = Album
+    template_name = 'albums/album_confirm_delete.html'
+    success_url = reverse_lazy('album_list')
+
+    def get_queryset(self):
+        return Album.objects.filter(user=self.request.user)

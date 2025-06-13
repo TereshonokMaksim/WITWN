@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserPost
+from .models import UserPost, Album
 
 
 class MultipleFileInput(forms.ClearableFileInput):
@@ -53,3 +53,28 @@ class CreationPostForm(forms.ModelForm):
 
     def clean_files(self):
         return self.files.getlist("files")
+    
+class MultipleFileInput(forms.ClearableFileInput):
+    allow_multiple_selected = True
+
+class MultipleFileField(forms.FileField):
+    widget = MultipleFileInput
+
+    def to_python(self, data):
+        if not data:
+            return []
+        if isinstance(data, list):
+            return data
+        return [data]
+
+    def validate(self, data):
+        if self.required and not data:
+            raise forms.ValidationError("Це поле обов'язкове.")
+        for file in data:
+            super().validate(file)
+
+class AlbumForm(forms.ModelForm):
+    images = MultipleFileField(required=False)
+    class Meta:
+        model = Album
+        fields = ['title', 'description']

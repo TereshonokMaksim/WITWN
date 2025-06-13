@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <p>Ти впевнений, що хочеш видалити "{{ object.title }}"?</p>
+        <button type="submit">Так</button>
+    </form>
+    <a href="{% url 'album_list' %}">← Назад</a>
+{% endblock %}

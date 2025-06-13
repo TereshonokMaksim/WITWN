@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Створити альбом</h2>
+    <form method = "post" enctype = "multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="file" name="images" multiple>
+        <button type = "submit">Створити</button>
+    </form>
+
+    <a href="{% url 'album_list' %}">← Назад до альбомів</a>
+
+
+{% endblock %}

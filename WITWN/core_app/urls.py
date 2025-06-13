@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import HomeView, MyPublicationsView, PostDeleteView, FriendsView,  AcceptFriendRequestView, DeclineFriendRequestView, SendFriendRequestView, RemoveFriendView
+from .views import HomeView, MyPublicationsView, PostDeleteView, FriendsView,  AcceptFriendRequestView, DeclineFriendRequestView, SendFriendRequestView, RemoveFriendView, AlbumListView, AlbumCreateView, AlbumDeleteView
 from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
@@ -12,4 +12,7 @@ urlpatterns = [
     path('friends/decline/<int:user_id>/', login_required(DeclineFriendRequestView.as_view()), name = 'decline_friend'),
     path('friends/remove/<int:user_id>/', login_required(RemoveFriendView.as_view()), name = 'remove_friend'),
     path('recommendations/send_request/<int:user_id>/', login_required(SendFriendRequestView.as_view()), name = 'send_friend_request'),
-]
+    path('albums/', AlbumListView.as_view(), name = 'album_list'),
+    path('albums/create/', AlbumCreateView.as_view(), name = 'album_create'),
+    path('albums/delete/<int:pk>/', AlbumDeleteView.as_view(), name = 'album_delete'),
+]   

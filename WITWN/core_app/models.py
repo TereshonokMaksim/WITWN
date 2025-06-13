@@ -31,3 +31,31 @@ class ImageFile(models.Model):
     
     def __str__(self):
         return f"Image from {self.post.title} post"
+    
+class Album(models.Model):
+    user = models.ForeignKey(User, on_delete = models.CASCADE, related_name='albums')
+    title = models.CharField(max_length = 200)
+    description = models.TextField(blank = True)  
+    created = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return self.title
+
+
+
+
+class AlbumImageFile(models.Model):
+    album = models.ForeignKey('Album', on_delete = models.CASCADE, related_name = 'image_files')  
+    file = models.ImageField(upload_to = f'albums/')
+
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return f"Image {self.pk} uploaded on {self.uploaded_at.strftime('%Y-%m-%d %H:%M')}"
+
+class AlbumImage(models.Model):
+    album = models.ForeignKey(Album, on_delete = models.CASCADE, related_name = 'images')  
+    imagefile = models.ForeignKey(AlbumImageFile, on_delete = models.CASCADE, related_name = 'album_images')
+    caption = models.CharField(max_length = 255, blank = True)
+
+    def __str__(self):
+        return f"Image {self.imagefile.pk} in album '{self.album.title}'"

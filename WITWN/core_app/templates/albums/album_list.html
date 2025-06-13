@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Мої альбоми</h2>
+<ul>
+    {% for album in albums %}
+        <li>
+            {{ album.title }} —
+            <a href = "{% url 'album_delete' album.pk %}">Видалити</a>
+            {% if album.images.all %}
+                {% with album.images.first.imagefile.file.url as img_url %}
+                    <br>
+                    <img src = "{{ img_url }}" alt= "Зображення альбому" width = "150">
+                {% endwith %}
+            {% endif %}
+        </li>
+        
+    {% empty %}
+        <li>Альбомів ще немає</li>
+    {% endfor %}
+</ul>
+
+<a href = "{% url 'album_create' %}">Створити новий альбом</a>
+
+{% endblock %}
