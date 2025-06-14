@@ -1,3 +1,8 @@
+header{
+    display: flex;
+    justify-content: center;
+}
+
 .look{
     position: absolute;
     right: 10px;
@@ -31,6 +36,8 @@ main{
     border-color: rgb(200, 200, 200);
     border-image: initial;
     gap: 36px;
+    position: fixed;
+    left: 26vw;
 }
 
 
@@ -123,6 +130,6 @@ body{
 }
 
 .errorlist{
-    margin-bottom: 0px;
+    margin: 0px;
     color: red;
 }

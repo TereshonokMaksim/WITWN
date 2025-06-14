@@ -500,3 +500,7 @@ label{
 .creation-link-input:focus{
     outline: none;
 }
+
+.deactive-tag{
+    filter: brightness(85%);
+}

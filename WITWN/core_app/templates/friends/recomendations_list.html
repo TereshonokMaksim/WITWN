@@ -1,0 +1,52 @@
+{% extends "main_base.html" %}
+{% load static %}
+{% load base_post_tags %}
+
+
+
+{% block page_links %}
+    <link rel="stylesheet" href="{% static 'css/friends/friends.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_tt/profile_pic.css' %}">
+    <script src = "{% static 'js/friends/friends_script.js' %}" defer></script>
+{% endblock %}
+
+{% block page_nav %}
+    <a href="{% url 'friends' %}" class="main-nav-link">Головна</a>
+    <a href="{% url 'all_requests' %}" class="main-nav-link">Запити</a>
+    <a href="{% url 'all_recomendations' %}" class="main-nav-link selected-link">Рекомендації</a>
+    <a href="{% url 'all_friends' %}" class="main-nav-link">Всі друзі</a>
+{% endblock %}
+
+{% block page_content %}
+    <input type="hidden" id = "addFriendLink" value = "{% url 'add_friend' 0 %}">
+    <input type="hidden" id = "removeFriendLink" value = "{% url 'remove_friend' 0 %}">
+    <input type="hidden" id = "denyRequestLink" value = "{% url 'deny_request' 0 %}">
+    <input type="hidden" id = "sendRequestLink" value = "{% url 'send_request' 0 %}">
+    <input type="hidden" id = "deleteRecomendationLink" value = "{% url 'delete_recomendation' 0 %}">
+    <div class="requests-div">
+        <div class="request-header">
+            <p class="request-title">Рекомендації</p>
+            <a href="{% url 'home' %}" class="request-see-all">Дивитись всі</a>
+        </div>
+        <div class="all-requests-block">
+            {% for request in acc_list %}
+                <div class="single-request-div" id = "{{ request.id }}">
+                    <a class="profile-info" href = "{% url 'user_page' request.pk %}">
+                        <div class = "friend-avatar-wrapper">
+                            {% get_avatar request %}
+                        </div>
+                        <div class="nicknames-info">
+                            <p class="request-username">{{ request.user.first_name }} {{ request.user.last_name }}</p>
+                            <p class="request-tag">{{ request.user.username }}</p>
+                        </div>
+                    </a>
+                    <div class="request-buttons">
+                        <button class="confirm-button conf-rec-button">Додати</button>
+                        <button class="delete-button del-rec-button">Видалити</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

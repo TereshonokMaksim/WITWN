@@ -1,6 +1,7 @@
 from django import forms
 from .models import UserPost
 from user_app.models import Account
+from .models import Album, AlbumTheme
 from django.contrib.auth import get_user_model
 
 
@@ -31,6 +32,8 @@ class FirstVisitForm(forms.ModelForm):
         self.fields["last_name"].label = "Прізвище"
         self.fields["username"].label = "Ім'я користувача"
 
+    # Who shall we listen to?
+
     def clean_username(self):
         data: str = self.cleaned_data["username"]
         for symbol in data:
@@ -51,6 +54,22 @@ class FirstVisitForm(forms.ModelForm):
 #             img_source = "{% static 'img/user_base/closed_eye.svg' %}"
 #         html = f"""<div class = 'settings-input'>{base}<img src = {img_source} class = ""></div>"""
 #         return html
+
+class AlbumCreationForm(forms.ModelForm):
+    # year = forms.ChoiceField(choices = list(range(1950, 2071)))
+
+    class Meta:
+        model = Album
+        fields = ["name", "theme", "year"]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["name"].label = "Назва альбому"
+        self.fields["theme"].label = "Оберіть тему"
+        self.fields["year"].label = "Рік альбому"
+        self.fields["name"].widget.attrs.update({"placeholder": "Введіть ім'я"})
+        self.fields["theme"].widget.attrs.update({"placeholder": "Оберіть тему"})
+        self.fields["year"].widget.attrs.update({"placeholder": "Оберіть рік"})
 
 class SettingsForm(forms.ModelForm):
     birthday = forms.DateField(required = True)
@@ -78,6 +97,8 @@ class MultipleFileField(forms.FileField):
         else:
             result = [single_file_clean(data, initial)]
         return result
+
+# i feel, like im the next one who will fall under his control...
 
 class CreationPostForm(forms.ModelForm):
     files = MultipleFileField(required = False, attrs = {'class': "hidden"})

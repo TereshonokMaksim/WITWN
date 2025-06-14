@@ -1,6 +1,5 @@
 .friends-links-div{
     position: relative;
-    left: 150px;
     display: flex;
     flex-direction: column;
     min-width: 254px;
@@ -9,16 +8,7 @@
     top: 16px;
     gap: 26px;
 }
-.friends-link{
-    min-height: 18px;
-    max-height: 18px;
-    width: fit-content;
-    font-size: 16px;
-    font-weight: 500;
-    color: rgba(129, 129, 141, 1);
-    text-decoration: none;
-  
-}
+
 #main-friends-link{
     display: flex;
     color: rgba(7, 10, 28, 1);
@@ -28,32 +18,12 @@
     border-bottom: 2px solid rgba(84, 60, 82, 1);
     
 }
-.everything-div{
-    display: flex;
-    flex-direction: row;
-    gap: 347px;
-    height: 100%;
-}
-
 .settings-edit-options{
     display: flex;
     flex-direction: row;
     gap: 12px;
 }
 
-.content-div{
-    overflow-y: scroll;
-    overflow-x: hidden;
-    scrollbar-width: none;
-    display: flex;
-    flex-direction: column;
-    min-width: 1173px;
-    max-width: 1173px;
-    margin-top: 1%;
-    gap: 8px;
-    min-height: 90%;
-    max-height: 90%;
-}
 .section-div{
     display: flex;
     flex-direction: column;
@@ -201,6 +171,7 @@
     font-size: 24px;
     color: #070A1C;
     margin: 0px;
+    font-weight: 700;
 }
 
 .self-username{
@@ -333,10 +304,13 @@
 }
 
 .settings-save-button{
-    color: #FFF;
-    background-color: #543C52;
+    /* background-color: #543C52; */
     padding: 12px;
 }
+
+/* .settings-save-button p{
+    color: white;
+} */
 
 .settings-edit-button:hover{
     cursor: pointer;
@@ -350,8 +324,64 @@
     cursor: pointer !important;
 }
 
-.error{
+li{
     font-size: 14px;
     color: red;
-    margin: 3px;
+    margin: 0px;
+}
+
+.errorlist{
+    margin: 0px;
+}
+.header-edit{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.avatar-edit-button{
+    border: 0px;
+    background-color: transparent;
+    font-size: 16px;
+    color: #543C52;
+    gap: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-edit-button:hover{
+    cursor: pointer;
+}
+
+.avatar-edit-buttonbox{
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+.username-input{
+    border: 1px solid #81818D;
+    border-radius: 10px;
+    padding: 12px;
+    color: black;
+    font-size: 16px;
+    width: 350px;
+}
+
+.username-input::placeholder{
+    color: #81818D;
+}
+
+.username-label{
+    color: #81818D;
+    font-size: 16px;
+}
+
+.username-inputbox{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: start;
 }

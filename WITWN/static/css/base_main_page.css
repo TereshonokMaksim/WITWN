@@ -1,0 +1,43 @@
+.everything-div{
+    display: flex;
+    flex-direction: row;
+    gap: 200px;
+    height: 100%;
+}
+
+
+.content-div{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    display: flex;
+    flex-direction: column;
+    min-width: 1173px;
+    max-width: 1173px;
+    margin-top: 1%;
+    gap: 8px;
+    min-height: 90%;
+    max-height: 90%;
+}
+
+.main-nav-link{
+    min-height: 18px;
+    max-height: 18px;
+    width: fit-content;
+    font-size: 16px;
+    font-weight: 500;
+    color: rgba(129, 129, 141, 1);
+    text-decoration: none;
+}
+
+.selected-link{
+    color: #070A1C;
+    border-bottom: 2px solid #543C52;
+}
+
+main{
+    display: flex;
+    align-items: center;
+    padding-left: calc(4vw + 8vh);
+    box-sizing: border-box;
+}

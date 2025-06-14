@@ -1,5 +1,5 @@
 from django import template
-from ..models import ImageFile, UserPost
+from ..models import ImageFile, UserPost, Album, AlbumImageFile
 from user_app.models import Account
 
 register = template.Library()
@@ -18,14 +18,25 @@ def render_post(post: UserPost):
 
 @register.inclusion_tag(filename = "post_tags/profile_and_info.html")
 
-def render_profile_short(account, detailed: bool = True):
+def render_profile_short(account: Account, detailed: bool = True, album_view: bool = False, relation: str = ""):
     friends = account.get_friends_accounts()
     requests = account.get_requests_accounts()
     post_num = len(UserPost.objects.filter(author = account))
     readers_num = len(account.readers.all())
-    return {"account": account, "profile_with_additions": detailed, "friends": friends, "requests": requests, "posts_num": post_num, "readers_num": readers_num}
+    albums = {album: AlbumImageFile.objects.filter(album = album).first() for album in Album.objects.filter(author = account)}
+    return {"account": account, 
+            "profile_with_additions": detailed, 
+            "friends": friends, 
+            "requests": requests, 
+            "posts_num": post_num, 
+            "readers_num": readers_num,
+            "albums_need": album_view,
+            "albums": albums,
+            "relation": relation}
 
 @register.inclusion_tag(filename = "post_tags/create_post_form.html")
 
-def render_creation_form(form, account: Account):
-    return {"form": form, "account": account}
+def render_creation_form(form, account: Account, tags: list):
+    return {"form": form, "account": account, "tags": tags}
+
+# Our watcher is looking at our souls...

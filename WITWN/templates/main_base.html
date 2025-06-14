@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+{% load base_post_tags %}
+
+{% block links %}
+    <link rel="stylesheet" href="{% static 'css/base_main_page.css' %}">
+    {% block page_links %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    <div class="everything-div">
+        <div class="friends-links-div">
+            <!-- <a href="{% url 'home' %}" class="main-nav-link" id="main-friends-link">Особиста інформація</a> -->
+            {% block page_nav %}
+            {% endblock %}
+        </div>
+        <div class="content-div">
+            {% block page_content %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

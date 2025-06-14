@@ -1,0 +1,118 @@
+{% extends "main_base.html" %}
+{% load static %}
+{% load base_post_tags %}
+
+{% block page_links %}
+   
+{% endblock %}
+
+{% block content %}
+    <div class="everything-div">
+        <div class="contact-div">
+            <button class="button">+ Створити груповий чат</button>
+            <div class="contacts-everything-div">
+                <div class="contacts-p-div">
+                    <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                    <p class="contacts-p">Контакти</p>
+                </div>
+                <div class="search-contacts-div">
+                     <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                    <input type="text" placeholder="Пошук">
+                </div>
+                <div class="contacts-list-div">
+                    <div class="single-contact-div">
+                        <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                        <p class="contact-name-p">Jane Cooper</p>
+                    </div>
+                    <div class="single-contact-div">
+                        <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                        <p class="contact-name-p">Jane Cooper</p>
+                    </div>
+                    <div class="single-contact-div">
+                        <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                        <p class="contact-name-p">Jane Cooper</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-everything-div">
+            <p class="main-chat-p">Почніть нове спілкування</p>
+            <p class="second-chat-p">Оберіть контакт зі списку ліворуч або створіть групу, щоб почати спілкування</p>
+        </div>
+        <div class="messages-everything-div">
+            <div class="mesages-div">
+                <div class="messages-header-div">
+                    <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                    <p class="messages-header-p">Повідомлення</p>
+                    <p class="see-all-messages-header-p">Дивитись всі</p>
+                </div>
+                <div class="messages">
+                    <div class="single-message-div">
+                        <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                        <div class="time-and-name-message">
+                            <p class="message-author-name">Mona Lisa</p>
+                            <p class="time-message">14.04.88</p>
+                        </div>
+                        
+                        <p class="message-text">Привіт! Як справи?</p>
+                    </div>
+                    <div class="single-message-div">
+                        <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                         <div class="time-and-name-message">
+                            <p class="message-author-name">Mona Lisa</p>
+                            <p class="time-message">14.04.88</p>
+                        </div>
+                       
+                        <p class="message-text">Привіт! Як справи?</p>
+                    </div>
+                    <div class="single-message-div">
+                        <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                         <div class="time-and-name-message">
+                            <p class="message-author-name">Mona Lisa</p>
+                            <p class="time-message">14.04.88</p>
+                        </div>
+                       
+                        <p class="message-text">Привіт! Як справи?</p>
+                    </div>
+                </div>
+            </div>
+            <div class="groups-div">
+                <div class="messages-header-div">
+                    <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                    <p class="messages-header-p">Групові чати</p>
+                    <p class="see-all-messages-header-p">Дивитись всі</p>
+                </div>
+                <div class="messages">
+                    <div class="single-message-div">
+                        <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                        <div class="time-and-name-message">
+                            <p class="message-author-name">Mona Lisa</p>
+                            <p class="time-message">14.04.88</p>
+                        </div>
+                        
+                        <p class="message-text">Привіт! Як справи?</p>
+                    </div>
+                    <div class="single-message-div">
+                        <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                         <div class="time-and-name-message">
+                            <p class="message-author-name">Mona Lisa</p>
+                            <p class="time-message">14.04.88</p>
+                        </div>
+                       
+                        <p class="message-text">Привіт! Як справи?</p>
+                    </div>
+                    <div class="single-message-div">
+                        <img src="{% static 'img/home_tt/smile.svg' %}" alt="contacts-image" class="contacts-image">
+                         <div class="time-and-name-message">
+                            <p class="message-author-name">Mona Lisa</p>
+                            <p class="time-message">14.04.88</p>
+                        </div>
+                       
+                        <p class="message-text">Привіт! Як справи?</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

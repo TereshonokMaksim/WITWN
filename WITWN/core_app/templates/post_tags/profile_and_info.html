@@ -22,6 +22,16 @@
                 <p class = "profile-activity-text">Друзі</p>
             </div>
         </div>
+        {% if albums_need %}
+            <div class = "profile-header-button" id = "account.id">
+                <input type="hidden" id = "accountsRelation" value = "{{ relation }}">
+                <button class = "profile-header-confirm">Додати</button>
+                <button class = "profile-header-deny">Видалити</button>
+                <p class = "profile-header-text hidden" id = "headerDelFriendText">Ви видалили цього друга</p>
+                <p class = "profile-header-text hidden" id = "headerSendReqText">Ви надіслали запит</p>
+                <p class = "profile-header-text hidden" id = "headerDelReqText">Ви відхили запит</p>
+            </div>
+        {% endif %}
     </div>
     {% if profile_with_additions %}
         <div class = "profile-requests-box">
@@ -64,6 +74,28 @@
                             <!-- Hard coded info, fix once TT with messages is done (TODO) -->
                             <p class = "profile-friend-text">Я придбав Луну 😠</p>
                         </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    {% if albums_need %}
+        <div class = "profile-requests-box">
+            <div class = "profile-requests-panel">
+                <img src = "{% static 'img/my_publications/img.svg' %}" class = "profile-section-icon">
+                <p class = "profile-requests-title">Альбоми</p>
+                <a href="#" class = "profile-requests-all">Дивитись всі</a>
+            </div>
+            <div class = "profile-albums">
+                {% for album, image in albums.items %}
+                    <div class = "profile-album-block">
+                        <h2 class = "profile-album-header">{{ album.name }}</h2>
+                        {% if album.year %}
+                            <p class = "album-additional-info">{{ album.theme.name }} <span class = "album-year">{{ album.year }} рік</span></p>
+                        {% else %}
+                            <p class = "album-additional-info">ㅤ</p>
+                        {% endif %}
+                        <img src = "{{ image.file.url }}" alt = "noimage" class = "profile-album-photo">
                     </div>
                 {% endfor %}
             </div>

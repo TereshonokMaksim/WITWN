@@ -59,6 +59,9 @@
                 <p class = "create-tag-preview"></p>
                 <p class = "invinsible helper-text" id = "areaTextCopy"></p>
                 <div class="" id="createTagDiv">
+                    {% for tag in tags %}
+                        <p class = "create-tag-name create-standart-tag deactive-tag">{{ tag.name }}</p>
+                    {% endfor %}
                     <div class = "create-tag-box hidden">
                         <p class = "create-tag-sign">#</p>
                         <input name="create-tag-input" class = "create-tag-input" id="createTagInput">
@@ -92,7 +95,6 @@
                 <button class="creation-form-send" type = "submit">Публікація <img src = "{% static 'img/my_publications/send.svg' %}" alt="" class = "icon"></button>
             </div>
         </form>
-    </div>
 
     <script defer src = "{% static 'js/home_tt/creation_form.js' %}"></script>
     {% else %}
@@ -116,3 +118,4 @@
 
         <script src = "{% static 'js/home_tt/first_visit_form.js' %}"></script>
     {% endif %} 
+</div>

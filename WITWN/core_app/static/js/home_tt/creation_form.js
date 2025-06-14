@@ -4,9 +4,7 @@ const creationFormClose = document.querySelector(".creation-form-close")
 const publicationForm = document.querySelector(".form-creation-post")
 let sendImgTextTag = `<img src = "${document.querySelector("[name='sendImgURL']").value}">`
 
-function closeForm(){
-    dimmer.classList.replace("show", "hidden")
-    publicationForm.querySelector("[name='specific_id']").value = -1
+function formClean(){
     publicationForm.reset()
     resizeScroll()
     setContentScroll(0)
@@ -19,8 +17,12 @@ function closeForm(){
     publicationForm.querySelector(".creation-form-title").innerHTML = "Створення публікації"
     publicationForm.querySelector(".creation-form-send").innerHTML = `Публікація ${sendImgTextTag}`
     // Tag cleaning
-    for (let tagElement of document.querySelectorAll(".create-tag-name")){
+    activeTags = []
+    for (let tagElement of document.querySelectorAll(".create-custom-tag")){
         tagElement.remove()
+    }   
+    for (let standartTagElement of document.querySelectorAll(".create-standart-tag")){
+        standartTagElement.classList.replace("active-tag", "deactive-tag")
     }
     updateTagsPreviewText()
     let linkBlocks = Array.from(document.querySelectorAll(".creation-link-box"))
@@ -31,6 +33,14 @@ function closeForm(){
     }
     document.querySelector(".creation-link-box").querySelector(".creation-link-input").value = ""
     document.querySelector(".creation-link-box").querySelector(".creation-link-create").classList.remove("hidden")
+}
+
+function closeForm(){
+    dimmer.classList.replace("show", "hidden")
+    if (publicationForm.querySelector("[name='specific_id']").value != -1){
+        formClean()
+    }
+    publicationForm.querySelector("[name='specific_id']").value = -1
 }
 
 publicationForm.addEventListener("submit", (event) => {
@@ -87,6 +97,7 @@ let createFormBox = document.querySelector(".create-tag-box")
 let showTagButton = document.querySelector(".show-tag-button")
 let tagsTextPreview = document.querySelector(".create-tag-preview")
 let mainTextArea = document.querySelector("#id_text")
+let activeTags = []
 
 
 publicationForm.querySelector(".creation-form-inputs").insertBefore(createTagDiv, document.querySelector("#id_text").parentElement)
@@ -124,7 +135,7 @@ function updateTagsPreviewPosition(){
     let offsetTop = px2vh(mainTextArea.parentElement.querySelector("label").clientHeight)
     offsetTop += px2vh(Number(window.getComputedStyle(mainTextArea.parentElement).gap.split("px")[0]))
     offsetTop += Math.max(4, px2vh(textAreaContentHeight(mainTextArea)))
-    offsetTop -= px2vh(50)
+    // offsetTop -= px2vh(20)
     // offsetTop -= px2vh(mainTextArea.scrollTop)
     console.log(offsetLeft, offsetTop, window.innerHeight, window.innerWidth)
     tagsTextPreview.style.left = `calc(${offsetLeft}vw)`
@@ -133,8 +144,8 @@ function updateTagsPreviewPosition(){
 
 function updateTagsPreviewText(){
     let tagsText = ''
-    for (let tagTag of document.querySelectorAll(".create-tag-name")){
-        tagsText += `${tagTag.innerHTML} `
+    for (let tag of activeTags){
+        tagsText += `${tag} `
     }
     tagsTextPreview.innerHTML = tagsText
     updateTagsPreviewPosition()
@@ -164,10 +175,22 @@ function createTag(text = null){
     }
     let newTag = document.createElement("p")
     newTag.classList.add("create-tag-name")
+    newTag.classList.add("active-tag")
+    activeTags.push(newTag.innerHTML)
+    newTag.classList.add("create-custom-tag")
     newTag.textContent = tagText
     newTag.addEventListener("click", () => {
-        newTag.remove()
-        updateTagsPreviewText()
+        if (newTag.classList.contains("active-tag")){
+            // newTag.remove()
+            newTag.classList.replace("active-tag", "deactive-tag")
+            activeTags.splice(activeTags.indexOf(newTag.innerHTML), 1)
+            updateTagsPreviewText()
+        }
+        else{
+            newTag.classList.replace("deactive-tag", "active-tag")
+            activeTags.push(newTag.innerHTML)
+            updateTagsPreviewText()
+        }
     })
     createTagDiv.insertBefore(newTag, createFormBox)
     closeTagCreation()
@@ -193,6 +216,20 @@ createTagInput.addEventListener("keydown", (event) => {
     }
 })
 
+document.querySelectorAll(".create-standart-tag").forEach((obj) => {
+    obj.addEventListener("click", () => {
+        if (obj.classList.contains("active-tag")){
+            obj.classList.replace("active-tag", "deactive-tag")
+            activeTags.splice(activeTags.indexOf(obj.innerHTML), 1)
+            updateTagsPreviewText()
+        }
+        else{
+            obj.classList.replace("deactive-tag", "active-tag")
+            activeTags.push(obj.innerHTML)
+            updateTagsPreviewText()
+        }
+    })
+})
 
 mainTextArea.addEventListener("input", updateTagsPreviewPosition)
 mainTextArea.addEventListener("scroll", updateTagsPreviewPosition)

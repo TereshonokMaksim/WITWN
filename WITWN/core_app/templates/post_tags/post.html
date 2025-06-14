@@ -6,7 +6,7 @@
         <div class = "post-avator-restricter">
             {% get_avatar post.author %} 
         </div>
-        <p class = "author-username">{{ post.author.user.username }}</p>
+        <p class = "author-username">{{ post.author.user.first_name }} {{ post.author.user.last_name }}</p>
         <img src = "{% static 'img/home_tt/triple_dot.svg' %}" alt = "add." id = "details-{{ post.pk }}" class = "author-triple-dot">
     </div>
     <div class = "content-box">

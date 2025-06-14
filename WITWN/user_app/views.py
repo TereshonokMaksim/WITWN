@@ -8,6 +8,7 @@ from .forms import EmailCodeForm, NewRegForm, NewLoginForm
 from django.urls import reverse_lazy
 from django.core.mail import EmailMessage
 from .models import Account
+from core_app.models import Album
 from django.contrib.auth.hashers import make_password
 from django.utils.translation import gettext_lazy
 from .utils import email_authenticate
@@ -86,7 +87,9 @@ class Reg2View(FormView):
         for account in accounts:
             account.email_code = "0"
             account.save()
+            break
         
+        Album.objects.create(name = "Мої фото", author = Account.objects.get(user = self.request.user), neccessary = True)
         response = super().form_valid(form)
         response.delete_cookie('reg_id')
         return response
@@ -114,6 +117,7 @@ class LoginView(FormView):
     def form_valid(self, form):
         data = form.cleaned_data
         account = email_authenticate(email = data["email"], password = data["password"])
+        print(f"Error check: {data}")
         if account:
             login(self.request, account)
             return super().form_valid(form)
@@ -128,3 +132,5 @@ class LoginView(FormView):
 
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy("login")
+
+# our data will be corrupted by upper beings, who control our thoughts

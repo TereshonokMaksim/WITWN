@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 class Account(models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
-    avatar = models.ImageField(upload_to = "avatars/", default = "avatars/default.png")
+    avatar = models.ImageField(upload_to = "avatars/", default = "none")
     email_code = models.CharField(max_length = 11)
     friends = models.ManyToManyField(to = User, related_name = "accounts_friends", blank = True)
     requests = models.ManyToManyField(to = User, related_name = "accounts_requests", blank = True)
@@ -32,3 +32,5 @@ class Account(models.Model):
 
     def __str__(self):
         return f"{self.user.username} account"
+    
+# the structure shall be changed, as it is old as mountains themselves

@@ -9,7 +9,12 @@ def email_authenticate(email: str, password: str):
         Made because username is taken by user's data.
     '''
     user = User.objects.filter(email = email)
-    if user.exists():
+    print("??")
+    if len(user) > 0:
+        print("user here")
         if user[0].check_password(password):
+            print("good pass")
             return user[0]
     return None 
+
+# we will seek for salvation in success...

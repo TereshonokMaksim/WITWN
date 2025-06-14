@@ -80,5 +80,7 @@ label {
 .phone_pic {
     width: 880px;
     height: 730px;
-    margin-left: -100px;
+    position: fixed;
+    left: 45vw;
+    z-index: -1;
 }

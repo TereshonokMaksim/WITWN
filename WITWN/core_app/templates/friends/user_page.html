@@ -7,18 +7,19 @@
     <link rel="stylesheet" href="{% static 'css/home_tt/post.css' %}">
     <link rel="stylesheet" href="{% static 'css/home_tt/profile.css' %}">
     <link rel="stylesheet" href="{% static 'css/publications/publications_styles.css' %}">
-    <link rel="stylesheet" href="{% static 'css/home_tt/post_creation_styles.css' %}">
-    <link rel="stylesheet" href="{% static 'css/home_tt/first_visit_styles.css' %}">
-    <script defer src = "{% static 'js/publications/post_details.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/friends/user_page.css' %}">
+    <script src = "{% static 'js/friends/user_page_script.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
+    <input type="hidden" id = "addFriendLink" value = "{% url 'add_friend' 0 %}">
+    <input type="hidden" id = "removeFriendLink" value = "{% url 'remove_friend' 0 %}">
+    <input type="hidden" id = "denyRequestLink" value = "{% url 'deny_request' 0 %}">
+    <input type="hidden" id = "sendRequestLink" value = "{% url 'send_request' 0 %}">
     {% if request.user.is_authenticated %}
-        {% render_profile_short account full_acc %}
+        {% render_profile_short account full_acc 1 relation %}
     {% endif %}
-    <input type="hidden" name = "deleteURL" value = "{% url 'delete_link' %}">
     <div class = "posts">
-        {% render_creation_form form account tags %}
         {% for post in posts %}
             {% render_post post %}
         {% endfor %}

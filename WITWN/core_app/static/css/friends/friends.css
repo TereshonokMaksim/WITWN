@@ -1,6 +1,6 @@
 .friends-links-div{
     position: relative;
-    left: 150px;
+    /* left: 150px; */
     display: flex;
     flex-direction: column;
     min-width: 254px;
@@ -31,7 +31,7 @@
 .everything-div{
     display: flex;
     flex-direction: row;
-    gap: 347px;
+    gap: 200px;
     height: 100%;
 }
 .content-div{
@@ -102,7 +102,10 @@
     gap: 35px;
     justify-content: center;
     align-items: center;
+    color: black;
+    text-decoration: none;
 }
+
 .nicknames-info{
     display: flex;
     flex-direction: column;

@@ -23,16 +23,22 @@ class NewLoginForm(AuthenticationForm):
         data = self.cleaned_data
         print(data)
         data["email"] = data["username"]
-        user = authenticate(username = data["email"], password = data["password"])
-        if user == None:
-            raise forms.ValidationError(gettext_lazy("Incorrect password or email"))
-        else:
-            account = Account.objects.get(user = user)
+        user = User.objects.filter(email = data["email"])
+        # if user == None:
+        #     raise forms.ValidationError(gettext_lazy("Incorrect password or email"))
+        # else:
+        if len(user) > 0:
+            account = Account.objects.filter(user = user[0])
+            account = account[0]
             if account.email_code == "0":
                 self.user_cache = user
                 return data
             else:
+                print("Hello")
                 raise forms.ValidationError(gettext_lazy("Complete your email confirmation first"))
+        else:
+            print("What", data, user)
+            raise forms.ValidationError(gettext_lazy("Incorrect password or email"))
             
     def clean_username(self):
         print('as')
@@ -86,3 +92,5 @@ class EmailCodeForm(forms.Form):
     symbol4 = forms.CharField(max_length = 1)
     symbol5 = forms.CharField(max_length = 1)
     symbol6 = forms.CharField(max_length = 1)
+
+# ...and see only their failure.

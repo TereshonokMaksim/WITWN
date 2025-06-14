@@ -1,6 +1,10 @@
 {% load static %}
 
 <div class = "profile-box">
-    <img src = "{{ account.avatar.url }}" class = "prof-pic">
+    {% if account.avatar != "none" %}
+        <img src = "{{ account.avatar.url }}" class = "prof-pic">
+    {% else %}
+        <img src = "{% static 'img/base/standart_avatar.png' %}" class = "prof-pic">
+    {% endif %}
     <img src="{% static img_path %}" class="prof-ind">
 </div>

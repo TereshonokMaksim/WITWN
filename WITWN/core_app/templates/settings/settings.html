@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "main_base.html" %}
 {% load static %}
 {% load base_post_tags %}
 
@@ -6,90 +6,129 @@
     Profile Settings
 {% endblock %}
 
-{% block links %}
+{% block page_links %}
     <link rel="stylesheet" href="{% static 'css/settings/settings_styles.css' %}">
     <link rel="stylesheet" href="{% static 'css/home_tt/profile_pic.css' %}">
     <script src = "{% static 'js/settings/settings_script.js' %}" defer></script>
 {% endblock %}
 
-{% block content %}
-    <div class="everything-div">
-        <div class="friends-links-div">
-            <a href="{% url 'home' %}" class="friends-link" id="main-friends-link">Особиста інформація</a>
-            <a href="{% url 'home' %}" class="friends-link">Альбоми</a>
+{% block page_nav %}
+    <a href="{% url 'settings' %}" class="main-nav-link selected-link">Особиста інформація</a>
+    <a href="{% url 'my_albums' %}" class="main-nav-link">Альбоми</a>
+{% endblock %}
+
+{% block page_content %}
+    <input type="hidden" id = "mainInfoLink" value = "{% url 'edit_main_info' %}">
+    <div class="section-div">
+        <div class="request-header">
+            <p class="request-title">Картка профілю</p>
+            <div class = "settings-edit-options">
+                <button class = "settings-edit-button settings-edit-header">
+                    <img src = "{% static 'img/settings/pencil.svg' %}" alt="/" class = "icon">
+                    <p href="{% url 'home' %}" class="request-see-all">Редагувати</p>
+                </button>
+                <button class = "settings-edit-button hidden" id = "headerEditCancel">
+                    <img src = "{% static 'img/settings/cross.svg' %}" alt="/" class = "icon">
+                    <p href="{% url 'home' %}" class="request-see-all">Скасувати</p>
+                </button>
+                <button class = "settings-edit-button hidden" id = "headerEditSend">
+                    <img src = "{% static 'img/settings/pencil.svg' %}" alt="/" class = "icon">
+                    <p href="{% url 'home' %}" class="request-see-all">Зберегти</p>
+                </button>
+            </div>
         </div>
-        <div class="content-div">
-            <div class="section-div">
-                <div class="request-header">
-                    <p class="request-title">Картка профілю</p>
-                    <button class = "settings-edit-button">
-                        <img src = "{% static 'img/settings/pencil.svg' %}" alt="/" class = "icon">
-                        <p href="{% url 'home' %}" class="request-see-all">Редагувати</p>
-                    </button>
-                </div>
-                <div class="self-info-block">
-                    <div class = "self-avatar-wrapper">
-                        {% get_avatar account 0 %}
-                    </div>
-                    <div class = self-text-info>
-                        <p class = "self-name">{{ user.first_name }} {{ user.last_name }}</p>
-                        <p class = "self-username">{{ user.username }}</p>
-                    </div>
+        <div class="self-info-block header-readonly">
+            <div class = "self-avatar-wrapper">
+                {% get_avatar account 0 %}
+            </div>
+            <div class = self-text-info>
+                <p class = "self-name">{{ user.first_name }} {{ user.last_name }}</p>
+                <p class = "self-username">{{ user.username }}</p>
+            </div>
+        </div>
+        <form class="self-info-block header-edit hidden" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p class = "avatar-edit-text">Оберіть або завантажте фото профілю</p>
+            <div class = "self-avatar-wrapper">
+                {% get_avatar account 0 %}
+            </div>
+            <div class = "avatar-edit-buttonbox">
+                <input type="file" id = "newAvatarDownload" class = "hidden" name = "avatar">
+                <button class = "avatar-edit-button" id = "avatarEditAdd" type = "button">
+                    <img src = "{% static 'img/settings/plus.svg' %}" alt=" " class = "icon">
+                    <p class = "avatar-edit-buttontext">Додайте фото</p>
+                </button>
+                <button class = "avatar-edit-button" id = "avatarEditChoose" type = "button">
+                    <img src = "{% static 'img/settings/img.svg' %}" alt=" " class = "icon">
+                    <p class = "avatar-edit-buttontext">Оберіть фото</p>
+                </button>
+            </div>
+            <div class = self-text-info>
+                <p class = "self-name">{{ user.first_name }} {{ user.last_name }}</p>
+                <div class = "username-inputbox">
+                    <label for = "usernameInput" class = "username-label">Ім'я користувача</label>
+                    <input type = "text" class = "username-input" name = "username" placeholder = "{{ user.username }}">
                 </div>
             </div>
-            <input type="hidden" value = "{% static 'img/user_base/closed-eye.svg' %}" name = "{% static 'img/user_base/open-eye.svg' %}" id = "URLs">
-            <form class="section-div" method = "post">
-                {% csrf_token %}
-                <div class="request-header">
-                    <p class="request-title">Особиста інформація</p>
-                    <div class = "settings-edit-options">
-                        <button class = "settings-edit-button settings-open-editing" type = "button">
-                            <img src = "{% static 'img/settings/pencil.svg' %}" alt="/" class = "icon">
-                            <p class="request-see-all">Редагувати</p>
-                        </button>
-                        <button class = "settings-edit-button settings-cancel-button hidden" type = "button">Скасувати</button>
-                        <button class = "settings-edit-button settings-save-button hidden" type = "submit">Зберегти</button>
-                    </div>
-                </div>
-                <div class="self-info-editbox half-visible">
-                    {% for field in form %}
-                        <div class = "input-block">
-                            {{ field.label_tag }}
-                            <div class = "input-box">
-                                {{ field }}
-                                {% if field.field.widget|classname == "PasswordInput" %}
-                                    <img src = "{% static 'img/user_base/closed-eye.svg' %}" class = "icon absolute-eye show-password non-interactive" id = "hidden">
-                                {% else %}
-                                    <img src = "{% static 'img/user_base/open-eye.svg' %}" class = "icon show-main-info non-interactive">
-                                {% endif %}
-                            </div>
-                            <p class = "error">{{ field.errors }}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            </form> 
-            <div class="section-div">
-                <div class="request-header">
-                    <p class="request-title">Варіанти підпису</p>
-                    <button class = "settings-edit-button">
-                        <img src = "{% static 'img/settings/pencil.svg' %}" alt="/" class = "icon">
-                        <p href="{% url 'home' %}" class="request-see-all">Редагувати</p>
-                    </button>
-                </div>
-                <div class="checkboxes-block">
-                    <div class = "checkbox-block">
-                        <input type="checkbox" class = "checkbox-input">
-                        <p class = "checkbox-name">Ім'я та прізвище</p>
-                    </div>
-                    <p class = "checkbox-preview-text">{{ user.first_name }} {{ user.last_name }}</p>
-                    
-                    <div class = "checkbox-block">
-                        <input type="checkbox" class = "checkbox-input">
-                        <p class = "checkbox-name">Мій електроний підпис</p>
-                    </div>
-                    <img src="{% static 'img/settings/sign.png' %}" alt="" class = "checkbox-img-prev">
-                </div>
+        </form>
+    </div>
+    <input type="hidden" value = "{% static 'img/user_base/closed-eye.svg' %}" name = "{% static 'img/user_base/open-eye.svg' %}" id = "URLs">
+    <form class="section-div" method = "post">
+        {% csrf_token %}
+        <div class="request-header">
+            <p class="request-title">Особиста інформація</p>
+            <div class = "settings-edit-options">
+                <button class = "settings-edit-button settings-open-editing" type = "button">
+                    <img src = "{% static 'img/settings/pencil.svg' %}" alt="/" class = "icon">
+                    <p class="request-see-all">Редагувати</p>
+                </button>
+                <button class = "settings-edit-button settings-cancel-button hidden" type = "button">
+                    <img src = "{% static 'img/settings/cross.svg' %}" alt="/" class = "icon">
+                    <p class="request-see-all">Скасувати</p>
+                </button>
+                <button class = "settings-edit-button settings-save-button hidden" type = "submit">
+                    <img src = "{% static 'img/settings/pencil.svg' %}" alt="/" class = "icon">
+                    <p class="request-see-all">Зберегти</p>
+                </button>
             </div>
+        </div>
+        <div class="self-info-editbox half-visible">
+            {% for field in form %}
+                <div class = "input-block">
+                    {{ field.label_tag }}
+                    <div class = "input-box">
+                        {{ field }}
+                        {% if field.field.widget|classname == "PasswordInput" %}
+                            <img src = "{% static 'img/user_base/closed-eye.svg' %}" class = "icon absolute-eye show-password non-interactive" id = "hidden">
+                        {% else %}
+                            <img src = "{% static 'img/user_base/open-eye.svg' %}" class = "icon show-main-info non-interactive">
+                        {% endif %}
+                    </div>
+                    {{ field.errors }}
+                </div>
+            {% endfor %}
+        </div>
+    </form> 
+    <div class="section-div">
+        <div class="request-header">
+            <p class="request-title">Варіанти підпису</p>
+            <button class = "settings-edit-button">
+                <img src = "{% static 'img/settings/pencil.svg' %}" alt="/" class = "icon">
+                <p href="{% url 'home' %}" class="request-see-all">Редагувати</p>
+            </button>
+        </div>
+        <div class="checkboxes-block">
+            <div class = "checkbox-block">
+                <input type="checkbox" class = "checkbox-input">
+                <p class = "checkbox-name">Ім'я та прізвище</p>
+            </div>
+            <p class = "checkbox-preview-text">{{ user.first_name }} {{ user.last_name }}</p>
+            
+            <div class = "checkbox-block">
+                <input type="checkbox" class = "checkbox-input">
+                <p class = "checkbox-name">Мій електроний підпис</p>
+            </div>
+            <img src="{% static 'img/settings/sign.png' %}" alt="" class = "checkbox-img-prev">
         </div>
     </div>
 {% endblock %}

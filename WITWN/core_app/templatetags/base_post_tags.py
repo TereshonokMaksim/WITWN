@@ -1,4 +1,5 @@
 from django import template
+from ..models import AlbumImageFile, Album
 
 register = template.Library()
 
@@ -15,3 +16,9 @@ def get_avatar(account, indicator_on: bool = True):
 @register.filter
 def classname(obj: object):
     return obj.__class__.__name__
+
+@register.filter
+def images(album: Album):
+    return AlbumImageFile.objects.filter(album = album)
+
+# ...and he sees freedom and independence...

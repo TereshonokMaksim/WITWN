@@ -11,6 +11,7 @@ document.addEventListener("click", (event) => {
 
 function detailClickEvent(button){
     if (document.querySelector(".profile-username").innerHTML == button.parentElement.querySelector(".author-username").innerHTML){
+        // console.log("what")
         let detailsStyles = getComputedStyle(detailsWindow)
         let detailsWidth = Number(detailsStyles.width.split("px")[0])
         let fixedOffsetTop = button.parentElement.offsetTop + 4
@@ -41,13 +42,27 @@ document.querySelector("#deletePost").addEventListener("click", () => {
 getDetailButtons()
 function getTags(post){
     let tagsData = post.querySelector(".content-tags").innerHTML
-    tagsTextPreview.innerHTML = tagsData
+    let standartTags = []
+    for (let tag of document.querySelectorAll(".create-standart-tag")){
+        standartTags.push(tag.innerHTML)
+    }
     updateTagsPreviewPosition()
     for (let tag of tagsData.split(" ")){
         if (tag != " " && tag != ""){
-            createTag(tag)
+            if (!standartTags.includes(tag)){
+                createTag(tag)
+            }
+            else {
+                for (let standartTag of document.querySelectorAll(".create-standart-tag")){
+                    if (standartTag.innerHTML == tag){
+                        standartTag.classList.replace("deactive-tag", "active-tag")
+                    }
+                }
+            }
+            activeTags.push(tag)
         }
     }
+    updateTagsPreviewText()
 }
 
 const creationForm = document.querySelector(".form-creation-post")
@@ -79,6 +94,7 @@ function imgTag2File(imgTag, imgName){
 }
 
 document.querySelector("#editPost").addEventListener("click", () => {
+    formClean()
     creationForm.querySelector(`[name="specific_id"]`).value = detailsWindow.id
     let origPost = document.querySelector(`#post-${detailsWindow.id}`)
     creationForm.querySelector("#id_title").value = origPost.querySelector(".content-title").innerHTML

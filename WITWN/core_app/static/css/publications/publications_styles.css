@@ -1,6 +1,6 @@
 .posts{
     overflow-y: scroll;
-    min-height: 95%;
+    height: 97%;
     width: 64.1%;
     overflow-x: hidden;
     display: flex;
@@ -15,7 +15,7 @@
 main{
     display: flex;
     justify-content: center;
-    gap: calc(0.35vw + 0.F1vh);
+    gap: calc(0.35vw + 0.1vh);
     padding-top: calc(1vw + 0.2vh);
     overflow: hidden;
 }

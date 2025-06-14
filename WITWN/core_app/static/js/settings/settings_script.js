@@ -62,3 +62,90 @@ buttonCloseEdit.addEventListener("click", () => {
     }
     mainInfoInputArea.querySelector("[name='password']").type = "password"
 })
+
+// avatar
+
+const showHeadSettings = document.querySelector(".header-readonly")
+const editHeadSettings = document.querySelector(".header-edit")
+
+const openEditHeader = document.querySelector(".settings-edit-header")
+const cancelEditHeader = document.querySelector("#headerEditCancel")
+const saveEditHeader = document.querySelector("#headerEditSend")
+const realAvatarImage = showHeadSettings.querySelector(".prof-pic")
+const realUsername = showHeadSettings.querySelector(".self-username")
+const mainInfoLink = document.querySelector("#mainInfoLink").value
+let avatarChanged = false
+
+openEditHeader.addEventListener("click", () => {
+    showHeadSettings.classList.add("hidden")
+    editHeadSettings.classList.remove("hidden")
+    openEditHeader.classList.add("hidden")
+    cancelEditHeader.classList.remove("hidden")
+    saveEditHeader.classList.remove("hidden")
+})
+
+function closeEditingHeader(){
+    showHeadSettings.classList.remove("hidden")
+    editHeadSettings.classList.add("hidden")
+    openEditHeader.classList.remove("hidden")
+    cancelEditHeader.classList.add("hidden")
+    saveEditHeader.classList.add("hidden")
+    previewUsernameInput.placeholder = realUsername.innerHTML
+    previewAvatarImage.src = realAvatarImage.src
+    avatarChanged = false
+}
+
+function sendData(){
+    let dataForm = new FormData(editHeadSettings)
+    dataForm.append("change_photo", avatarChanged)
+    postData(mainInfoLink, dataForm).then((data) => {
+        realUsername.innerHTML = data["username"]
+        previewUsernameInput.placeholder = data["username"]
+        realAvatarImage.src = previewAvatarImage.src
+        closeEditingHeader()
+        previewUsernameInput.value = ""
+    })
+}
+
+cancelEditHeader.addEventListener("click", closeEditingHeader)
+saveEditHeader.addEventListener("click", sendData)
+
+const avatarInput = document.querySelector("#newAvatarDownload")
+const avatarDownloadButton = document.querySelector("#avatarEditAdd")
+const previewAvatarImage = editHeadSettings.querySelector(".prof-pic")
+const previewUsernameInput = editHeadSettings.querySelector(".username-input")
+
+avatarDownloadButton.addEventListener("click", () => {
+    avatarInput.click()
+})
+
+avatarInput.addEventListener("input", () => {
+    previewAvatarImage.src = URL.createObjectURL(avatarInput.files[0])
+    avatarChanged = true
+})
+
+async function postData(url, formData) {
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+        'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: formData
+    });
+    return response.json()
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+            break;
+        }
+        }
+    }
+    return cookieValue;
+}

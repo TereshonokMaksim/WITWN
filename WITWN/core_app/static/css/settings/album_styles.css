@@ -1,0 +1,241 @@
+.dimmer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 20;
+}
+
+.friends-links-div {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 254px;
+    max-width: 254px;
+    height: fit-content;
+    top: 16px;
+    gap: 26px;
+}
+
+.album-div{
+    display: flex;
+    flex-direction: column;
+    width: 1123px;
+    height: fit-content;
+    border: 1px solid rgba(205, 206, 210, 1);
+    border-radius: 10px;
+    padding: 16px 20px 16px 20px;
+    gap: 16px;
+    background-color: white;
+    position: relative;
+}
+
+.album-new-button{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border-radius: 100vw;
+    border: 1px solid #543C52;
+    gap: 10px;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+    background-color: transparent;
+    position: absolute;
+    right: 20px;
+    color: #543C52;
+}
+
+.album-new-button:hover{
+    cursor: pointer;
+}
+
+.album-control-buttons{
+    position: absolute;
+    right: 20px;
+    display: flex;album-additional-info
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 10px;
+    top: 20px;
+}
+
+.album-new-text{
+    font-size: 14px;
+    align-items: center;
+    margin: 0;
+}
+
+
+.new-album-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 44px 44px;
+    position: relative;
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+.new-album-title{
+    color: #070A1C;
+    font-weight: 500;
+    font-size: 34px;
+    width: 100%;
+    text-align: start;
+    margin: 5px 0px;
+}
+
+.new-album-inputs{
+    padding: 24px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.new-album-inputs label{
+    color: #070A1C;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.new-album-inputbox{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.new-album-inputs input, select{
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: 1px solid #81818D;
+    color: #070A1C;
+    width: 400px;
+    box-sizing: border-box;
+}
+
+.new-album-inputs input::placeholder, select::placeholder{
+    color: #81818D;
+}
+
+.new-album-buttons{
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.new-album-create{
+    background-color: #543C52;
+    color: #FFFFFF;
+    position: relative;
+    right: 0px;
+}
+
+.new-album-cancel{
+    position: relative;
+    right: 0px;
+}
+
+.album-new-image{
+    position: relative;
+    top: 0px;
+    right: 0px;
+}
+
+.album-new-imagebox{
+    width: 200px;
+    height: 200px;
+    border: 1px dotted #81818D;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .album-new-imagebox p{
+    font-size: 32px;
+    color: #543C52;
+    border: 1px solid #543C52;
+    border-radius: 100vw;
+    padding: 10px;
+    margin: 0px;
+    height: 40px;
+    width: 40px;
+    box-sizing: border-box;
+    text-align: center;
+}   */
+
+.album-new-imagebox img{
+    width: calc(2vw + 0.5vh);
+    height: calc(2vw + 0.5vh);
+    border-width: 1px;
+}
+
+.album-year{
+    color: #81818D;
+}
+
+.album-image-box{
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.album-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.album-image-buttons{
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.album-images-block{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px,200px));
+    width: 100%;
+    gap: 25px;
+}
+
+.album-image-visibility, .album-image-delete{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #543C52;
+    border-radius: 100vw;
+    box-sizing: border-box;
+    padding: 10px;
+    background: white;
+}
+
+.album-image-visibility:hover, .album-image-delete:hover{
+    cursor: pointer;
+}
+
+.album-visibility, .album-delete{
+    width: 40px;
+    height: 40px;
+    border: 1px solid #543C52;
+    border-radius: 100vw;
+    box-sizing: border-box;
+    padding: 10px;
+    background: white;
+}
+
+.album-visibility:hover, .album-delete:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,128 @@
+{% extends "main_base.html" %}
+{% load static %}
+{% load base_post_tags %}
+
+{% block title %}
+    My Albums
+{% endblock %}
+
+{% block page_links %}
+    <link rel="stylesheet" href="{% static 'css/settings/album_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_tt/profile_pic.css' %}">
+    <script src = "{% static 'js/settings/albums_script.js' %}" defer></script>
+{% endblock %}
+
+{% block page_nav %}
+    <a href="{% url 'settings' %}" class="main-nav-link">Особиста інформація</a>
+    <a href="{% url 'my_albums' %}" class="main-nav-link selected-link">Альбоми</a>
+{% endblock %}
+
+{% block page_content %}
+
+    <input type="hidden" id = "deleteImage" value = "{% url 'delete_image' 0 %}">
+    <input type="hidden" id = "deleteAlbum" value = "{% url 'delete_album' 0 %}">
+    <input type="hidden" id = "visibilityImage" value = "{% url 'image_visibility' 0 0 %}">
+    <input type="hidden" id = "visibilityAlbum" value = "{% url 'album_visibility' 0 0 %}">
+    <input type="hidden" id = "createImage" value = "{% url 'create_image' %}">
+    <input type="hidden" id = "createAlbum" value = "{% url 'create_album' %}">
+    <input type="hidden" id = "openedEye" value = "{% static 'img/user_base/open-eye.svg' %}">
+    <input type="hidden" id = "closedEye" value = "{% static 'img/user_base/closed-eye.svg' %}">
+    <input type="file" id = "imageInput" class = "hidden">
+    {% for album in album_list %}
+        <div class="album-div" id = "{{ album.pk }}">
+            <div class="album-header">
+                <p class="album-title">{{ album.name }}</p>
+                <div class = "album-control-buttons">
+                    <button class = "album-new-button album-new-image">
+                        <img src = "{% static 'img/my_publications/img.svg' %}" alt="/" class = "icon">
+                        <p href="{% url 'home' %}" class="album-new-text">Додати фото</p>
+                    </button>
+                    {% if not album.necessary %}
+                        {% if album.public %}
+                            <img src = "{% static 'img/user_base/open-eye.svg' %}" alt="eye" class = "album-visibility" id = "1">
+                        {% else %}
+                            <img src = "{% static 'img/user_base/closed-eye.svg' %}" alt="eye" class = "album-visibility" id = "0">
+                        {% endif %}
+                        <img src = "{% static 'img/my_publications/trashbin.svg' %}" alt="trashbin" class = "album-delete">
+                    {% endif %}
+                </div>
+                {% if album.year != None %}
+                    <p class = "album-additional-info">{{ album.theme.name }} <span class = "album-year">{{ album.year }} рік</span></p>
+                {% endif %}
+            </div>
+            <div class="album-images-block">
+                {% for image in album|images %}
+                    <div class = "album-image-box" id = "{{ image.pk }}">
+                        <img src = "{{ image.file.url }}" alt = "noimage" class = "album-image">
+                        <div class = "album-image-buttons">
+                            {% if image.public %}
+                                <img src = "{% static 'img/user_base/open-eye.svg' %}" alt="eye" class = "album-image-visibility" id = "1">
+                            {% else %}
+                                <img src = "{% static 'img/user_base/closed-eye.svg' %}" alt="eye" class = "album-image-visibility" id = "0">
+                            {% endif %}
+                            <img src = "{% static 'img/my_publications/trashbin.svg' %}" alt="trashbin" class = "album-image-delete">
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class = "album-new-imagebox">
+                    <img class = "icon album-new-createbox" src = "{% static 'img/albums/plus.svg' %}">
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class = "album-div new-album-creation">
+        <p class = "new-album-text">Хочете мати альбом?</p>
+        <button class = "album-new-button album-new-album">
+            <img src = "{% static 'img/my_publications/plus.svg' %}" alt="/" class = "icon">
+            <p href="{% url 'home' %}" class="album-new-text">Створити альбом</p>
+        </button>
+    </div>
+    <div class = "dimmer hidden">
+        <form method = "post" class = "new-album-form">
+            {% csrf_token %}
+            <h1 class = "new-album-title">Створити альбом</h1>
+            <div class = "new-album-inputs">
+                {% for field in form %}
+                    <div class = "new-album-inputbox">
+                        {{ field.label_tag }}
+                        {{ field }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class = "new-album-buttons">
+                <button class = "album-new-button new-album-cancel" type = "button">Скасувати</button>
+                <button class = "album-new-button new-album-create" type = "submit">Створити</button>
+            </div>
+        </form>
+    </div>
+    <!-- JS TEMPLATES -->
+    <div class = "hidden" id = "templates">
+        <div class="album-div">
+            <div class="album-header">
+                <p class="album-title"></p>
+                <div class = "album-control-buttons">
+                    <button class = "album-new-button album-new-image">
+                        <img src = "{% static 'img/my_publications/img.svg' %}" alt="/" class = "icon">
+                        <p href="{% url 'home' %}" class="album-new-text">Додати фото</p>
+                    </button>
+                    <img src = "{% static 'img/user_base/open-eye.svg' %}" alt="eye" class = "album-visibility" id = "1">
+                    <img src = "{% static 'img/my_publications/trashbin.svg' %}" alt="trashbin" class = "album-delete">
+                </div>
+                <!-- <span class = "album-year"> рік</span> -->
+                <p class = "album-additional-info"></p>
+            </div>
+            <div class="album-images-block">
+                <div class = "album-new-imagebox">
+                    <img class = "icon album-new-createbox" src = "{% static 'img/albums/plus.svg' %}">
+                </div>
+            </div>
+        </div>
+        <div class = "album-image-box">
+            <img src = "" alt = "noimage" class = "album-image">
+            <div class = "album-image-buttons">
+                <img src = "{% static 'img/user_base/open-eye.svg' %}" alt="eye" class = "album-image-visibility">
+                <img src = "{% static 'img/my_publications/trashbin.svg' %}" alt="trashbin" class = "album-image-delete">
+            </div>
+        </div>
+    </div>
+{% endblock %}
