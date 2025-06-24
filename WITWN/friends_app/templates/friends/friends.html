@@ -26,7 +26,7 @@
     <div class="requests-div">
         <div class="request-header">
             <p class="request-title">Запити</p>
-            <a href="{% url 'home' %}" class="request-see-all">Дивитись всі</a>
+            <a href="{% url 'all_requests' %}" class="request-see-all">Дивитись всі</a>
         </div>
         <div class="all-requests-block">
             {% for friend_request in requests %}
@@ -51,7 +51,7 @@
     <div class="requests-div">
         <div class="request-header">
             <p class="request-title">Рекомендації</p>
-            <a href="{% url 'home' %}" class="request-see-all">Дивитись всі</a>
+            <a href="{% url 'all_recomendations' %}" class="request-see-all">Дивитись всі</a>
         </div>
         <div class="all-requests-block">
             {% for request in recomendations %}
@@ -76,7 +76,7 @@
     <div class="requests-div">
         <div class="request-header">
             <p class="request-title">Всі друзі</p>
-            <a href="{% url 'home' %}" class="request-see-all">Дивитись всі</a>
+            <a href="{% url 'all_friends' %}" class="request-see-all">Дивитись всі</a>
         </div>
         <div class="all-requests-block friends-block">
             {% for friend in friends %}

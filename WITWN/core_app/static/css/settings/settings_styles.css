@@ -217,7 +217,7 @@
     width: fit-content;
     height: fit-content;
     width: 100%;
-    padding: 24px 14px;
+    padding: 12px 0px;
 }
 
 .half-visible{
@@ -384,4 +384,16 @@ li{
     flex-direction: column;
     gap: 6px;
     align-items: start;
+}
+
+.errortext{
+    font-size: 14px;
+    color: red;
+    margin: 0;
+}
+
+.password-box-edit{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }

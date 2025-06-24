@@ -76,6 +76,11 @@ header{
     border-radius: calc(0.15vw + 0.05vh);
 }
 
+.link:hover{
+    background-color: rgb(240, 240, 240);
+    cursor: pointer;
+}
+
 .logout-button{
     display: flex;
     flex-direction: row;

@@ -7,11 +7,12 @@ from django.views.generic.base import TemplateView
 from .forms import EmailCodeForm, NewRegForm, NewLoginForm
 from django.urls import reverse_lazy
 from django.core.mail import EmailMessage
-from .models import Account
-from core_app.models import Album
+from .models import Profile, VerificationCode, Friendship # no friendship is real under this model structure
+from core_app.models import Album, Tag
 from django.contrib.auth.hashers import make_password
 from django.utils.translation import gettext_lazy
 from .utils import email_authenticate
+from django.utils import timezone
 import random
 
 # Create your views here.
@@ -39,17 +40,18 @@ class RegView(FormView):
             return self.form_invalid(form)
 
         email_code = generate_email_code()
-        while len(Account.objects.filter(email_code = email_code)) > 0:
+        while len(VerificationCode.objects.filter(code = email_code)) > 0:
             email_code = generate_email_code()
         if self.request.COOKIES.get("reg_id") == None:
             user = User.objects.create_user(username = "none", password = data["password1"], email = data["email"])
-            account = Account(user = user, email_code = email_code, password = data["password1"])
+            account = Profile(user = user, date_of_birth = timezone.now())
+            code = VerificationCode.objects.create(username = user.email, code = email_code)
         else:
             user = User.objects.get(pk = int(self.request.COOKIES["reg_id"]))
             user.email = data["email"]
             user.password = make_password(data["password1"])
-            account = Account.objects.get(user = user)
-            account.email_code = email_code
+            account = Profile.objects.get(user = user)
+            VerificationCode.objects.get(username = user.email).code = email_code
 
         account.save()
         message_text = f"Hello!<br>This is email from WIT Messenger.<br>Enter this code: {email_code} to finish your registration.<br><br>Thanks for choosing us, {user.username}."
@@ -81,15 +83,16 @@ class Reg2View(FormView):
     def form_valid(self, form):
         data: dict = form.cleaned_data
         code = "".join(str(data[f"symbol{symbol_num}"]) for symbol_num in range(1, 7))
-        accounts = Account.objects.filter(email_code = code)
-        if len(accounts) == 0:
+        codes = VerificationCode.objects.filter(code = code)
+        if len(codes) == 0:
             return super().form_invalid(form)
-        for account in accounts:
-            account.email_code = "0"
-            account.save()
+        for email_code in codes:
+            email_code.code = "0"
+            email_code.save()
             break
         
-        Album.objects.create(name = "Мої фото", author = Account.objects.get(user = self.request.user), neccessary = True)
+        # Album.objects.create(name = "Мої фото", author = Account.objects.get(user = self.request.user), neccessary = True)
+        Album.objects.get_or_create(name = "Мої фото", topic = Tag.objects.first())
         response = super().form_valid(form)
         response.delete_cookie('reg_id')
         return response
@@ -117,7 +120,7 @@ class LoginView(FormView):
     def form_valid(self, form):
         data = form.cleaned_data
         account = email_authenticate(email = data["email"], password = data["password"])
-        print(f"Error check: {data}")
+        # print(f"Error check: {data}")
         if account:
             login(self.request, account)
             return super().form_valid(form)
@@ -133,4 +136,3 @@ class LoginView(FormView):
 class CustomLogoutView(LogoutView):
     next_page = reverse_lazy("login")
 
-# our data will be corrupted by upper beings, who control our thoughts

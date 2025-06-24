@@ -69,7 +69,7 @@ publicationForm.addEventListener("submit", (event) => {
 makePostButton.addEventListener("click", () => {
     dimmer.classList.replace("hidden", "show");
     let origText = document.querySelector("#publication-text")
-    publicationForm.querySelector("#id_text").value = origText.value
+    publicationForm.querySelector("#id_content").value = origText.value
     origText.value = ""
 })
 
@@ -96,11 +96,11 @@ let createTagDiv = document.querySelector('#createTagDiv')
 let createFormBox = document.querySelector(".create-tag-box")
 let showTagButton = document.querySelector(".show-tag-button")
 let tagsTextPreview = document.querySelector(".create-tag-preview")
-let mainTextArea = document.querySelector("#id_text")
+let mainTextArea = document.querySelector("#id_content")
 let activeTags = []
 
 
-publicationForm.querySelector(".creation-form-inputs").insertBefore(createTagDiv, document.querySelector("#id_text").parentElement)
+publicationForm.querySelector(".creation-form-inputs").insertBefore(createTagDiv, document.querySelector("#id_content").parentElement)
 mainTextArea.parentElement.appendChild(tagsTextPreview)
 
 function textAreaContentHeight(textArea){
@@ -151,16 +151,16 @@ function updateTagsPreviewText(){
     updateTagsPreviewPosition()
 }
 
-showTagButton.addEventListener("click", () => {
-    createFormBox.classList.remove("hidden")
-    showTagButton.classList.add("hidden")
-    createTagInput.focus()
-})
+// showTagButton.addEventListener("click", () => {
+//     createFormBox.classList.remove("hidden")
+//     showTagButton.classList.add("hidden")
+//     createTagInput.focus()
+// })
 
 function closeTagCreation(){
-    createTagInput.value = ""
-    createFormBox.classList.add("hidden")
-    showTagButton.classList.remove("hidden")
+    // createTagInput.value = ""
+    // createFormBox.classList.add("hidden")
+    // showTagButton.classList.remove("hidden")
 }
 
 function createTag(text = null){
@@ -209,12 +209,12 @@ document.addEventListener("mousedown", (event) => {
     }
 })
 
-createTagInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter"){
-        event.preventDefault(); 
-        createTag();
-    }
-})
+// createTagInput.addEventListener("keydown", (event) => {
+//     if (event.key === "Enter"){
+//         event.preventDefault(); 
+//         createTag();
+//     }
+// })
 
 document.querySelectorAll(".create-standart-tag").forEach((obj) => {
     obj.addEventListener("click", () => {
@@ -233,7 +233,7 @@ document.querySelectorAll(".create-standart-tag").forEach((obj) => {
 
 mainTextArea.addEventListener("input", updateTagsPreviewPosition)
 mainTextArea.addEventListener("scroll", updateTagsPreviewPosition)
-createTagButton.addEventListener("click", () => {createTag()})
+// createTagButton.addEventListener("click", () => {createTag()})
 
 // Form creation: Links
 

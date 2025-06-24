@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Tag, ImageFile, UserPost, Album, AlbumImageFile, AlbumTheme
+from .models import Post, Image, Album, Tag, Link
 
 # Register your models here.
 
-admin.site.register([Tag, ImageFile, UserPost, AlbumTheme, Album, AlbumImageFile])
+admin.site.register([Post, Image, Album, Tag, Link])
 
 # ...and so, he strikes us down with calamities.

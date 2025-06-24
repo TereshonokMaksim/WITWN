@@ -23,7 +23,7 @@
             </div>
         </div>
         {% if albums_need %}
-            <div class = "profile-header-button" id = "account.id">
+            <div class = "profile-header-button" id = "{{ account.pk }}">
                 <input type="hidden" id = "accountsRelation" value = "{{ relation }}">
                 <button class = "profile-header-confirm">Додати</button>
                 <button class = "profile-header-deny">Видалити</button>
@@ -38,7 +38,7 @@
             <div class = "profile-requests-panel">
                 <img src = "{% static 'img/home_tt/humans.svg' %}" class = "profile-section-icon">
                 <p class = "profile-requests-title">Запити</p>
-                <a href="#" class = "profile-requests-all">Дивитись всі</a>
+                <a href="{% url 'all_requests' %}" class = "profile-requests-all">Дивитись всі</a>
             </div>
             <div class = "profile-possible-friends">
                 {% for request in requests %}
@@ -58,7 +58,7 @@
             <div class = "profile-requests-panel profile-messages-panel">   
                 <img src = "{% static 'img/base/chats2.svg' %}" class = "profile-section-icon">
                 <p class = "profile-requests-title">Повідомлення</p>
-                <a href="#" class = "profile-requests-all profile-messages-all">Дивитись всі</a>
+                <a href="{% url 'chats' %}" class = "profile-requests-all profile-messages-all">Дивитись всі</a>
             </div>
             <div class = "profile-messages">
                 {% for friend in friends %}
@@ -91,7 +91,7 @@
                     <div class = "profile-album-block">
                         <h2 class = "profile-album-header">{{ album.name }}</h2>
                         {% if album.year %}
-                            <p class = "album-additional-info">{{ album.theme.name }} <span class = "album-year">{{ album.year }} рік</span></p>
+                            <p class = "album-additional-info">{{ album.topic.name }} <span class = "album-year">-1 рік</span></p>
                         {% else %}
                             <p class = "album-additional-info">ㅤ</p>
                         {% endif %}

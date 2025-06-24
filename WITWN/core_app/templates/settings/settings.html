@@ -19,6 +19,7 @@
 
 {% block page_content %}
     <input type="hidden" id = "mainInfoLink" value = "{% url 'edit_main_info' %}">
+    <input type="hidden" id = "changePasswordLink" value = "{% url 'change_password_link' %}">
     <div class="section-div">
         <div class="request-header">
             <p class="request-title">Картка профілю</p>
@@ -107,6 +108,53 @@
                     {{ field.errors }}
                 </div>
             {% endfor %}
+        </div>
+        <div class = "request-header password-header">
+            <p class="request-title">Пароль</p>
+            <div class = "settings-edit-options">
+                <button class = "settings-edit-button password-open-button" type = "button">
+                    <img src = "{% static 'img/settings/pencil.svg' %}" alt="/" class = "icon">
+                    <p class="request-see-all">Редагувати пароль</p>
+                </button>
+                <button class = "settings-edit-button password-cancel-button hidden" type = "button">
+                    <img src = "{% static 'img/settings/cross.svg' %}" alt="/" class = "icon">
+                    <p class="request-see-all">Скасувати</p>
+                </button>
+                <button class = "settings-edit-button password-save-button hidden" type = "button">
+                    <img src = "{% static 'img/settings/pencil.svg' %}" alt="/" class = "icon">
+                    <p class="request-see-all">Змінити пароль</p>
+                </button>
+            </div>
+        </div>
+        <div class="self-info-editbox half-visible password-editbox">
+            <div class = "input-block">
+                <div class = "password-box-show">
+                    <div class = "input-block">
+                        <label for="passwordInitial">Пароль</label>
+                        <div class = "input-box password-input-initial">
+                            <input type="password" value = "aaaaaaaaaa" id = "passwordInitial" class = "PasswordInput" disabled>
+                            <img src = "{% static 'img/user_base/closed-eye.svg' %}" class = "icon absolute-eye show-password non-interactive" id = "hidden">
+                        </div>
+                    </div>
+                </div>
+                <div class = "password-box-edit hidden">
+                    <div class = "input-block">
+                        <label for="mainPassword">Новий пароль</label>
+                        <div class = "input-box password-input-main">
+                            <input type="password" id = "mainPassword" class = "PasswordInput">
+                            <img src = "{% static 'img/user_base/closed-eye.svg' %}" class = "icon absolute-eye show-password non-interactive" id = "hidden">
+                        </div>
+                    </div>
+                    <div class = "input-block">
+                        <label for="additionalPassword">Підтвердіть новий пароль</label>
+                        <div class = "input-box password-input-confirm">
+                            <input type="password" id = "additionalPassword" class = "PasswordInput">
+                            <img src = "{% static 'img/user_base/closed-eye.svg' %}" class = "icon absolute-eye show-password non-interactive" id = "hidden">
+                        </div>
+                    </div>
+                    <p class = "errortext hidden">Паролі не співпадають!</p>
+                </div>
+            </div>
         </div>
     </form> 
     <div class="section-div">

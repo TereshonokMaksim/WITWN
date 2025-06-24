@@ -33,7 +33,7 @@
 <canvas class = "hidden image-transfer"></canvas>
 <div class = "form-dimmer hidden">
     <input type="hidden" name = "TODO" value = "{{ account }}">
-    {% if account.registered %}
+    {% if account.user.username != None and account.user.username != "none" %}
         <form method = "post" class = "form-creation-post" enctype="multipart/form-data">
             {% csrf_token %}
             <img src = "{% static 'img/my_publications/close.svg' %}" alt = "X" class = "creation-form-close icon">
@@ -62,12 +62,12 @@
                     {% for tag in tags %}
                         <p class = "create-tag-name create-standart-tag deactive-tag">{{ tag.name }}</p>
                     {% endfor %}
-                    <div class = "create-tag-box hidden">
+                    <!-- <div class = "create-tag-box hidden">
                         <p class = "create-tag-sign">#</p>
                         <input name="create-tag-input" class = "create-tag-input" id="createTagInput">
                         <img class="create-tag-button icon" src="{% static 'img/my_publications/checkmark.svg' %}" alt="checkmark">
-                    </div>
-                    <img class="show-tag-button icon" src="{% static 'img/my_publications/plus.svg' %}" alt="plus">
+                    </div> -->
+                    <!-- <img class="show-tag-button icon" src="{% static 'img/my_publications/plus.svg' %}" alt="plus"> -->
                 </div>
                 <div class = "creation-links-block">
                     <p class = "creation-links-title">Посилання</p>

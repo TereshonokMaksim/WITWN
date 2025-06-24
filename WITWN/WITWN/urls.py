@@ -23,8 +23,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("user/", include("user_app.urls")),
-    path("", include("core_app.urls"))
+    path("", include("core_app.urls")),
+    path("friends/", include("friends_app.urls")),
+    path("chats/", include("chat_app.urls"))
 ]
 
 if DEBUG:
     urlpatterns += static(MEDIA_URL, document_root = MEDIA_ROOT)
+
+# Do not forget about free beings, as they will return.

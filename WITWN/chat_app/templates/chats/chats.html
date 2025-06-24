@@ -1,0 +1,372 @@
+{% extends "main_base.html" %}
+{% load static %}
+{% load base_post_tags %}
+
+{% block page_links %}
+    <link rel="stylesheet" href="{% static 'css/chats/chats.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_tt/profile_pic.css' %}">
+    <script src = "{% static 'js/chats/chat_script.js' %}" defer></script>
+    <link rel="stylesheet" href="{% static 'css/chats/modal_windows.css' %}">
+{% endblock %}
+
+{% block content %}
+    <input type="hidden" id = "selfID" value = "{{ user.profile.pk }}">
+    <input type="hidden" id = "checkmarkURL" value = "{% static 'img/chats/checkmark.svg' %}">
+    <input type="hidden" id = "trashbinSrc" value = "{% static 'img/chats/trashbin.svg' %}">
+    <input type="hidden" id = "standartAvatarSrc" value = "{% static 'img/base/standart_avatar.png' %}">
+    <div class = "templates hidden">
+        <div class="single-message-div friend-chat group-chat" id="noid">
+            <div class = "contacts-image">
+                <div class = "profile-box">
+                    <img src="nuhuh" alt=""  onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='" class = "prof-pic">
+                </div>
+            </div>
+            <div class="time-and-name-message">
+                <div class="author-and-time-div">
+                    <p class="message-author-name contact-name-p">nameandsurnamehere</p>
+                    <p class="time-message">time</p>
+                </div>
+                <p class="message-text">textoflastmessage</p>
+            </div>
+        </div>
+    </div>
+    <div class="everything-div">
+        <div class="contact-div">
+            <button class="create-chat-button">
+                <img src="{% static 'img/chats/plus.svg' %}" alt="contacts-image" class="plus-image"> 
+                <p>Створити груповий чат</p>
+            </button>
+            <div class="contacts-everything-div">
+                <div class="contacts-p-div">
+                    <img src="{% static 'img/chats/people.svg' %}" alt="contacts-image" class="people-image">
+                    <p class="contacts-p">Контакти</p>
+                </div>
+                <div class="search-contacts-div">
+                     <img src="{% static 'img/chats/lookingfor.svg' %}" alt="contacts-image" class="looking-for-image">
+                    <input type="text" placeholder="Пошук" class="looking-for-input">
+                </div>
+                <div class="contacts-list-div">
+                    {% for friend in friends %}
+                        <div class="single-contact-div friend-chat" id = "{{ friend.pk }}">
+                            <div class = "contacts-image">
+                                {% get_avatar friend 0 %}
+                            </div>
+                            <p class="contact-name-p">{{ friend.user.first_name }} {{ friend.user.last_name }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="chat-everything-div">
+            <div class="chat-p-div">
+                <p class="main-chat-p">Почніть нове спілкування</p>
+                <p class="second-chat-p">Оберіть контакт зі списку ліворуч <br> або створіть групу, щоб почати спілкування</p>
+            </div>
+            <div class = "chat-selected-box hidden">
+                <div class = "chat-header">
+                    <img src = "{% static 'img/chats/back.svg' %}" alt="Back" class = "icon chat-back">
+                    <img src = "" alt = "ico" class = "chat-avatar">
+                    <div class = "chat-info">
+                        <p class = "chat-name">Chat name</p>
+                        <p class = "chat-members-online">0 online</p>
+                    </div>
+                    <img src="{% static 'img/chats/triple_dot.svg' %}" alt="add." class = "icon chat-additional">
+                    
+                    <div class = "hidden chat-detail-box" name = "0" id = "personalChatDetail">
+                        <div class = "chat-detail-imgbox">
+                            <img src="{% static 'img/home_tt/triple_dot.svg' %}" alt=":" class = "icon details-triple-dot">
+                        </div>
+                        <div class = "chat-detail-edit" id = "mediaChat">
+                            <img src = "{% static 'img/chats/img.svg' %}" alt="" class = "icon chat-details-desc-img">
+                            <p class = "post-detail-desc-text">Медіа</p>
+                        </div>
+                        <hr class = "chat-detail-breaker">
+                        <div class = "chat-detail-edit delete-chat" id = "deletePersonalChat">
+                            <img src = "{% static 'img/chats/trashbin.svg' %}" alt="" class = "icon chat-details-desc-img">
+                            <p class = "chat-detail-desc-text">Видалити чат</p>
+                        </div>
+                    </div>
+                    <div class = "hidden chat-detail-box" name = "0" id = "groupMemberDetail">
+                        <div class = "chat-detail-imgbox">
+                            <img src="{% static 'img/home_tt/triple_dot.svg' %}" alt=":" class = "icon details-triple-dot">
+                        </div>
+                        <div class = "chat-detail-edit" id = "mediaChat">
+                            <img src = "{% static 'img/chats/img.svg' %}" alt="" class = "icon chat-details-desc-img">
+                            <p class = "post-detail-desc-text">Медіа</p>
+                        </div>
+                        <hr class = "chat-detail-breaker">
+                        <div class = "chat-detail-edit" id = "quitChat">
+                            <img src = "{% static 'img/chats/quit.svg' %}" alt="" class = "icon chat-details-desc-img">
+                            <p class = "chat-detail-desc-text">Покинути групу</p>
+                        </div>
+                    </div>
+                    <div class = "hidden chat-detail-box" name = "0" id = "groupAdminDetail">
+                        <div class = "chat-detail-imgbox">
+                            <img src="{% static 'img/home_tt/triple_dot.svg' %}" alt=":" class = "icon details-triple-dot">
+                        </div>
+                        <div class = "chat-detail-edit" id = "mediaChat">
+                            <img src = "{% static 'img/chats/img.svg' %}" alt="" class = "icon chat-details-desc-img">
+                            <p class = "post-detail-desc-text">Медіа</p>
+                        </div>
+                        <div class = "chat-detail-edit" id = "editChat">
+                            <img src = "{% static 'img/chats/edit.svg' %}" alt="" class = "icon chat-details-desc-img">
+                            <p class = "post-detail-desc-text">Редагувати групу</p>
+                        </div>
+                        <hr class = "chat-detail-breaker">
+                        <div class = "chat-detail-edit delete-chat" id = "deleteGroupChat">
+                            <img src = "{% static 'img/chats/trashbin.svg' %}" alt="" class = "icon chat-details-desc-img">
+                            <p class = "chat-detail-desc-text">Видалити групу</p>
+                        </div>
+                    </div>
+                </div>
+                <div class = "chat-main">
+                    <div class = "chat-messages">
+                        <!-- messages here -->
+                    </div>
+                    <form class = "chat-send-options" method="post">
+                        <div class = "new-message-data">
+                            <div class = "new-photo-box hidden">
+                                <img src="beep boop beep beep" class = "new-message-photo" alt="">
+                                <img src="{% static 'img/chats/trashbin.svg' %}" alt="X" class = "delete-new-photo">
+                            </div>
+                            <input type="text" placeholder = "Повідомлення" class = "chat-main-input">
+                        </div>
+                        <div class = "message-buttons">
+                            <img src="{% static 'img/chats/smile.svg' %}" alt="emoji" class = "button-icon message-smile">
+                            <input type="file" class = "hidden" id = "uploadImageInput">
+                            <img src="{% static 'img/chats/img.svg' %}" alt="img" class = "button-icon message-img">
+                            <img src="{% static 'img/chats/send.svg' %}" alt="send" class = "button-icon message-send">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="messages-everything-div">
+            <div class="messages-div">
+                <div class="messages-header-div">
+                    <div class="image-and-p-div">
+                        <img src="{% static 'img/chats/messages.svg' %}" alt="contacts-image" class="messages-image">
+                        <p class="messages-header-p">Повідомлення</p>
+                    </div>
+                    <p class="see-all-messages-header-p">Дивитись всі</p>
+                </div>
+                <div class="messages friend-messages">
+                    {% for friend, message in messages.items %}
+                        <div class="single-message-div friend-chat" id="{{ friend.id }}">
+                            <div class = "contacts-image">
+                                {% get_avatar friend 0 %}
+                            </div>
+                            <div class="time-and-name-message">
+                                <div class="author-and-time-div">
+                                    <p class="message-author-name contact-name-p">{{ friend.user.first_name }} {{ friend.user.last_name }}</p>
+                                    <p class="time-message">{{ message.sent_at.isoformat }}</p>
+                                </div>
+                                <p class="message-text">{{ message.content }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="groups-div">
+                <div class="messages-header-div">
+                    <div class="image-and-p-div">
+                        <img src="{% static 'img/chats/messages.svg' %}" alt="contacts-image" class="messages-image">
+                        <p class="messages-header-p">Групові чати</p>
+                    </div>
+                    <p class="see-all-messages-header-p">Дивитись всі</p>
+                </div>
+                <div class="messages group-messages">
+                    {% for group, message in groups.items %}
+                        <div class="single-message-div group-chat" id="{{ group.id }}">
+                            <img src="{{ group.avatar.url }}" alt="contacts-image" class="contacts-image">
+                            <div class="time-and-name-message">
+                                <div class="author-and-time-div">
+                                    <p class="message-author-name contact-name-p">{{ group.name }}</p>
+                                    <p class="time-message">{{ message.sent_at.isoformat }}</p>
+                                </div>
+                                <p class="message-text">{{ message.content }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modals -->
+    <div class = "blur hidden">
+        <!-- <div class = "media-all">
+            <div class = "media-header">
+                <h2 class = "media-title">Медіа</h2>
+                <img src="{% static 'img/chats/cross.svg' %}" alt="X" class = "media-cross">
+            </div>
+        </div> -->
+        <div class="modal-window-new-group hidden" id = "newGroupMembers">
+            <div class="image-div"><img src="{% static 'img/chats/cross.svg' %}" alt="cross" class="cross-image"></div>
+            
+            <p class="new-group-p">Нова група</p>
+            <div class="search-contacts-div">
+                <img src="{% static 'img/chats/lookingfor.svg' %}" alt="loupe" >
+                <input type="text" placeholder="Пошук" class="search-input">
+            </div>
+            <p class="choosed-contacts-p">Вибрано: <span id = "newGroupMemNum">0</span></p>
+            <div class="contacts-div">
+                <div class="contacts-block">
+                    {% for friend in friends %}
+                        <div class="single-member-div" id = "{{ friend.id }}">
+                            <div class = "contacts-image">
+                                {% get_avatar friend 0 %}
+                            </div>
+                            <div class="name-and-input-div">
+                                <p>{{ friend.user.first_name }} {{ friend.user.last_name }}</p>
+                                <input type="checkbox" name="chekbox-input" class = "chekbox-input">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="buttons-div">
+                <button class="decline-button">Скасувати</button>
+                <button class="create-button">Далі</button>
+            </div>
+        </div>
+        <div class="modal-window-new-group hidden">
+            <div class="image-div"><img src="{% static 'img/chats/cross.svg' %}" alt="cross" class="cross-image"></div>
+            
+            <p class="new-group-p">Додати учасника</p>
+            <div class="search-contacts-div">
+                <img src="{% static 'img/chats/lookingfor.svg' %}" alt="loupe" >
+                <input type="text" placeholder="Пошук" class="search-input">
+            </div>
+            <p class="choosed-contacts-p">Вибрано: <span id = "choosedNumber">0</span></p>
+            <div class="contacts-div">
+                <div class="contacts-block">
+                    {% for friend in friends %}
+                        <div class="single-member-div" id = "{{ friend.id }}">
+                            <div class = "contacts-image">
+                                {% get_avatar friend 0 %}
+                            </div>
+                            <div class="name-and-input-div">
+                                <p>{{ friend.user.first_name }} {{ friend.user.last_name }}</p>
+                                <input type="checkbox" name="chekbox-input" class = "checkbox-input">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="buttons-div-2">
+                <button class="decline-button">Скасувати</button>
+                <button class="save-button">Зберегти</button>
+            </div>
+        </div>
+        <div class="modal-window-new-group-2 hidden" id = "createNewGroup">
+            <div class="image-div"><img src="{% static 'img/chats/cross.svg' %}" alt="cross" class="cross-image"></div>
+            <input type="hidden" id = "groupCreationType" name = "create" id = "-1">
+            <p class="new-group-p">Нова група</p>
+            <div class="input-and-name-div">
+                <p class="name-p">Назва</p>
+                <input type="text" placeholder="Введіть назву" class="search-input group-name-input">
+            </div>
+            <div class="photo-of-group-div">
+                <img src="aaq" alt="" onerror="this.src='data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='" class = "create-group-avatar">
+                <div class="photo-commands-div">
+                    <div class="image-div-group" id = "addAvatarCreateGroup">
+                        <img src="{% static 'img/chats/secondplus.svg' %}" alt="bin" class="command-image">
+                        <p class="photo-command-p">Додайте фото</p>
+                    </div >
+                    <div class ="image-div-group">
+                        <img src="{% static 'img/chats/img.svg' %}" alt="bin" class="command-image">
+                        <p class="photo-command-p">Оберіть фото</p>
+                    </div>
+                </div>
+            </div>
+            <input type="file" class = "hidden" id = "groupAvatarInput">
+            <div class="contacts-div-2">
+                <div class="contacts-block">
+                    <div class = "contacts-header-block">
+                        <p class="users-p">Учасники</p>
+                        <button class = "add-group-member hidden" id = "addMemberButton">
+                            <img src="{% static 'img/chats/dark_plus.svg' %}" alt="+" class = "icon">
+                            <p class = "add-member-text">Додайте учасника</p>
+                        </button>
+                    </div>
+                    <div class = "create-group-members">
+                    </div>
+                    <!-- <div class="single-contact-div">
+                        <img src="{% static 'img/chats/profile_icon.svg' %}" alt="profile-icon">
+                        <div class="name-and-input-div">
+                            <p>Zilaboba Gray</p>
+                            <img src="{% static 'img/chats/trashbin.svg' %}" alt="bin" class="bin-img">
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="buttons-div-3">
+                <button class="decline-button">Назад</button>
+                <button class="create-button">Створити групу</button>
+            </div>
+        </div>
+        <div class="modal-window-new-group-2 hidden">
+            <div class="image-div"><img src="{% static 'img/chats/cross.svg' %}" alt="cross" class="cross-image"></div>
+            
+            <p class="new-group-p">Редагування групи</p>
+            <div class="input-and-name-div">
+                <p class="name-p">Назва</p>
+                <div class="search-contacts-div">
+                    <input type="text" placeholder="New group" class="search-input">
+                </div>
+            </div>
+            <div class="photo-of-group-div">
+                <img src="{% static 'img/chats/profile_icon.svg' %}" alt="profile-icon" >
+                <div class="photo-commands-div">
+                    <div class="image-div-group">
+                        <img src="{% static 'img/chats/secondplus.svg' %}" alt="bin" class="command-image">
+                        <p class="photo-command-p">Додайте фото</p>
+                    </div >
+                    <div class ="image-div-group">
+                        <img src="{% static 'img/chats/album.svg' %}" alt="bin" class="command-image">
+                        <p class="photo-command-p">Оберіть фото</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contacts-div-2">
+                <div class="contacts-block">
+                    <div class="users-editing">
+                        <p class="users-p">Учасники</p>
+                        <div class="image-and-add-users">
+                            <img src="{% static 'img/chats/secondplus.svg' %}" alt="bin" class="command-image">
+                            <p class="add-users">Додайте учасника</p>
+                        </div>
+                    </div>
+                    <div class="letter-contacts-block">
+                        <div class="single-contact-div">
+                            <img src="{% static 'img/chats/profile_icon.svg' %}" alt="profile-icon">
+                            <div class="name-and-input-div">
+                                <p>Zilaboba Gray</p>
+                                <img src="{% static 'img/chats/trashbin.svg' %}" alt="bin" class="bin-img">
+                            </div>
+                        </div>
+                        <div class="single-contact-div">
+                            <img src="{% static 'img/chats/profile_icon.svg' %}" alt="profile-icon">
+                            <div class="name-and-input-div">
+                                <p>Zilaboba Gray</p>
+                                <img src="{% static 'img/chats/trashbin.svg' %}" alt="bin" class="bin-img">
+                            </div>
+                        </div>
+                        <div class="single-contact-div" id="last-contact">
+                            <img src="{% static 'img/chats/profile_icon.svg' %}" alt="profile-icon">
+                            <div class="name-and-input-div">
+                                <p>Zilaboba Gray</p>
+                                <img src="{% static 'img/chats/trashbin.svg' %}" alt="bin" class="bin-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons-div-3">
+                <button class="decline-button">Назад</button>
+                <button class="create-button">Зберегти зміни</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

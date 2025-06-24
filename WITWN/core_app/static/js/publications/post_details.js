@@ -98,8 +98,8 @@ document.querySelector("#editPost").addEventListener("click", () => {
     creationForm.querySelector(`[name="specific_id"]`).value = detailsWindow.id
     let origPost = document.querySelector(`#post-${detailsWindow.id}`)
     creationForm.querySelector("#id_title").value = origPost.querySelector(".content-title").innerHTML
-    creationForm.querySelector("#id_theme").value = origPost.querySelector(".content-theme").innerHTML
-    creationForm.querySelector("#id_text").value = origPost.querySelector(".content-text").innerHTML
+    creationForm.querySelector("#id_topic").value = origPost.querySelector(".content-theme").innerHTML
+    creationForm.querySelector("#id_content").value = origPost.querySelector(".content-text").innerHTML
     let links = ""
     for (let linkTag of origPost.querySelectorAll(".content-link")){
         links += `${linkTag.href} `

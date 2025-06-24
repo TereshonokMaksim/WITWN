@@ -1,5 +1,5 @@
 from django import forms
-from .models import Account
+from .models import Profile, VerificationCode
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -28,20 +28,21 @@ class NewLoginForm(AuthenticationForm):
         #     raise forms.ValidationError(gettext_lazy("Incorrect password or email"))
         # else:
         if len(user) > 0:
-            account = Account.objects.filter(user = user[0])
-            account = account[0]
-            if account.email_code == "0":
+            code = VerificationCode.objects.filter(username = user[0].email)
+            code = code.first()
+            # print(code.code)
+            if code == None:
+                self.user_cache = user
+                return data
+            elif code.code == "0":
                 self.user_cache = user
                 return data
             else:
-                print("Hello")
                 raise forms.ValidationError(gettext_lazy("Complete your email confirmation first"))
         else:
-            print("What", data, user)
             raise forms.ValidationError(gettext_lazy("Incorrect password or email"))
             
     def clean_username(self):
-        print('as')
         data = self.cleaned_data["username"]
         return data
             

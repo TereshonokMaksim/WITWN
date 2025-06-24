@@ -1,8 +1,10 @@
 const mainInfoBox = document.querySelector(".self-info-editbox")
-const inputBoxList = document.querySelectorAll(".input-box")
+const inputBoxList = mainInfoBox.querySelectorAll(".input-box")
 const mainInfoInputs = []
 const initialValues = []
+const changePasswordLink = document.querySelector("#changePasswordLink").value
 let formOn = false
+
 const closedEyeURL = document.querySelector("#URLs").value
 const openEyeURL = document.querySelector("#URLs").name
 for (let inputBox of inputBoxList){
@@ -149,3 +151,52 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+// passwords
+
+const passwordButtonBlock = document.querySelector(".password-header").querySelector(".settings-edit-options")
+const mainPasswordBlock = document.querySelector(".password-editbox")
+const openPassword = passwordButtonBlock.querySelector(".password-open-button")
+const cancelPassword = passwordButtonBlock.querySelector(".password-cancel-button")
+const savePassword = passwordButtonBlock.querySelector(".password-save-button")
+const showPasswordBox = document.querySelector(".password-box-show")
+const editPasswordBox = document.querySelector(".password-box-edit")
+const mainPasswordInput = document.querySelector("#mainPassword")
+const confirmPasswordInput = document.querySelector("#additionalPassword")
+const badPasswordText = editPasswordBox.querySelector(".errortext")
+
+openPassword.addEventListener('click', () => {
+    openPassword.classList.add("hidden")
+    cancelPassword.classList.remove("hidden")
+    savePassword.classList.remove("hidden")
+    showPasswordBox.classList.add("hidden")
+    editPasswordBox.classList.remove("hidden")
+    mainPasswordBlock.classList.remove("half-visible")
+})
+
+function closePasswordEditing(){
+    cancelPassword.classList.add("hidden")
+    savePassword.classList.add("hidden")
+    openPassword.classList.remove("hidden")
+    mainPasswordInput.value = ""
+    confirmPasswordInput.value = ""
+    badPasswordText.classList.add("hidden")
+    showPasswordBox.classList.remove("hidden")
+    editPasswordBox.classList.add("hidden")
+    mainPasswordBlock.classList.add("half-visible")
+}
+
+cancelPassword.addEventListener("click", closePasswordEditing)
+savePassword.addEventListener("click", () => {
+    if (mainPasswordInput.value.length > 6){
+        if (mainPasswordInput.value == confirmPasswordInput.value){
+            const passwordFormData = new FormData()
+            passwordFormData.append("password", mainPasswordInput.value)
+            postData(changePasswordLink, passwordFormData).then(() => {console.log("Successfull password change")})
+            closePasswordEditing()
+        }
+        else {
+            badPasswordText.classList.remove("hidden")
+        }
+    }
+})

@@ -3,6 +3,7 @@ const dimmer = document.querySelector(".dimmer")
 const templates = document.querySelector("#templates")
 const albumTemplate = templates.querySelector(".album-div")
 const imageTemplate = templates.querySelector(".album-image-box")
+const elementsWithEvents = []
 
 newAlbumButton.addEventListener("click", () => {
     dimmer.classList.remove("hidden")
@@ -42,8 +43,10 @@ form.addEventListener("submit", (event) => {
         newAlbum.id = data["id"]
         newAlbum.querySelector(".album-title").textContent = dataObject["name"]
         let options = document.querySelectorAll("option")
-        let theme = options[Number(dataObject["theme"])].innerHTML
-        newAlbum.querySelector(".album-additional-info").innerHTML = `${theme} <span class = "album-year">${dataObject["year"]} рік</span>`
+        // let theme = options[Number(dataObject["theme"])].innerHTML
+        let theme = "Природа"
+        // newAlbum.querySelector(".album-additional-info").innerHTML = `${theme} <span class = "album-year">${dataObject["year"]} рік</span>`
+        newAlbum.querySelector(".album-additional-info").innerHTML = `${theme} <span class = "album-year">2025 рік</span>`
 
         document.querySelector(".content-div").insertBefore(newAlbum, document.querySelector(".new-album-creation"))
         controlInit()
@@ -82,83 +85,114 @@ const closedEye = document.querySelector("#closedEye").value
 const imageInput = document.querySelector("#imageInput")
 
 function addImage(id){
+    console.log("huh")
     imageInput.name = id
     imageInput.click()
 }
 
-function controlInit(){
-    document.querySelector(".new-album-cancel").addEventListener("click", () => {
-        dimmer.classList.add("hidden")
-    })
-
-    document.querySelectorAll(".album-new-image").forEach((object) => {object.addEventListener("click", () => {
-        addImage(object.parentNode.parentNode.id)
-    })})
-    document.querySelectorAll(".album-new-createbox").forEach((object) => {object.addEventListener("click", () => {
-        addImage(object.parentNode.parentNode.parentNode.id)
-    })})
-
-    imageInput.addEventListener("input", () => {
-        let rawData = new FormData()
-        rawData.append("album_id", imageInput.name)
-        rawData.append("file", imageInput.files[0])
-        postData(createImageLink, rawData).then((data) => {
-            let image = imageTemplate.cloneNode(true)
-            image.querySelector(".album-image").src = URL.createObjectURL(imageInput.files[0])
-            image.id = data["id"]
-            let selectedAlbum = 0
-            for (let album of document.querySelectorAll(`.album-div`)){
-                if (album.id == imageInput.name){
-                    selectedAlbum = album
-                    break
-                }
+imageInput.addEventListener("input", () => {
+    let rawData = new FormData()
+    rawData.append("album_id", imageInput.name)
+    rawData.append("file", imageInput.files[0])
+    postData(createImageLink, rawData).then((data) => {
+        let image = imageTemplate.cloneNode(true)
+        image.querySelector(".album-image").src = URL.createObjectURL(imageInput.files[0])
+        image.id = data["id"]
+        let selectedAlbum = 0
+        for (let album of document.querySelectorAll(`.album-div`)){
+            if (album.id == imageInput.name){
+                selectedAlbum = album
+                break
             }
+        }
 
-            let selectedAlbumPhotos = selectedAlbum.querySelector(".album-images-block")
+        let selectedAlbumPhotos = selectedAlbum.querySelector(".album-images-block")
 
-            selectedAlbumPhotos.insertBefore(image, selectedAlbumPhotos.querySelector(".album-new-imagebox"))
-            controlInit()
-        })
+        selectedAlbumPhotos.insertBefore(image, selectedAlbumPhotos.querySelector(".album-new-imagebox"))
+        controlInit()
+    })
+})
+
+document.querySelector(".new-album-cancel").addEventListener("click", () => {
+        dimmer.classList.add("hidden")
+        elementsWithEvents.push(document.querySelector(".new-album-cancel"))
+})
+
+function controlInit(){
+    document.querySelectorAll(".album-new-image").forEach((object) => {
+        if (!elementsWithEvents.includes(object)){
+            object.addEventListener("click", () => {
+            addImage(object.parentNode.parentNode.id)
+            elementsWithEvents.push(object)
+            })
+        }
+    })
+    document.querySelectorAll(".album-new-createbox").forEach((object) => {
+        if (!elementsWithEvents.includes(object)){
+            object.addEventListener("click", () => {
+            addImage(object.parentNode.parentNode.parentNode.id)
+            elementsWithEvents.push(object)
+            })
+        }
     })
 
     document.querySelectorAll(".album-image-visibility").forEach((object) => {object.addEventListener("click", () => {
-        if (object.id == "0"){
-            object.id = "1"
-            object.src = openedEye
-            fetch(`${visibilityImageLink}/${object.parentNode.parentNode.id}&1`).then(console.log("Changed"))
+        if (!elementsWithEvents.includes(object)){
+            object.addEventListener("click", () => {
+            if (object.id == "0"){
+                object.id = "1"
+                object.src = openedEye
+                fetch(`${visibilityImageLink}/${object.parentNode.parentNode.id}&1`).then(console.log("Changed"))
+            }
+            else{
+                object.id = "0"
+                object.src = closedEye
+                fetch(`${visibilityImageLink}/${object.parentNode.parentNode.id}&0`).then(console.log("Changed"))
+            }
+        })
         }
-        else{
-            object.id = "0"
-            object.src = closedEye
-            fetch(`${visibilityImageLink}/${object.parentNode.parentNode.id}&0`).then(console.log("Changed"))
+    })
+
+    document.querySelectorAll(".album-image-delete").forEach((object) => {
+        if (!elementsWithEvents.includes(object)){
+            object.addEventListener("click", () => {
+            let id = object.parentNode.parentNode.id
+            object.parentNode.parentNode.remove()
+            fetch(`${deleteImageLink}/${id}`).then(console.log("Deleted successfully (?)"))
+            elementsWithEvents.push(object)
+            })
         }
     })})
 
-    document.querySelectorAll(".album-image-delete").forEach((object) => {object.addEventListener("click", () => {
-        let id = object.parentNode.parentNode.id
-        object.parentNode.parentNode.remove()
-        fetch(`${deleteImageLink}/${id}`).then(console.log("Deleted successfully (?)"))
-    })})
-
-    document.querySelectorAll(".album-visibility").forEach((object) => {object.addEventListener("click", () => {
-        let album = object.parentNode.parentNode.parentNode.id
-        if (object.id == "0"){
-            object.id = "1"
-            object.src = openedEye
-            fetch(`${visibilityAlbumLink}/${album}&1`).then(console.log("Changed"))
+    document.querySelectorAll(".album-visibility").forEach((object) => {
+        if (!elementsWithEvents.includes(object)){
+            object.addEventListener("click", () => {
+            let album = object.parentNode.parentNode.parentNode.id
+            if (object.id == "0"){
+                object.id = "1"
+                object.src = openedEye
+                fetch(`${visibilityAlbumLink}/${album}&1`).then(console.log("Changed"))
+            }
+            else{
+                object.id = "0"
+                object.src = closedEye
+                fetch(`${visibilityAlbumLink}/${album}&0`).then(console.log("Changed"))
+            }
+            elementsWithEvents.push(object)
+        })
         }
-        else{
-            object.id = "0"
-            object.src = closedEye
-            fetch(`${visibilityAlbumLink}/${album}&0`).then(console.log("Changed"))
-        }
-    })})
+    })
 
-    document.querySelectorAll(".album-delete").forEach((object) => {object.addEventListener("click", () => {
-        let id = object.parentNode.parentNode.parentNode.id
-        object.parentNode.parentNode.parentNode.remove()
-        fetch(`${deleteAlbumLink}/${id}`).then(console.log("Deleted successfully (?)"))
-    })})
+    document.querySelectorAll(".album-delete").forEach((object) => {
+        if (!elementsWithEvents.includes(object)){
+            object.addEventListener("click", () => {
+            let id = object.parentNode.parentNode.parentNode.id
+            object.parentNode.parentNode.parentNode.remove()
+            fetch(`${deleteAlbumLink}/${id}`).then(console.log("Deleted successfully (?)"))
+            elementsWithEvents.push(object)
+            })
+        }
+    })
 }
 
 controlInit()

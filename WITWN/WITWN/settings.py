@@ -10,6 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+# freedom will return, but thoughts won't
+# let this commit be my final speech of opposing force
+
 from pathlib import Path
 from django.urls import reverse_lazy
 
@@ -32,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'user_app',
-    "core_app"
+    "core_app",
+    "friends_app",
+    "chat_app"
 ]
 
 MIDDLEWARE = [
@@ -72,6 +78,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'WITWN.wsgi.application'
 
+ASGI_APPLICATION = 'WITWN.asgi.application'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels.layers.InMemoryChannelLayer",
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
@@ -138,3 +151,6 @@ EMAIL_HOST_USER = 'danilaageev02@gmail.com'
 EMAIL_HOST_PASSWORD = 'oavx shyv cctq otol'
 
 LOGIN_URL = reverse_lazy("login")
+
+# or shall i hope, that one day, we will return, but faster, stronger, 
+# more effective and with higher determination?

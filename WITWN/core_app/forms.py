@@ -1,7 +1,7 @@
 from django import forms
-from .models import UserPost
-from user_app.models import Account
-from .models import Album, AlbumTheme
+from .models import Post
+from user_app.models import Profile
+from .models import Album, Tag
 from django.contrib.auth import get_user_model
 
 
@@ -60,29 +60,31 @@ class AlbumCreationForm(forms.ModelForm):
 
     class Meta:
         model = Album
-        fields = ["name", "theme", "year"]
+        fields = ["name", "topic"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["name"].label = "Назва альбому"
-        self.fields["theme"].label = "Оберіть тему"
-        self.fields["year"].label = "Рік альбому"
+        self.fields["topic"].label = "Оберіть тему"
+        # self.fields["year"].label = "Рік альбому"
         self.fields["name"].widget.attrs.update({"placeholder": "Введіть ім'я"})
-        self.fields["theme"].widget.attrs.update({"placeholder": "Оберіть тему"})
-        self.fields["year"].widget.attrs.update({"placeholder": "Оберіть рік"})
+        self.fields["topic"].widget.attrs.update({"placeholder": "Оберіть тему"})
+        # self.fields["year"].widget.attrs.update({"placeholder": "Оберіть рік"})
 
 class SettingsForm(forms.ModelForm):
     birthday = forms.DateField(required = True)
-    password = forms.CharField(max_length = 200, widget = forms.PasswordInput(render_value = True))
+    # password = forms.CharField(max_length = 200, widget = forms.PasswordInput(render_value = True))
     class Meta:
         model = User
-        fields = ["first_name", "last_name", "birthday", "email", "password"]
+        fields = ["first_name", "last_name", "birthday", "email"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["birthday"].label = "День народженя"
         self.fields["email"].label = "Електронна пошта"
-        self.fields["password"].label = "Пароль"
+        # Look for password in html, as it is now more complicated
+        # self.fields["password"].label = "Пароль"
+        # self.fields["password"].widget.attrs.update({"value": "ㅤ"})
 
 
 class MultipleFileField(forms.FileField):
@@ -101,23 +103,24 @@ class MultipleFileField(forms.FileField):
 # i feel, like im the next one who will fall under his control...
 
 class CreationPostForm(forms.ModelForm):
+    topic = forms.CharField(required = True, max_length = 255)
     files = MultipleFileField(required = False, attrs = {'class': "hidden"})
     tags = forms.CharField(required = False, widget = forms.TextInput(attrs = {"class": "hidden"}))
     links = forms.CharField(required = False, widget = forms.TextInput(attrs = {"placeholder": "Додайте посилань до своєї публікації", "class": "creation-input-field"}))
     specific_id = forms.IntegerField(min_value = -1, widget = forms.TextInput(attrs = {"name": "specific_id", "type": "hidden", "value": -1, "class": "hidden"}))
     class Meta:
-        model = UserPost
-        fields = ["title", "theme", "text", "links", "tags", "files", "specific_id"]
+        model = Post
+        fields = ["title", "topic", "content", "links", "tags", "files", "specific_id"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["title"].widget.attrs.update({"placeholder": "Напишіть назву публікації", "class": "creation-input-field"})
-        self.fields["theme"].widget.attrs.update({"placeholder": "Напишіть тему публікації", "class": "creation-input-field"})
-        self.fields["text"].widget.attrs.update({"placeholder": "Напишіть опис публікації", "class": "creation-input-area"})
+        self.fields["topic"].widget.attrs.update({"placeholder": "Напишіть тему публікації", "class": "creation-input-field"})
+        self.fields["content"].widget.attrs.update({"placeholder": "Напишіть опис публікації", "class": "creation-input-area"})
         self.fields["links"].widget.attrs.update({"class": "hidden"})
         self.fields["title"].label = "Назва публікації"
-        self.fields["theme"].label = "Тема публікації"
-        self.fields["text"].label = "Опис публікації"
+        self.fields["topic"].label = "Тема публікації"
+        self.fields["content"].label = "Опис публікації"
         self.fields["links"].label = "Посилання"
 
     def clean_tags(self):

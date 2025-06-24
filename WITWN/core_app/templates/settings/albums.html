@@ -38,16 +38,16 @@
                         <p href="{% url 'home' %}" class="album-new-text">Додати фото</p>
                     </button>
                     {% if not album.necessary %}
-                        {% if album.public %}
+                        <!-- {% if album.public %} -->
                             <img src = "{% static 'img/user_base/open-eye.svg' %}" alt="eye" class = "album-visibility" id = "1">
-                        {% else %}
+                        <!-- {% else %}
                             <img src = "{% static 'img/user_base/closed-eye.svg' %}" alt="eye" class = "album-visibility" id = "0">
-                        {% endif %}
+                        {% endif %} -->
                         <img src = "{% static 'img/my_publications/trashbin.svg' %}" alt="trashbin" class = "album-delete">
                     {% endif %}
                 </div>
-                {% if album.year != None %}
-                    <p class = "album-additional-info">{{ album.theme.name }} <span class = "album-year">{{ album.year }} рік</span></p>
+                {% if album.name != "Мої фото" %}
+                    <p class = "album-additional-info">{{ album.topic.name|all_but_first }} <span class = "album-year">2025 рік</span></p>
                 {% endif %}
             </div>
             <div class="album-images-block">
