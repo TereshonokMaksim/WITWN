@@ -23,4 +23,3 @@ class ChatMessage(models.Model):
     def __str__(self):
         return f'Повідомлення від {self.author}. Відправлено {self.sent_at}'
     
-# Why are we even doing this?

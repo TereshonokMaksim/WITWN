@@ -52,7 +52,7 @@ class ChatsConsumer(AsyncWebsocketConsumer):
                 }
             )
             receivers = await self.get_group_members(self.group)
-            for receiver in receivers:
+            for receiver in [*receivers]:
                 data = {"type": "notification", 
                         "request_type": "message", 
                         "message_content": message_data.get("message"), 
@@ -109,7 +109,10 @@ class ChatsConsumer(AsyncWebsocketConsumer):
         else:
             print("Error, form isnt valid!")
 
-    
+    @database_sync_to_async
+    def get_group_admin(self, group: ChatGroup):
+        return group.admin
+
     @database_sync_to_async
     def get_group_members(self, group: ChatGroup):
         return list(group.members.all())
@@ -276,7 +279,55 @@ class ChatStatusConsumer(AsyncWebsocketConsumer):
             raw_data = {"request_type": "groupEdit", "members": data_to_send}
             await self.send(json.dumps(raw_data, ensure_ascii=False))
         elif data.get("request_type") == "groupEditing":
+            group = await self.get_group_by_id(int(data.get("group_id")))
+            admin = await self.get_group_admin(group)
+            new_members = [int(id) for id in data.get("members")]
+            old_members_list = [member for member in await self.get_group_members(group)]
+            old_members_list.append(admin)
+            for old_member in old_members_list:
+                if old_member.pk in new_members:
+                    user = await self.get_user_from_profile(old_member)
+                    new_members.remove(old_member.pk)
+                    avatar = group.avatar   
+                    if avatar != None:
+                        avatar = avatar.url
+                    else:
+                        avatar = "0"
+                    mem_channel_name = cache.get(f"chat_status_user_{user.pk}")
+                    if mem_channel_name != None:
+                        await self.channel_layer.send(mem_channel_name, {"name": group.name, "avatar": avatar, "group_id": group.id})
+                    
+                else:
+                    if old_member != admin:
+                        user = await self.get_user_from_profile(old_member)
+                        member_channel_name = cache.get(f"chat_status_user_{user.pk}")
+                        if member_channel_name != None:
+                            await self.channel_layer.send(member_channel_name, {"type": "deleted_from_group", "event": json.dumps({"request_type": "deleted_from_group", "group_id": group.pk})})
+
+            if len(new_members) > 0:
+                avatar = group.avatar
+                if avatar != None:
+                    avatar = avatar.url
+                else:
+                    avatar = "0"
+                for new_member in new_members:
+                    new_member_profile = await self.get_profile_by_id(id = new_member)
+                    new_member_user = await self.get_user_from_profile(new_member_profile)
+                    new_member_channel = cache.get(f"chat_status_user_{new_member_user.pk}")
+                    # print(f"ID: {new_member}, channel name: {new_member_channel}, assembled channel name: 'chat_status_user_{new_member_user.pk}'")
+                    if new_member_channel != None:
+                        await self.channel_layer.send(
+                            new_member_channel,
+                            {
+                                "type": "added_to_group",
+                                "name": group.name,
+                                "avatar": avatar,
+                                "group_id": group.id
+                            }
+                        )
+                
             await self.edit_group(data)
+
         elif data.get("request_type") == "infoGet":
             print("Status data: ", data)
             if not data["personal"]:
@@ -297,8 +348,14 @@ class ChatStatusConsumer(AsyncWebsocketConsumer):
                     online = True
                 await self.send(json.dumps({"request_type": "infoPost", "online": online}))
 
+    async def deleted_from_group(self, event: str):
+        await self.send(event["event"])
+
     async def added_to_group(self, event: dict):
         await self.send(json.dumps({"request_type": "added_to_group", "name": event["name"], "avatar": event["avatar"], "id": event["group_id"]}))
+
+    async def group_edited(self, event: dict):
+        await self.send(json.dumps({"request_type": "group_edited", "name": event.get('name'), "avatar": event.get("avatar"), "id": event.get("group_id")}))
 
     async def notification(self, event: dict):
         if event["request_type"] == "message":
@@ -339,6 +396,14 @@ class ChatStatusConsumer(AsyncWebsocketConsumer):
                     friend_profile = profiles[0]
                 data["chat_id"] = friend_profile.pk
             await self.send(json.dumps(data))
+
+    @database_sync_to_async
+    def get_group_admin(self, chat: ChatGroup):
+        return chat.admin
+
+    @database_sync_to_async 
+    def get_profile_by_id(self, id: int):
+        return Profile.objects.get(id = int(id))
 
     @database_sync_to_async
     def edit_group(self, data: dict):

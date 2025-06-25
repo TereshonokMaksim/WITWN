@@ -5,7 +5,15 @@ let personalChat = false
 function processMessageTime(text){
     let date = new Date(text)
     console.log(date, date.toLocaleString())
-    let dateText = `${date.getHours()}:${date.getMinutes()}`
+    let hours = String(date.getHours())
+    let minutes = String(date.getMinutes())
+    if (hours.length == 1){
+        hours = `0${hours}`
+    }
+    if (minutes.length == 1){
+        minutes = `0${minutes}`
+    }
+    let dateText = `${hours}:${minutes}`
     return dateText
 }
 
@@ -264,6 +272,10 @@ createGroupButton.addEventListener("click", () => {
     newGroupMembers.classList.remove("hidden")
     addNewMemberButton.classList.add("hidden")
     updateMemNum()
+    newGroupForm.querySelector(".group-name-input").value = ""
+    newGroupForm.querySelector("#groupAvatarInput").value = ""
+    newGroupForm.querySelector(".create-group-avatar").src = "beeep"
+    clearMemberList()
 })
 
 function updateMemNum(){
@@ -423,10 +435,18 @@ groupCreateButton.addEventListener("click", () => {
             let avatarToSend = arrayBufferToBase64(arrayBuffer)
             sendGroupData(avatarToSend)
         }
+        getChatInfo()
     }
     else{
         sendGroupData("0")
+        getChatInfo()
     }
+})
+
+newGroupForm.querySelector(".cross-image").addEventListener("click", () => {
+    choosedMembers = []
+    newGroupForm.classList.add("hidden")
+    formBlur.classList.add("hidden")
 })
 
 // Message images!
@@ -488,6 +508,12 @@ document.querySelector("#editChat").addEventListener("click", () => {
     statusConnection.send(JSON.stringify({"request_type": "groupEdit", "group_id": document.querySelector('.selected-chat').id}))
 })
 
+chatName.addEventListener("click", () => {
+    if (!personalChat && selfAdmin){
+        statusConnection.send(JSON.stringify({"request_type": "groupEdit", "group_id": document.querySelector('.selected-chat').id}))
+    }
+})
+
 const standartAvatarSrc = document.querySelector("#standartAvatarSrc").value
 const chatTemplate = document.querySelector(".templates").querySelector(".single-message-div")
 
@@ -525,6 +551,10 @@ statusConnection.addEventListener("message", (event) => {
                 trashbinIcon.classList.add("bin-img")
                 memberMainInfo.appendChild(trashbinIcon)
                 choosedMembers.push(memberData.id)
+                trashbinIcon.addEventListener("click", () => {
+                    choosedMembers.splice(choosedMembers.indexOf(trashbinIcon.parentNode.parentNode.id), 1)
+                    trashbinIcon.parentNode.parentNode.remove()
+                })
             }
             else{
                 memberTextInfo.textContent = `${memberData.name} (Ви)`
@@ -626,7 +656,18 @@ statusConnection.addEventListener("message", (event) => {
         }
         chat.remove()
     }
-    if (data.request_type == "added_to_group"){
+    else if (data.request_type == "group_edited"){
+        let chat = document.querySelector(".group-messages").querySelector(`[id='${data.id}']`)
+        if (chat != null){
+            chat.querySelector(".message-author-name").textContent = data.name
+            chat.querySelector(".prof-pic").src = data.avatar
+            if (chat.classList.contains("selected-chat")){
+                document.querySelector(".chat-name").textContent = data.name
+                document.querySelector(".chat-avatar").src = data.avatar
+            }
+        }
+    }
+    else if (data.request_type == "added_to_group"){
         let groupBox = document.querySelector(".group-messages")
         let notifiedChat = chatTemplate.cloneNode(true)
         notifiedChat.classList.remove("friend-chat")
@@ -637,8 +678,10 @@ statusConnection.addEventListener("message", (event) => {
         }
         notifiedChat.querySelector(".prof-pic").src = avatarSrc
         notifiedChat.querySelector(".message-author-name").textContent = data.name
-        notifiedChat.querySelector(".time-message").textContent = " "
-        notifiedChat.querySelector(".message-text").textContent = " "
+        notifiedChat.querySelector(".message-text").textContent = "Ви були додані до цієї групи"
+        let date = new Date()
+        let timeString = processMessageTime(date.toISOString())
+        notifiedChat.querySelector(".time-message").textContent = timeString
         if (groupBox.querySelectorAll(".single-message-div").length > 0){
             groupBox.insertBefore(notifiedChat, groupBox.querySelector(".single-message-div"))
         }
@@ -664,6 +707,15 @@ statusConnection.addEventListener("message", (event) => {
             messageTextInput.focus()
         })
     }
+    else if (data.request_type == "deleted_from_group"){
+        let chat = document.querySelector(".group-messages").querySelector(`[id='${data.group_id}']`)
+        if (chat != null){
+            if (chat.classList.contains("selected-chat")){
+                closeChat()
+            }
+            chat.remove()
+        }
+    }
     else{
         console.log(`Unexpected websocket message detected.\nData: ${data}`)
     }
@@ -685,4 +737,35 @@ document.querySelectorAll(".delete-chat").forEach(obj => {obj.addEventListener("
 })
 document.getElementById("quitChat").addEventListener("click", () => {
     connection.send(JSON.stringify({"request": "quit"}))
+})
+
+// media (oh wow)
+
+let mediaOpenButtons = document.querySelectorAll('.media-details-button')
+let mediaWindow = document.querySelector(".media-all")
+
+mediaOpenButtons.forEach(obj => {
+    obj.addEventListener("click", () => {
+        mediaWindow.classList.remove("hidden")
+        formBlur.classList.remove("hidden")
+        let mediaContent = document.querySelector(".media-content")
+        mediaContent.innerHTML = ""
+        let imagesSrc = []
+        for (let imageTag of document.querySelectorAll(".message-image")){
+            imagesSrc.push(imageTag.src)
+        }
+        if (imagesSrc.length == 0){
+            mediaContent.innerHTML = "<p class = 'media-nothing'>Нажаль, в цьому чату не знайдено жодного фото.</p>"
+        }
+        else{
+            for (let src of imagesSrc){
+                mediaContent.innerHTML += `<img src = ${src} class = "media-image">`
+            }
+        }
+    })
+})
+
+document.querySelector(".media-cross").addEventListener("click", () => {
+    formBlur.classList.add("hidden")
+    mediaWindow.classList.add("hidden")
 })

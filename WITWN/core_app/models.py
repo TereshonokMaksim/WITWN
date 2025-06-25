@@ -113,4 +113,3 @@ class Link(models.Model):
     def __str__(self):
         return f'Посилання для поста "{self.post}"'
     
-# Im in tears because of how bad this db structure is

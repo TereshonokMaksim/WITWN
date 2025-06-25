@@ -25,12 +25,15 @@ def render_post(post: Post):
 def render_profile_short(account: Profile, detailed: bool = True, album_view: bool = False, relation: str = ""):
     friends = []
     for friendship in Friendship.objects.filter(profile1 = Profile.objects.get(user = account.user), accepted = 1):
-        friends.append(friendship.profile2)
+        if len(friends) < 3:
+            friends.append(friendship.profile2)
     for friendship in Friendship.objects.filter(profile2 = Profile.objects.get(user = account.user), accepted = 1):
-        friends.append(friendship.profile1)
+        if len(friends) < 3:
+            friends.append(friendship.profile1)
     requests = []
     for friendship in Friendship.objects.filter(profile1 = Profile.objects.get(user = account.user), accepted = 0):
-        requests.append(friendship.profile2)
+        if len(requests) < 3:
+            requests.append(friendship.profile2)
     post_num = len(Post.objects.filter(author = account))
     # readers_num = len(account.readers.all())
     readers_num = sum([len(post.views.all()) for post in Post.objects.filter(author = account)])

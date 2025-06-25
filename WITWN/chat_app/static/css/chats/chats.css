@@ -9,11 +9,11 @@ p{
     padding-right: 0px;
     padding-left: 0px;
     gap: 5px;
-    height: 82vh;
+    height: 89vh;
     justify-content: center;
     align-items: end;
-    padding-top: 16px;
-    padding-bottom: 70px;
+    /* padding-top: 16px; */
+    /* padding-bottom: 70px; */
 }
 
 .contact-div{
@@ -21,7 +21,7 @@ p{
     flex-direction: column;
     min-width: 417px;
     max-width: 417px;
-    height: 82vh;
+    height: 100%;
     /* min-height: 834px; */
     /* max-height: 834px; */
     border-radius: 10px;
@@ -32,9 +32,9 @@ p{
 .chat-everything-div{
     display: flex;
     flex-direction: column;
-    min-width: 714px;
-    max-width: 714px;
-    height: 82vh;
+    min-width: 766px;
+    max-width: 766px;
+    height: 100%;
     /* max-height: 834px; */
     justify-content: center;
     align-items: center;
@@ -53,7 +53,7 @@ p{
     flex-direction: column;
     min-width: 417px;
     max-width: 417px;
-    height: 82vh;
+    height: 100%;
     border-radius: 10px;
     gap: 1%;
     /* padding-bottom: 30px ; */
@@ -220,10 +220,17 @@ p{
 }
 
 .message-text{
+    display: flex;
+    gap: 10px;
+    flex-direction: row;
+    align-items: end;  
     font-weight: bold;
     font-size: 14px;
     color: rgba(7, 10, 28, 1);
     font-family: 'GT Walsheim Light';
+    max-width: 100%;
+    max-height: 50%;
+    overflow: hidden;
 }
 
 .messages-image{
@@ -258,7 +265,8 @@ p{
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    height: 82vh;
+    height: calc(100% - 48px);
+    /* flex: 1; */
     border: 1px solid rgba(205, 206, 210, 1);
     /* padding: 16px; */
     gap: 24px;
@@ -324,8 +332,9 @@ p{
     flex-direction: column;
     /* width: fill; */
     /* gap: 16px; */
-    max-height: 60vh;
-    height: fit-content;
+    /* max-height: 60vh; */
+    flex: 1;
+    /* height: fit-content; */
     overflow-y: scroll;
     overflow-x: hidden;
     scrollbar-width: 8px;
@@ -394,6 +403,11 @@ p{
     margin: 0px;
 }
 
+.chat-name:hover{
+    cursor: pointer;
+    filter: brightness(105%);
+}
+
 .chat-members-online{
     color: #81818D;
     font-size: 14px;
@@ -420,7 +434,7 @@ p{
 
 .chat-main-input{
     /* flex: 1 0; */
-    width: 510px;
+    width: 550px;
     border-radius: 10px;
     border: 1px solid #CDCED2;
     padding: 10px 16px;
@@ -478,14 +492,8 @@ p{
     height: fit-content;
     /* height: 47px; */
     box-sizing: border-box;
+    max-width: 60%;
     gap: 10px;
-}
-
-.message-text{
-    display: flex;
-    gap: 10px;
-    flex-direction: row;
-    align-items: end;  
 }
 
 .message-image{
@@ -500,6 +508,7 @@ p{
     flex-direction: column;
     gap: 4px;
     align-items: start;
+    width: 90%;
 }
 
 .message-sender{
@@ -514,7 +523,12 @@ p{
     font-size: 14px;
     font-weight: 400;
     margin: 0px;
-    width: fit-content;
+    max-width: 95%;
+    overflow: hidden;
+    text-align: start;
+    overflow-wrap: break-word; 
+    word-wrap: break-word;     
+    word-break: break-word;  
 }
 
 .message-add-info{
@@ -639,7 +653,11 @@ body{
 .cross-image{ 
     width: 20px;
     height: 20px;
-    
+}
+
+.cross-image:hover{
+    cursor: pointer;
+    filter: brightness(105%);
 }
 
 .new-group-p{
@@ -1117,4 +1135,69 @@ body{
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
+}
+
+.media-all{
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 10px;
+    width: 50vw;
+    height: fit-content;
+    max-height: 70vh;
+}
+
+.media-header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #81818D;
+    padding: 10px 0px;
+    margin-bottom: 10px;
+}
+
+.media-title{
+    font-size: 24px;
+    color: #070A1C;
+    margin: 0;
+    font-weight: 500;
+}
+
+.media-cross{
+    width: 20px;
+    height: 20px;
+}
+
+.media-cross:hover{
+    cursor: pointer;
+    filter: brightness(105%);
+}
+
+.media-content{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: start;
+    flex-wrap: wrap;
+}
+
+.media-nothing{
+    display: flex;
+    font-size: 16px;
+    color: #070A1C;
+    margin: 100px 0px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.media-image{
+    width: 147px;
+    height: 147px;
+    border-radius: 10px;
+    margin-top: 9.28px;
+    margin-right: 9.28px;
 }
