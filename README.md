@@ -1,5 +1,7 @@
 # World IT Web Network - Соціальна мережа
 
+![Preview Image](./readme_media/preview.png)
+
 ---
 
 ## Навігація по файлу
