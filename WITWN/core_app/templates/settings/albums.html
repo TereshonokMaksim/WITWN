@@ -18,8 +18,8 @@
 {% endblock %}
 
 {% block page_content %}
-
     <input type="hidden" id = "deleteImage" value = "{% url 'delete_image' 0 %}">
+    <input type="hidden" id = "deleteAvatar" value = "{% url 'delete_avatar' 0 %}">
     <input type="hidden" id = "deleteAlbum" value = "{% url 'delete_album' 0 %}">
     <input type="hidden" id = "visibilityImage" value = "{% url 'image_visibility' 0 0 %}">
     <input type="hidden" id = "visibilityAlbum" value = "{% url 'album_visibility' 0 0 %}">
@@ -28,6 +28,37 @@
     <input type="hidden" id = "openedEye" value = "{% static 'img/user_base/open-eye.svg' %}">
     <input type="hidden" id = "closedEye" value = "{% static 'img/user_base/closed-eye.svg' %}">
     <input type="file" id = "imageInput" class = "hidden">
+    
+    <div class="album-div" id = "-1">
+        <div class="album-header">
+            <p class="album-title">Мої фото</p>
+            <div class = "album-control-buttons">
+                <button class = "album-new-button album-new-image">
+                    <img src = "{% static 'img/my_publications/img.svg' %}" alt="/" class = "icon">
+                    <p class="album-new-text">Додати фото</p>
+                </button>
+            </div>
+        </div>
+        <div class="album-images-block">
+            {% for image in avatars %}
+                <div class = "album-image-box" id = "{{ image.pk }}">
+                    <img src = "{{ image.image.url }}" alt = "noimage" class = "album-image">
+                    <div class = "album-image-buttons">
+                        {% if image.shown %}
+                            <img src = "{% static 'img/user_base/open-eye.svg' %}" alt="eye" class = "album-image-visibility" id = "1">
+                        {% else %}
+                            <img src = "{% static 'img/user_base/closed-eye.svg' %}" alt="eye" class = "album-image-visibility" id = "0">
+                        {% endif %}
+                        <img src = "{% static 'img/my_publications/trashbin.svg' %}" alt="trashbin" class = "album-image-delete">
+                    </div>
+                </div>
+            {% endfor %}
+            <div class = "album-new-imagebox">
+                <img class = "icon album-new-createbox" src = "{% static 'img/albums/plus.svg' %}">
+            </div>
+        </div>
+    </div>
+
     {% for album in album_list %}
         <div class="album-div" id = "{{ album.pk }}">
             <div class="album-header">
@@ -38,17 +69,15 @@
                         <p href="{% url 'home' %}" class="album-new-text">Додати фото</p>
                     </button>
                     {% if not album.necessary %}
-                        <!-- {% if album.public %} -->
+                        {% if album.shown %}
                             <img src = "{% static 'img/user_base/open-eye.svg' %}" alt="eye" class = "album-visibility" id = "1">
-                        <!-- {% else %}
+                        {% else %}
                             <img src = "{% static 'img/user_base/closed-eye.svg' %}" alt="eye" class = "album-visibility" id = "0">
-                        {% endif %} -->
+                        {% endif %}
                         <img src = "{% static 'img/my_publications/trashbin.svg' %}" alt="trashbin" class = "album-delete">
                     {% endif %}
                 </div>
-                {% if album.name != "Мої фото" %}
-                    <p class = "album-additional-info">{{ album.topic.name|all_but_first }} <span class = "album-year">2025 рік</span></p>
-                {% endif %}
+                <p class = "album-additional-info">{{ album.topic.name|all_but_first }} <span class = "album-year">2025 рік</span></p>
             </div>
             <div class="album-images-block">
                 {% for image in album|images %}

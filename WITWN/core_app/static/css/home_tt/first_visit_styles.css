@@ -11,9 +11,9 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 24px 44px 44px 44px;
+    padding: calc(1.2vw + 0.3vh) calc(2vw + 0.4vh) calc(2vw + 0.4vh) calc(2vw + 0.4vh);
     background-color: white;
-    border-radius: 20px;
+    border-radius: calc(0.9vw + 0.3vh);
     position: relative;
 }
 
@@ -22,38 +22,39 @@
 }
 
 .data-form label{
-    font-size: 16px;
+    font-size: calc(0.8vw + 0.2vh);
 }
 
 .data-form-title{
-    font-size: 34px;
+    font-size: calc(1.7vw + 0.45vh);
     color: #070A1C;
     font-weight: 500;
-    width: 402px; /* <- FORM WIDTH CONTROL HERE */
+    width: calc(18vw + 5vh); /* <- FORM WIDTH CONTROL HERE */
     text-align: center;
     margin: 0;
 }
 
 .data-form-inputs{
     width: 100%;
-    padding: 24px 0px;
+    padding: calc(1.2vw + 0.3vh) 0px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: calc(0.8vw + 0.2vh);
 }
 
 .data-form-input{
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: calc(0.3vw + 0.07vh);
 }
 
 input{
+    font-size: calc(1vw + 0.2vh);
     box-sizing: border-box;
-    padding: 10px 16px;
-    border: 1px solid #CDCED2;
-    border-radius: 10px;
+    padding: calc(0.5vw + 0.17vh) calc(0.8vw + 0.2vh);
+    border: 0.01vw solid #CDCED2;
+    border-radius: calc(0.5vw + 0.17vh);
     width: 100%;
     box-sizing: border-box;
 }
@@ -64,20 +65,20 @@ input{
 }
 
 .data-form-sign{
-    font-size: 16px;
+    font-size: calc(0.8vw + 0.2vh);
     color: #81818D;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 16px;
+    left: calc(0.8vw + 0.2vh);
 }
 
 .data-form-username > input{
-    padding-left: 30px;
+    padding-left: calc(1.5vw + 0.35vh);
 }
 
 .data-form-hinttext{
-    font-size: 12px;
+    font-size: calc(0.6vw + 0.15vh);
 }
 
 .data-form-hint{
@@ -87,9 +88,9 @@ input{
 .data-form-submit{
     float: right;
     background-color: #543C52;
-    padding: 10px 16px;
+    padding: calc(0.5vw + 0.12vh) calc(0.8vw + 0.2vh);
     border-radius: 100vw;
-    font-size: 14px;
+    font-size: calc(0.7vw + 0.18vh);
     border: 0;
     color: white;
 }

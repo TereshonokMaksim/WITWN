@@ -170,14 +170,15 @@ class AlbumsView(ListView):
     context_object_name = "album_list"
     
     def get_queryset(self):
-        return Album.objects.all()
-        # return Album.objects.filter(author = Profile.objects.get(user = self.request.user))
+        # TODO: PAGING
+        return Album.objects.filter(author = Profile.objects.get(user = self.request.user))
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data["album_themes"] = Tag.objects.all()
         data["form"] = AlbumCreationForm()
         data["page_name"] = "settings"
+        data["avatars"] = Avatar.objects.filter(profile = self.request.user.profile)
         return data
 
 # AJAX endpoints
@@ -187,19 +188,27 @@ def check_user(user_checked, user_req, function):
         function()
         return JsonResponse(data = {"request": "success"}, status = 200)
     else:
+        print("no")
         return JsonResponse(data = {"request": "permission_denied"}, status = 500)
 
 def delete_album_image(request, *args, **kwargs):
     image = get_object_or_404(Image, pk = kwargs["id"])
-    album = Album.objects.filter(images__in = [image])
     return check_user(request.user, request.user, lambda: image.delete())
+
+def delete_album_avatar(request, *args, **kwargs):
+    print("no avatar?")
+    image = get_object_or_404(Avatar, pk = kwargs["id"])
+    def deleting(avatar: Avatar):
+        if avatar.active == False:
+            avatar.delete()
+        else:
+            print("Nuh uh")
+            return JsonResponse(data = {"request": "permission_denied"}, status = 500)
+
+    return check_user(request.user, request.user, lambda: deleting(image))
 
 def delete_album(request, *args, **kwargs):
     album = get_object_or_404(Album, pk = kwargs["id"])
-    # if album.necessary:
-    #     print("ERROR!")
-    #     return JsonResponse(data = {"request": "album_necessary"}, status = 500)
-    # else:
     return check_user(request.user, request.user, lambda: album.delete())
 
 def change_visibility(model_obj: Image | Album, visible: int | str):
@@ -227,7 +236,7 @@ def create_album(request: WSGIRequest, *args, **kwargs):
         data = request.POST
         user = request.user
         # new_album = Album.objects.create(author = Profile.objects.get(user = user), name = data["name"], year = int(data["year"]), theme = AlbumTheme.objects.get(pk = int(data["theme"])))
-        new_album = Album.objects.create(name = data["name"], topic = Tag.objects.get(pk = int(data["topic"])))
+        new_album = Album.objects.create(name = data["name"], topic = Tag.objects.get(pk = int(data["topic"])), author = user.profile)
         return JsonResponse({"request": "success", "id": new_album.pk}, status = 200)
     else:
         return JsonResponse({"request": "incorrect_method"}, status = 500)
@@ -235,9 +244,11 @@ def create_album(request: WSGIRequest, *args, **kwargs):
 def add_image(request: WSGIRequest, *args, **kwargs):
     if request.method == "POST":
         data = request.POST
-
-        new_image = Image.objects.create(file = request.FILES["file"], filename = "unnamed")
-        Album.objects.get(pk = data["album_id"]).images.add(new_image)
+        if data["album_id"] != "-1":
+            new_image = Image.objects.create(file = request.FILES["file"], filename = "unnamed")
+            Album.objects.get(pk = data["album_id"]).images.add(new_image)
+        else:
+            new_image = Avatar.objects.create(image = request.FILES["file"], profile = request.user.profile, shown = True, active = False)
         return JsonResponse({"request": "success", "id": new_image.pk}, status = 200)
     else:
         return JsonResponse({"request": "incorrect_method"}, status = 500)
@@ -257,7 +268,6 @@ def apply_user_changes(request: WSGIRequest, *args, **kwargs):
             avatar_to_delete.active = False
             avatar_to_delete.save()
         Avatar.objects.create(image = avatar, active = True, profile = account)
-        Album.objects.filter(name = "Мої фото").first().images.add(Image.objects.create(file = avatar, filename = "unnamed_avatar"))
     if len(data["username"]) > 0:
         if data["username"][0] != "@":
             username = f"@{data['username'].strip()}"

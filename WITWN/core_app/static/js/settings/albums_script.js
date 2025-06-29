@@ -24,6 +24,7 @@ function cutBackOfLink(link){
 }
 
 const deleteImageLink = cutBackOfLink(document.querySelector("#deleteImage").value)
+const deleteAvatarLink = cutBackOfLink(document.querySelector("#deleteAvatar").value)
 const deleteAlbumLink = cutBackOfLink(document.querySelector("#deleteAlbum").value)
 const visibilityImageLink = cutBackOfLink(document.querySelector("#visibilityImage").value)
 const visibilityAlbumLink = cutBackOfLink(document.querySelector("#visibilityAlbum").value)
@@ -42,14 +43,18 @@ form.addEventListener("submit", (event) => {
         let newAlbum = albumTemplate.cloneNode(true)
         newAlbum.id = data["id"]
         newAlbum.querySelector(".album-title").textContent = dataObject["name"]
-        let options = document.querySelectorAll("option")
+        // let options = document.querySelectorAll("option")
         // let theme = options[Number(dataObject["theme"])].innerHTML
-        let theme = "Природа"
+        let theme = document.getElementById("id_topic").querySelectorAll("option")[Number(document.getElementById("id_topic").value) + 1].textContent.split("#")[1]
         // newAlbum.querySelector(".album-additional-info").innerHTML = `${theme} <span class = "album-year">${dataObject["year"]} рік</span>`
         newAlbum.querySelector(".album-additional-info").innerHTML = `${theme} <span class = "album-year">2025 рік</span>`
 
         document.querySelector(".content-div").insertBefore(newAlbum, document.querySelector(".new-album-creation"))
         controlInit()
+        let firstThemeOption = document.getElementById("id_topic").querySelector("option")
+        firstThemeOption.selected = true
+        document.getElementById("id_topic").value = ''
+        document.getElementById("id_name").value = ""
     })
 })
 
@@ -155,11 +160,17 @@ function controlInit(){
 
     document.querySelectorAll(".album-image-delete").forEach((object) => {
         if (!elementsWithEvents.includes(object)){
-            object.addEventListener("click", () => {
+            object.addEventListener("click", (event) => {
             let id = object.parentNode.parentNode.id
-            object.parentNode.parentNode.remove()
-            fetch(`${deleteImageLink}/${id}`).then(console.log("Deleted successfully (?)"))
+            if (event.currentTarget.closest(".album-div").id != "-1"){
+                fetch(`${deleteImageLink}/${id}`).then(console.log("Deleted successfully (?)"))
+            }
+            else {
+                console.log("djosadjaodjosajd")
+                fetch(`${deleteAvatarLink}/${id}`).then(console.log("Deleted successfully (?)"))
+            }
             elementsWithEvents.push(object)
+            object.parentNode.parentNode.remove()
             })
         }
     })})

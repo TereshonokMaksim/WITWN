@@ -1,56 +1,13 @@
-.friends-links-div{
-    position: relative;
-    /* left: 150px; */
-    display: flex;
-    flex-direction: column;
-    min-width: 254px;
-    max-width: 254px;
-    height: fit-content;
-    top: 16px;
-    gap: 26px;
-}
-.friends-link{
-    min-height: 18px;
-    max-height: 18px;
-    width: fit-content;
-    font-size: 16px;
-    font-weight: 500;
-    color: rgba(129, 129, 141, 1);
-    text-decoration: none;
-  
-}
-#main-friends-link{
-    display: flex;
-    color: rgba(7, 10, 28, 1);
-    font-weight: 700;
-    gap: 8px;
-    padding-bottom: 7px ;
-    border-bottom: 2px solid rgba(84, 60, 82, 1);
-    
-}
 .everything-div{
     display: flex;
     flex-direction: row;
     gap: 200px;
     height: 100%;
 }
-.content-div{
-    overflow-y: scroll;
-    overflow-x: hidden;
-    scrollbar-width: none;
-    display: flex;
-    flex-direction: column;
-    min-width: 1173px;
-    max-width: 1173px;
-    margin-top: 1%;
-    gap: 8px;
-    min-height: 90%;
-    max-height: 90%;
-}
 .requests-div{
     display: flex;
     flex-direction: column;
-    width: 1123px;
+    width: 100%;
     height: fit-content;
     border: 1px solid rgba(205, 206, 210, 1);
     border-radius: 10px;
@@ -58,16 +15,18 @@
     padding: 16px 20px 16px 20px;
     gap: 16px;
     background-color: white;
+    box-sizing: border-box;
    
 }
 .request-header{
-    min-width: 1123px;
+    min-width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: row;
     min-height: 18px;
     max-height: 18px;
-    width: 923px;
     justify-content: space-between;
+    box-sizing: border-box;
 }
 .request-header a{
     color: rgba(84, 60, 82, 1);
@@ -81,8 +40,8 @@
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    min-width: 366.25px;
-    max-width: 366.25px;
+    min-width: 32%;
+    max-width: 32%;
     height: 333.75px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -163,9 +122,9 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: 8px;
-    width: fit-content;
+    gap: 0.6%;
     height: fit-content;
+    width: 100%;
 }
 
 .friend-avatar-wrapper{

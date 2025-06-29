@@ -14,14 +14,14 @@
         <input type="hidden" id = "pageNameString" value = "{{ page_name }}">
         <header>
             <!-- LINKS HERE -->
-            <img src="{% static 'img/base/logo.svg' %}" alt="logo" class="logo">
-            <div class = 'links'>
-                <div class = 'login-links'>
+            <div class = "header-content">
+                <img src="{% static 'img/base/logo.svg' %}" alt="logo" class="logo">
+                <div class = 'links'>
                     {% if not user.is_authenticated %}
                         <a href="{% url 'login' %}" class="link">Авторизація</a>
                         <a href="{% url 'reg' %}" class="link">Реєстрація</a>
                     {% else %}
-                         <div class="header-authenticated">
+                            <div class="header-authenticated">
                             <div class = 'authenticated-links'>
                                 <a href="{% url 'home' %}" class="link" id="homeLink"><img src="{% static 'img/base/home.svg' %}" class="header-link-icon">Головна</a>
                                 <a href="{% url 'my_publications' %}" class="link" id = "myPublicationsLink"><img src="{% static 'img/base/publications.svg' %}" class="header-link-icon">Мої публікації</a>
@@ -35,7 +35,7 @@
                             <button class = "logout-button" type = "submit"><img src="{% static 'img/base/door.svg' %}" alt="door" class="door-img">Вихід</button>
                         </form>
                     {% endif %}
-                </div> 
+                </div>
             </div>
         </header>
         <main>

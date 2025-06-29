@@ -167,13 +167,13 @@
         </div>
         <div class="checkboxes-block">
             <div class = "checkbox-block">
-                <input type="checkbox" class = "checkbox-input">
+                <input type="checkbox" class = "checkbox-input" disabled name = "name-sign-check">
                 <p class = "checkbox-name">Ім'я та прізвище</p>
             </div>
             <p class = "checkbox-preview-text">{{ user.first_name }} {{ user.last_name }}</p>
             
             <div class = "checkbox-block">
-                <input type="checkbox" class = "checkbox-input">
+                <input type="checkbox" class = "checkbox-input" disabled name = "image-sign-check">
                 <p class = "checkbox-name">Мій електроний підпис</p>
             </div>
             <img src="{% static 'img/settings/sign.png' %}" alt="" class = "checkbox-img-prev">

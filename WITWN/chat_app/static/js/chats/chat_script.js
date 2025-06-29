@@ -163,6 +163,7 @@ function sendMessage(byteData){
         let JSONString = JSON.stringify(dataToSend);
         connection.send(JSONString);
         messageForm.reset()
+        messageTextInput.focus()
     }
     else{
         messageTextInput.classList.add("errorlight")
@@ -521,6 +522,7 @@ const chatTemplate = document.querySelector(".templates").querySelector(".single
 
 statusConnection.addEventListener("message", (event) => {
     let data = JSON.parse(event.data);
+    console.log("Request", data.request_type)
     if (data.request_type == "groupEdit"){
         groupCreationType.value = document.querySelector(".selected-chat").id
         groupCreationType.name = "edit"
@@ -657,10 +659,12 @@ statusConnection.addEventListener("message", (event) => {
         chat.remove()
     }
     else if (data.request_type == "group_edited"){
+        console.log("Edit request received", data.id, data)
         let chat = document.querySelector(".group-messages").querySelector(`[id='${data.id}']`)
         if (chat != null){
+            console.log("Edit request is accepted")
             chat.querySelector(".message-author-name").textContent = data.name
-            chat.querySelector(".prof-pic").src = data.avatar
+            chat.querySelector(".contacts-image").src = data.avatar
             if (chat.classList.contains("selected-chat")){
                 document.querySelector(".chat-name").textContent = data.name
                 document.querySelector(".chat-avatar").src = data.avatar

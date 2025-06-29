@@ -10,7 +10,7 @@ p{
     padding-left: 0px;
     gap: 5px;
     height: 89vh;
-    justify-content: center;
+    justify-content: space-between;
     align-items: end;
     /* padding-top: 16px; */
     /* padding-bottom: 70px; */
@@ -19,11 +19,9 @@ p{
 .contact-div{
     display: flex;
     flex-direction: column;
-    min-width: 417px;
-    max-width: 417px;
+    min-width: calc(20vw + 4vh);
+    max-width: calc(20vw + 4vh);
     height: 100%;
-    /* min-height: 834px; */
-    /* max-height: 834px; */
     border-radius: 10px;
     gap: 8px;
     /* padding-bottom: 30px ; */
@@ -32,8 +30,8 @@ p{
 .chat-everything-div{
     display: flex;
     flex-direction: column;
-    min-width: 766px;
-    max-width: 766px;
+    min-width: calc(36vw + 7vh);
+    max-width: calc(36vw + 7vh);
     height: 100%;
     /* max-height: 834px; */
     justify-content: center;
@@ -51,8 +49,8 @@ p{
 .messages-everything-div{
     display: flex;
     flex-direction: column;
-    min-width: 417px;
-    max-width: 417px;
+    min-width: calc(20vw + 4vh);
+    max-width: calc(20vw + 4vh);
     height: 100%;
     border-radius: 10px;
     gap: 1%;
@@ -84,15 +82,15 @@ p{
     justify-content: center;
     align-items: center;
     padding: 10px 16px 10px 16px;
-    border-radius: 1234px;
+    border-radius: 100vw;
     
     height: 40px;
     background-color: rgba(84, 60, 82, 1);
     border: 0px ;
     color: white;
     position: relative;
-    min-width: 414px;
-    max-width: 414px;
+    min-width: 100%;
+    max-width: 100%;
 }
 
 .messages-div{
@@ -100,8 +98,8 @@ p{
     flex-direction: column;
     border: 1px solid rgba(205, 206, 210, 1);
     border-radius: 10px;
-     min-width: 417px;
-    max-width: 417px;
+     min-width: 100%;
+    max-width: 100%;
     height: fit-content;
     padding-top: 16px;
     padding-bottom: 16px;
@@ -116,8 +114,8 @@ p{
     flex-direction: column;
     border: 1px solid rgba(205, 206, 210, 1);
     border-radius: 10px;
-     min-width: 417px;
-    max-width: 417px;
+     min-width: 100%;
+    max-width: 100%;
     height: fit-content;
     padding-top: 16px;
     padding-bottom: 16px;
@@ -270,8 +268,8 @@ p{
     border: 1px solid rgba(205, 206, 210, 1);
     /* padding: 16px; */
     gap: 24px;
-    min-width: 411px;
-    max-width: 411px;
+    min-width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
     position: relative;
     background-color: white;
@@ -314,8 +312,9 @@ p{
     align-items: center;
     gap: 16px;
     padding: 16px;
-    width: 377px;
+    width: 100%;
     left: 0px;
+    box-sizing: border-box;
     padding-left: 16px;
     height: fit-content;
 }
@@ -326,8 +325,8 @@ p{
 }
 
 .contacts-list-div{
-    min-width: 411px;
-    max-width: 411px;
+    min-width: 100%;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     /* width: fill; */
@@ -350,7 +349,7 @@ p{
 }
 
 .message-box{
-    width: calc(100% - 32px);
+    width: 100%;
     display: flex;
     justify-content: end;
     /* height: 50px; */
@@ -372,6 +371,9 @@ p{
     min-height: 100%;
     max-height: 100%;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .chat-header{
@@ -422,13 +424,12 @@ p{
 }
 
 .chat-main{
-    position: absolute;
+    /* position: absolute; */
     height: auto;
     max-height: 85%;
     display: flex;
     flex-direction: column;
     gap: 24px;
-    bottom: 16px;
     width: 100%;
 }
 
@@ -477,10 +478,11 @@ p{
 
 .chat-send-options{
     display: flex;
-    gap: 24px;
+    justify-content: space-between;
     flex-direction: row;
     align-items: end;
-    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
 }
 
 .message{
@@ -523,7 +525,7 @@ p{
     font-size: 14px;
     font-weight: 400;
     margin: 0px;
-    max-width: 95%;
+    /* max-width: 95%; */
     overflow: hidden;
     text-align: start;
     overflow-wrap: break-word; 
@@ -1017,8 +1019,8 @@ body{
 }
 
 .friend-chat, .group-chat{
-    min-width: 417px;
-    max-width: 417px;
+    min-width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
     padding: 16px;
 }
@@ -1180,7 +1182,7 @@ body{
     display: flex;
     width: 100%;
     flex-direction: row;
-    justify-content: start;
+    justify-content: space-evenly;
     flex-wrap: wrap;
 }
 
@@ -1200,4 +1202,5 @@ body{
     border-radius: 10px;
     margin-top: 9.28px;
     margin-right: 9.28px;
+    object-fit: cover;
 }

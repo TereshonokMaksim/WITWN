@@ -1,10 +1,22 @@
 .everything-div{
     display: flex;
     flex-direction: row;
-    gap: 200px;
+    justify-content: space-between;
     height: 100%;
+    min-width: 85vw;
+    max-width: 85vw;
 }
 
+.friends-links-div{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: calc(12vw + 2vh);
+    max-width: calc(12vw + 2vh);
+    height: fit-content;
+    top: calc(0.8vw + 0.2vh);
+    gap: calc(0.8vw + 0.2vh);
+}
 
 .content-div{
     overflow-y: scroll;
@@ -12,32 +24,33 @@
     scrollbar-width: none;
     display: flex;
     flex-direction: column;
-    min-width: 1173px;
-    max-width: 1173px;
+    min-width: 58vw;
+    max-width: 58vw;
     margin-top: 1%;
-    gap: 8px;
-    min-height: 90%;
-    max-height: 90%;
+    gap: calc(0.4vw + 0.1vh);
+    min-height: 89%;
+    max-height: 89%;
 }
 
 .main-nav-link{
-    min-height: 18px;
-    max-height: 18px;
+    min-height: calc(0.8vw + 0.22vh);
+    max-height: calc(0.8vw + 0.22vh);
     width: fit-content;
-    font-size: 16px;
+    font-size: calc(0.8vw + 0.2vh);
     font-weight: 500;
     color: rgba(129, 129, 141, 1);
     text-decoration: none;
+    padding-bottom: calc(0.1vw + 0.1vh);
 }
 
 .selected-link{
     color: #070A1C;
-    border-bottom: 2px solid #543C52;
+    border-bottom: calc(0.1vw + 0.04vh) solid #543C52;
 }
 
 main{
     display: flex;
     align-items: center;
-    padding-left: calc(4vw + 8vh);
+    justify-content: center;
     box-sizing: border-box;
 }

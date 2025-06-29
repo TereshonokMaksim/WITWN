@@ -5,8 +5,8 @@
     width: 100vw;
     height: 100vh;
     position: fixed;
-    left: 0px;
-    top: 0px;
+    left: 0;
+    top: 0;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 20;
 }
@@ -15,224 +15,211 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    min-width: 254px;
-    max-width: 254px;
+    min-width: calc(13.23vw); /* 254px width-only */
+    max-width: calc(13.23vw);
     height: fit-content;
-    top: 16px;
-    gap: 26px;
+    top: calc(0.83vw + 0.17vh); /* 16px */
+    gap: calc(1.35vw + 0.33vh); /* 26px */
 }
 
-.album-div{
+.album-div {
     display: flex;
     flex-direction: column;
-    width: 1123px;
+    width: calc(52.49vw); /* 1123px width-only */
     height: fit-content;
-    border: 1px solid rgba(205, 206, 210, 1);
-    border-radius: 10px;
-    padding: 16px 20px 16px 20px;
-    gap: 16px;
+    border: 0.05vw solid rgba(205, 206, 210, 1);
+    border-radius: calc(0.52vw + 0.13vh); /* 10px */
+    padding: calc(0.83vw + 0.17vh) calc(1.04vw + 0.21vh) calc(0.83vw + 0.17vh) calc(1.04vw + 0.21vh); /* 16px 20px 16px 20px */
+    gap: calc(0.83vw + 0.17vh); /* 16px */
     background-color: white;
     position: relative;
 }
 
-.album-new-button{
+.album-new-button {
     display: flex;
     flex-direction: row;
-    padding: 10px;
+    padding: calc(0.52vw + 0.21vh); /* 10px */
     border-radius: 100vw;
     border: 1px solid #543C52;
-    gap: 10px;
+    gap: calc(0.52vw + 0.21vh); /* 10px */
     width: fit-content;
     height: fit-content;
     align-items: center;
     background-color: transparent;
     position: absolute;
-    right: 20px;
+    right: calc(1.04vw); /* 20px width-only */
     color: #543C52;
 }
+
 
 .album-new-button:hover{
     cursor: pointer;
 }
 
-.album-control-buttons{
+.album-control-buttons {
     position: absolute;
-    right: 20px;
-    display: flex;album-additional-info
+    right: 1.04vw; /* 20px width-only */
+    display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    gap: 10px;
-    top: 20px;
+    gap: calc(0.52vw + 0.21vh); /* 10px */
+    top: calc(1.04vw + 0.21vh); /* 20px */
 }
 
-.album-new-text{
-    font-size: 14px;
+.album-new-text {
+    font-size: calc(0.73vw + 0.14vh); /* 14px */
     align-items: center;
     margin: 0;
 }
 
-
-.new-album-form{
+.new-album-form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 24px 44px 44px;
+    padding: calc(1.25vw + 0.25vh) calc(2.29vw + 0.42vh) calc(2.29vw + 0.83vh); /* 24px 44px 44px */
     position: relative;
     background: #FFFFFF;
-    border-radius: 20px;
+    border-radius: calc(1.04vw + 0.42vh); /* 20px */
 }
 
-.new-album-title{
+.new-album-title {
     color: #070A1C;
     font-weight: 500;
-    font-size: 34px;
+    font-size: calc(1.77vw + 0.35vh); /* 34px */
     width: 100%;
     text-align: start;
-    margin: 5px 0px;
+    margin: calc(0.26vw + 0.1vh) 0; /* 5px 0px */
 }
 
-.new-album-inputs{
-    padding: 24px 0px;
+.new-album-inputs {
+    padding: calc(1.25vw + 0.25vh) 0; /* 24px 0 */
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: calc(0.83vw + 0.17vh); /* 16px */
 }
 
-.new-album-inputs label{
+.new-album-inputs label {
     color: #070A1C;
-    font-size: 16px;
+    font-size: calc(0.83vw + 0.17vh); /* 16px */
     font-weight: 400;
 }
 
-.new-album-inputbox{
+.new-album-inputbox {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: calc(0.31vw + 0.13vh); /* 6px */
 }
 
-.new-album-inputs input, select{
-    padding: 10px 16px;
-    border-radius: 10px;
+.new-album-inputs input, select {
+    padding: calc(0.52vw + 0.21vh) calc(0.83vw + 0.17vh); /* 10px 16px */
+    border-radius: calc(0.52vw + 0.13vh); /* 10px */
     border: 1px solid #81818D;
     color: #070A1C;
-    width: 400px;
+    width: 20.83vw; /* 400px width-only */
     box-sizing: border-box;
 }
 
-.new-album-inputs input::placeholder, select::placeholder{
+.new-album-inputs input::placeholder, select::placeholder {
     color: #81818D;
 }
 
-.new-album-buttons{
+.new-album-buttons {
     width: 100%;
     position: relative;
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    gap: calc(0.52vw + 0.21vh); /* 10px */
 }
 
-.new-album-create{
+.new-album-create {
     background-color: #543C52;
     color: #FFFFFF;
     position: relative;
-    right: 0px;
+    right: 0;
 }
 
-.new-album-cancel{
+.new-album-cancel {
     position: relative;
-    right: 0px;
+    right: 0;
 }
 
-.album-new-image{
+.album-new-image {
     position: relative;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
 }
-
-.album-new-imagebox{
-    width: 200px;
-    height: 200px;
-    border: 1px dotted #81818D;
-    border-radius: 10px;
+.album-new-imagebox {
+    width: 10.42vw; /* 200px width-only */
+    height: 20.83vh; /* 200px height-only */
+    border: 0.05vw dotted #81818D;
+    border-radius: calc(0.52vw + 0.13vh); /* 10px */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* .album-new-imagebox p{
-    font-size: 32px;
-    color: #543C52;
-    border: 1px solid #543C52;
-    border-radius: 100vw;
-    padding: 10px;
-    margin: 0px;
-    height: 40px;
-    width: 40px;
-    box-sizing: border-box;
-    text-align: center;
-}   */
 
 .album-new-imagebox img{
     width: calc(2vw + 0.5vh);
     height: calc(2vw + 0.5vh);
-    border-width: 1px;
+    border-width: 0.05vw;
 }
 
 .album-year{
     color: #81818D;
 }
 
-.album-image-box{
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
+.album-image-box {
+    width: 10.42vw; /* 200px width-only */
+    height: 20.83vh; /* 200px height-only */
+    border-radius: calc(0.52vw + 0.13vh); /* 10px */
     position: relative;
 }
 
-.album-image{
+.album-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: calc(0.52vw + 0.13vh); /* 10px */
 }
 
-.album-image-buttons{
+.album-image-buttons {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
+    right: calc(0.52vw + 0.21vh); /* 10px */
+    bottom: calc(0.52vw + 0.21vh); /* 10px */
     display: flex;
-    gap: 10px;
+    gap: calc(0.52vw + 0.21vh); /* 10px */
 }
 
-.album-images-block{
+.album-images-block {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px,200px));
+    grid-template-columns: repeat(auto-fit, minmax(10.42vw, 10.42vw)); /* 200px */
     width: 100%;
-    gap: 25px;
+    gap: calc(1.3vw + 0.42vh); /* 25px */
 }
 
-.album-image-visibility, .album-image-delete{
-    width: 40px;
-    height: 40px;
-    border: 1px solid #543C52;
+.album-image-visibility, .album-image-delete {
+    width: 2.08vw; /* 40px width-only */
+    height: 4.17vh; /* 40px height-only */
+    border: 0.05vw solid #543C52;
     border-radius: 100vw;
     box-sizing: border-box;
-    padding: 10px;
+    padding: calc(0.52vw + 0.21vh); /* 10px */
     background: white;
 }
 
-.album-image-visibility:hover, .album-image-delete:hover{
+.album-image-visibility:hover, .album-image-delete:hover {
     cursor: pointer;
 }
 
-.album-visibility, .album-delete{
-    width: 40px;
-    height: 40px;
-    border: 1px solid #543C52;
+.album-visibility, .album-delete {
+    width: 2.08vw; /* 40px width-only */
+    height: 4.17vh; /* 40px height-only */
+    border: 0.05vw solid #543C52;
     border-radius: 100vw;
     box-sizing: border-box;
-    padding: 10px;
+    padding: calc(0.52vw + 0.21vh); /* 10px */
     background: white;
 }
 

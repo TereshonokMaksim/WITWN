@@ -61,18 +61,17 @@
                 <a href="{% url 'chats' %}" class = "profile-requests-all profile-messages-all">Дивитись всі</a>
             </div>
             <div class = "profile-messages">
-                {% for friend in friends %}
+                {% for friend, message in chats.items %}
                     <div class = "profile-friend-request profile-friend-message not-read-message">
                         <div class = "friend-avatar-restricter">
                             {% get_avatar friend %}
                         </div>
                         <div class = "profile-request-info profile-info-other">
                             <div class = "profile-friend-info">
-                                <p class = "profile-friend-username profile-username-other">{{ friend.user.username }}</p>
-                                <p class = "profile-friend-time profile-not-important">23:59</p>
+                                <p class = "profile-friend-username profile-username-other">{{ friend.user.first_name }} {{ friend.user.last_name }}</p>
+                                <p class = "profile-friend-time profile-not-important">{{ message.sent_at.isoformat }}</p>
                             </div>
-                            <!-- Hard coded info, fix once TT with messages is done (TODO) -->
-                            <p class = "profile-friend-text">ohno</p>
+                            <p class = "profile-friend-text">{{ message.content }}</p>
                         </div>
                     </div>
                 {% endfor %}
@@ -87,11 +86,15 @@
                 <a href="#" class = "profile-requests-all">Дивитись всі</a>
             </div>
             <div class = "profile-albums">
+                <div class = "profile-album-block">
+                    <h2 class = "profile-album-header">Мої фото</h2>
+                    <img src = "{{ random_avatar.image.url }}" alt = "noimage" class = "profile-album-photo">
+                </div>
                 {% for album, image in albums.items %}
                     <div class = "profile-album-block">
                         <h2 class = "profile-album-header">{{ album.name }}</h2>
                         {% if album.year %}
-                            <p class = "album-additional-info">{{ album.topic.name }} <span class = "album-year">-1 рік</span></p>
+                            <p class = "album-additional-info">{{ album.topic.name }} <span class = "album-year">2025 рік</span></p>
                         {% else %}
                             <p class = "album-additional-info">ㅤ</p>
                         {% endif %}
@@ -102,3 +105,4 @@
         </div>
     {% endif %}
 </div>
+<script defer src = "{% static 'js/home_tt/message_loader.js' %}"></script>

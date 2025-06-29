@@ -59,7 +59,6 @@
 #     def __str__(self):
 #         return f"Image from {self.album.name} album"
     
-# # What if we are wrong here?
 
 from django.db import models
 from user_app.models import Profile
@@ -94,6 +93,7 @@ class Album(models.Model):
     images = models.ManyToManyField(Image, blank=True)
     shown = models.BooleanField(default=True)
     topic = models.ForeignKey('Tag', on_delete=models.CASCADE)
+    author = models.ForeignKey(Profile, on_delete = models.CASCADE, null=True)
 
     def __str__(self):
         return self.name

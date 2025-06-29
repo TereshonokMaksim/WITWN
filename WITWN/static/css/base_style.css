@@ -49,16 +49,29 @@ header{
     display: flex;
     background-color: white;
     height: calc(2.2vw + 4vh);
-    padding: calc(1vw + 0.5vh) calc(4vw + 8vh);
+    padding: calc(1vw + 0.5vh) calc(10vw + 1vh);
     position: relative;
     align-items: center;
+    justify-content: center;
     flex-direction: row;
     width: 100%;
     box-sizing: border-box;
     z-index: 5;
+    gap: 24vw;
+}
+
+.header-content{
+    display: flex;
+    min-width: 85vw;
+    max-width: 85vw;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .link{
+    white-space: nowrap;
+    overflow-x: hidden;
     display: flex;
     flex-direction: row;
     gap: calc(0.5vw + 0.2vh);

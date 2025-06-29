@@ -1,159 +1,44 @@
-.friends-links-div{
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 254px;
-    max-width: 254px;
-    height: fit-content;
-    top: 16px;
-    gap: 26px;
-}
-
-#main-friends-link{
-    display: flex;
-    color: rgba(7, 10, 28, 1);
-    font-weight: 700;
-    gap: 8px;
-    padding-bottom: 7px ;
-    border-bottom: 2px solid rgba(84, 60, 82, 1);
-    
-}
 .settings-edit-options{
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    gap: calc(0.6vw + 0.15vh);
 }
 
 .section-div{
     display: flex;
     flex-direction: column;
-    width: 1123px;
+    width: 100%;
     height: fit-content;
-    border: 1px solid rgba(205, 206, 210, 1);
-    border-radius: 10px;
-    
-    padding: 16px 20px 16px 20px;
-    gap: 16px;
+    border: 0.01vw solid rgba(205, 206, 210, 1);
+    border-radius: calc(0.5vw + 0.12vh);
+    padding: calc(0.8vw + 0.2vh) calc(1vw + 0.24vh) calc(0.8vw + 0.2vh) calc(1vw + 0.24vh);
+    gap: calc(0.8vw + 0.2vh);
     background-color: white;
-   
+    box-sizing: border-box;
 }
 .request-header{
-    min-width: 1123px;
+    min-width: calc(100% - 4vw);
     display: flex;
     flex-direction: row;
-    min-height: 18px;
-    max-height: 18px;
-    width: 923px;
+    min-height: 2vh;
+    max-height: 2vh;
+    width: 100%;
     justify-content: space-between;
 }
 .request-header a{
     color: rgba(84, 60, 82, 1);
     font-weight: 500;
-    font-size: 16px;
+    font-size: calc(0.8vw + 0.2vh);
     text-decoration: none;
-}
-
-.single-request-div{
-    border: 1px solid rgba(205, 206, 210, 1);
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    min-width: 366.25px;
-    max-width: 366.25px;
-    height: 333.75px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    gap: 16px;
-    justify-content: center;
-    align-items: center;
-}
-.request-profile-icon{
-    width: 135px;
-    height: 135px;
-}
-.profile-info{
-    display: flex;
-    flex-direction: column;
-    width: 366.25px;
-    height: 226.25px;
-    gap: 35px;
-    justify-content: center;
-    align-items: center;
-}
-.nicknames-info{
-    display: flex;
-    flex-direction: column;
-    width: 366.25px;
-    min-height: 73.75px;
-    max-height: 73.75px;
-    gap: 17.5px;
-    justify-content: center;
-    align-items: center;
-}
-.request-buttons{
-    display: flex;
-    width: 281.25px;
-    height: 55px;
-    gap: 25px;
-    justify-content: center;
-    align-items: center;
-}
-
-.request-buttons button{
-    width: 143.75px;
-    height: 55px;
-    border-radius: 1234px;
-    font-family: "GT Walsheim Medium";
-    font-weight: 200;
-}
-.confirm-button{
-    background-color: rgba(84, 60, 82, 1);
-    color: white;
-    font-size: 17px;
-    border: 0px;
-}
-.delete-button{
-    border: 1px solid rgba(84, 60, 82, 1);
-    color: rgba(84, 60, 82, 1);
-    background-color: white;
-    font-size: 17px;
-   
-}
-
-.request-title{
-    margin: 0px;
-}
-.request-username{
-    font-weight: 700;
-    font-size: 24px;
-    margin: 0px;
-}
-.request-tag{
-    font-weight: 500;
-    font-size: 16px;
-    margin: 0px;
-}
-.all-requests-block{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    gap: 8px;
-    width: fit-content;
-    height: fit-content;
-}
-
-.friend-avatar-wrapper{
-    width: 96px;
-    height: 96px;
 }
 
 .settings-edit-button{
     display: flex;
     flex-direction: row;
-    padding: 10px;
+    padding: calc(0.5vw + 0.12vh);
     border-radius: 100vw;
-    border: 1px solid #543C52;
-    gap: 10px;
+    border: 0.05vw solid #543C52;
+    gap: calc(0.5vw + 0.12vh);
     width: fit-content;
     height: fit-content;
     align-items: center;
@@ -162,22 +47,22 @@
 
 .request-see-all{
     color: #543C52;
-    font-size: 14px;
+    font-size: calc(0.7vw + 0.18vh);
     align-items: center;
     margin: 0;
 }
 
 .self-name{
-    font-size: 24px;
+    font-size: calc(1.2vw + 0.3vh);
     color: #070A1C;
-    margin: 0px;
+    margin: 0;
     font-weight: 700;
 }
 
 .self-username{
     color: #070A1C;
-    font-size: 16px;
-    margin: 0px;
+    font-size: calc(0.8vw + 0.2vh);
+    margin: 0;
 }
 
 .self-text-info{
@@ -186,58 +71,57 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 10px;
+    gap: calc(0.5vw + 0.14vh);
 }
 
 .self-info-block{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    gap: 24px;
+    gap: calc(1.2vw + 0.3vh);
     align-items: center;
     justify-content: center;
     width: fit-content;
     height: fit-content;
     width: 100%;
-    padding: 24px 16px;
+    padding: calc(1.2vw + 0.3vh) calc(0.8vw + 0.2vh);
 }
 
 .self-avatar-wrapper{
-    width: 96px;
-    height: 96px;
+    width: calc(4.8vw + 1.2vh);
+    height: calc(4.8vw + 1.2vh);
 }
 
 .self-info-editbox{
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
-    gap: 24px;
+    gap: calc(1.2vw + 0.3vh);
     align-items: start;
     justify-content: center;
     width: fit-content;
     height: fit-content;
     width: 100%;
-    padding: 12px 0px;
+    padding: calc(0.6vw + 0.16vh) 0;
 }
 
 .half-visible{
     opacity: 0.5;
-
 }
 
 .self-info-editbox input{
-    width: 400px;
-    font-size: 16px;
+    width: 100%;
+    font-size: calc(0.8vw + 0.2vh);
     color: #070A1C;
-    border-radius: 10px;
-    border: 1px solid #81818D;
-    padding: 10px 10px;
+    border-radius: calc(0.5vw + 0.15vh);
+    border: 0.05vw solid #81818D;
+    padding: calc(0.5vw + 0.17vh) calc(0.5vw + 0.15vh);
 }
 .input-block{
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    width: 400px;
+    gap: calc(0.3vw + 0.07vh);
+    width: 44%;
 }
 
 .self-info-editbox label{
@@ -253,7 +137,7 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    gap: 10px;
+    gap: calc(0.5vw + 0.12vh);
     position: relative;
     width: 100%;
 }
@@ -263,15 +147,14 @@
 }
 
 .absolute-eye{
-    /* float: right; */
     position: absolute !important;
-    right: 20px;
+    right: calc(1vw + 0.25vh);
     cursor: default;
 }
 
 .checkboxes-block{
     display: flex;
-    gap: 24px;
+    gap: calc(1.2vw + 0.3vh);
     flex-direction: column;
 }
 
@@ -279,38 +162,33 @@
     display: flex;
     flex-direction: row;
     opacity: 0.5;
-    gap: 8px;
+    gap: calc(0.4vw + 0.1vh);
 }
 
 .checkbox{
-    border-radius: 2px;
-    border: 1px solid #543C52;
+    border-radius: 0.1vw;
+    border: 0.05vw solid #543C52;
 }
 
 .checkbox-preview-text{
-    font-size: 16px;
+    font-size: calc(0.8vw + 0.2vh);
     color: #070A1C;
     margin: 0;
 }   
 
 .checkbox-img-prev{
-    width: 131px;
-    height: 50px;
+    width: 14%;
+    height: 5vh;
 }
 
 .settings-cancel-button{
     color: #543C52;
-    padding: 12px;
+    padding: calc(0.6vw + 0.14vh);
 }
 
 .settings-save-button{
-    /* background-color: #543C52; */
-    padding: 12px;
+    padding: calc(0.6vw + 0.14vh);
 }
-
-/* .settings-save-button p{
-    color: white;
-} */
 
 .settings-edit-button:hover{
     cursor: pointer;
@@ -325,26 +203,26 @@
 }
 
 li{
-    font-size: 14px;
+    font-size: calc(0.7vw + 0.18vh);
     color: red;
-    margin: 0px;
+    margin: 0;
 }
 
 .errorlist{
-    margin: 0px;
+    margin: 0;
 }
 .header-edit{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: calc(0.5vw + 0.16vh);
 }
 
 .avatar-edit-button{
-    border: 0px;
+    border: 0;
     background-color: transparent;
-    font-size: 16px;
+    font-size: calc(0.8vw + 0.2vh);
     color: #543C52;
-    gap: 8px;
+    gap: calc(0.4vw + 0.1vh);
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -358,16 +236,16 @@ li{
 .avatar-edit-buttonbox{
     display: flex;
     flex-direction: row;
-    gap: 24px;
+    gap: calc(1.2vw + 0.3vh);
 }
 
 .username-input{
-    border: 1px solid #81818D;
-    border-radius: 10px;
-    padding: 12px;
+    border: 0.05vw solid #81818D;
+    border-radius: calc(0.5vw + 0.14vh);
+    padding: calc(0.6vw + 0.15vh);
     color: black;
-    font-size: 16px;
-    width: 350px;
+    font-size: calc(0.8vw + 0.2vh);
+    width: 100%;
 }
 
 .username-input::placeholder{
@@ -376,18 +254,19 @@ li{
 
 .username-label{
     color: #81818D;
-    font-size: 16px;
+    font-size: calc(0.8vw + 0.2vh);
 }
 
 .username-inputbox{
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: calc(0.3vw + 0.07vh);
     align-items: start;
+    width: 37%;
 }
 
 .errortext{
-    font-size: 14px;
+    font-size: calc(0.7vw + 0.18vh);
     color: red;
     margin: 0;
 }
@@ -395,5 +274,37 @@ li{
 .password-box-edit{
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: calc(1.2vw + 0.3vh);
+}
+
+.request-title{
+    font-size: calc(0.8vw + 0.2vh);
+    color: #070A1C;
+    margin: 0;
+}
+
+.input-block > label{
+    font-size: calc(0.7vw + 0.18vh);
+    color: #070A1C;
+    margin: 0;
+}
+
+.avatar-edit-text{
+    font-size: calc(0.9vw + 0.25vh);
+    color: #070A1C;
+}
+
+.checkbox-name{
+    font-size: calc(0.7vw + 0.18vh);
+    color: #543C52;
+    margin: 0;
+}
+
+.checkbox-input{
+    width: calc(1vw + 0.25vh);
+    height: calc(1vw + 0.25vh);
+    border-width: 0.05vw;
+    border-radius: 0.1vw;
+    margin: 0;
+    padding: 0.1vw;
 }

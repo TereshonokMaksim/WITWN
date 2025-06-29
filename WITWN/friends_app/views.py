@@ -37,7 +37,7 @@ class FriendsView(TemplateView):
         all_possible_recommendations = Profile.objects.exclude(pk__in = [acc.pk, *[obj.profile2.pk for obj in Friendship.objects.filter(profile1 = acc)], *[obj.profile1.pk for obj in Friendship.objects.filter(profile2 = acc)]])
         all_possible_recommendations = list(all_possible_recommendations)
         recomendations = []
-        for i in range(max(0, min(len(all_possible_recommendations), 5))):
+        for i in range(max(0, min(len(all_possible_recommendations), 6))):
             rec_acc = random.choice(all_possible_recommendations)
             all_possible_recommendations.remove(rec_acc)
             recomendations.append(rec_acc)
@@ -82,7 +82,7 @@ class AllRecomendationsView(ListView):
         all_possible_recommendations = Profile.objects.exclude(pk__in = [acc.pk, *[obj.profile2.pk for obj in Friendship.objects.filter(profile1 = acc)], *[obj.profile1.pk for obj in Friendship.objects.filter(profile2 = acc)]])
         all_possible_recommendations = list(all_possible_recommendations)
         recomendations = []
-        for i in range(max(0, min(len(all_possible_recommendations), 5))):
+        for i in range(len(all_possible_recommendations)):
             rec_acc = random.choice(all_possible_recommendations)
             all_possible_recommendations.remove(rec_acc)
             recomendations.append(rec_acc)
